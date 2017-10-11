@@ -1,0 +1,44 @@
+	<div data-th-fragment="he">
+	<header>
+		<div class="container">
+			<a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
+			<i class="material-icons">menu</i></a>
+		</div>
+		
+		<ul id="nav-mobile" class="side-nav fixed" >
+			<li class="logo"><a id="logo-container" href="/" class="brand-logo"> 
+				<object><img id="responsive-img" data-th-src="@{/assets/images/Logo.png}"/></object></a>
+			</li>
+			
+			<li data-th-if="${dato}==1">
+				<div class="center-align" >
+			    	<a href="#!user"><img class="circle" width="20%" height="20%" data-th-src="@{'/assets/images/usuarios/'+${usulog[0].usuario.DNI}+'.jpg'}"/></a><br/>
+					<a class="btn-flat dropdown-button waves-effect waves-light profile-btn" href="#" data-activates="profile-dropdown" data-th-text="${usulog[0].usuario.nombre}+' '+${usulog[0].usuario.ap}+' '+${usulog[0].usuario.am}">Juan Perez<i class=" material-icons right">keyboard_arrow_down</i></a>
+            	</div>
+              	<div class="col col s8 m8 l8">
+                        <ul id="profile-dropdown" class="dropdown-content">
+                            <li><a href="#"><i class="mdi-action-face-unlock"></i>Perfil</a></li>
+                            <li><a href="cerrarSesion"><i class="mdi-hardware-keyboard-tab"></i>Salir</a></li>
+                        </ul>
+                </div>
+			</li>
+          	<li data-th-if="${dato}==1">
+          		<h6 class="center" data-th-text="${usulog[0].usuario.roles[0].nombre}">Rol</h6>
+          		<div class="divider"></div>
+          	</li>
+           	<li data-th-if="${dato}==1"  class="bold" >
+           	<a  data-th-each="p:${usulog[0].usuario.roles[0].procesos}" data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
+           	</li>
+         
+		</ul>
+	
+		<div class="section no-pad-bot" id="index-banner">
+			<div class="container">
+				<h3 class="header center-on-small-only" data-th-text="${proceso}">Anioranzas</h3>
+				<h6 class="header col s12 10 light red-text text-lighten-4 left" >
+					COMERCIO INTEGRAL: Almacen de comestibles y verduras.</h6>
+			</div>
+			<br/><br/>
+		</div>
+	</header>
+</div>

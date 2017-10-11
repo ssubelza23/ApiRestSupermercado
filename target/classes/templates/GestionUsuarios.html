@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" th:href="@{/assets/js/ui/jquery-ui.css}">
+	<link rel="stylesheet" th:href="@{/assets/js/ui/jquery.dataTables.css}">
+	<link rel="stylesheet" th:href="@{/assets/js/ui/style.css}">
+	<script th:src="@{/assets/js/ui/jquery-1.11.3.js}"></script>
+	<script th:src="@{/assets/js/ui/jquery-ui.js}"></script>
+	<script th:src="@{/assets/js/ui/jquery.dataTables.js}"></script>
+	<script>
+	$(function(){
+		$("#dataTable").dataTable();
+	});
+	$( function() {
+		$( "#tabs" ).tabs();
+	} );
+	</script>
+</head>
+
+
+</head>
+<body>
+<div id="tabs">
+<ul>
+	<li><a href="#tabDatUsu">datos generales</a></li>
+	<li><a href="#tabLisUsu">lsita de usuarios</a></li>
+</ul>
+<form>
+	<div id="tabDatUsu">
+		<fieldset>
+		<legend>Datos Generales.</legend>
+		<table>
+			<tr>
+				<td><label>Rol:</label></td>
+				<td><select>
+				<option>Administrador</option>
+				<option>COntador</option>
+				<option>operador</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label>nombre usuarios:</label></td>
+				<td><input name="nombre" type="text"/></td>
+			</tr>
+			<tr>
+				<td><label>nombre usuarios:</label></td>
+				<td><input name="nombre" type="text"/></td>
+			</tr>
+		</table>
+		</fieldset>
+	</div>
+	<div id="tabLisUsu">
+	<fieldset>
+	<legend>Lista de usuarios</legend>
+	<table id="dataTable">
+	<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+		<tr>
+	<td>1</td>
+	<td>2</td>
+	</tr>
+	</table>
+	</fieldset>
+	</div>
+</form>
+</div>
+</body>
+</html>

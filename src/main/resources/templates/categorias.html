@@ -1,0 +1,100 @@
+<div data-th-fragment="categorias" >
+<p class="caption" data-th-text="${descripcion}"></p>   
+	<form id="formulario_categorias" method="POST"  data-th-object="${nuevo}" class="card">
+    <div class="col s12 ">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1"><span id="opcion">Nuevo</span></a></li>
+      </ul>
+      <br>
+    </div>
+    <div id="test1" class="col s12">
+    <input type="hidden" name="id" id="id"/>
+			<div class="input-field col s12">
+				<i class="material-icons prefix">playlist_add_check</i>
+				<input  id="nombre" type="text" class="validate"
+					name="nombre" data-th-field="*{nombre}" />
+				<label >Nombre</label>
+			</div>
+			<div class="input-field col s12">
+			<i class="material-icons prefix">short_text</i>
+			<input id="detalle" type="text" class="validate" name="detalle"
+				data-th-field="*{detalle}" />
+			<label for="icon_telephone">Detalle</label>
+			</div>
+			<div class="input-field col s6">
+			<i class="material-icons prefix">insert_photo</i>
+				<input id="logo" type="text" class="validate" name="logo"
+					data-th-field="*{logo}" />
+				<label for="icon_telephone">Logo</label>
+			</div>	
+			<div class="input-field col s6">
+			<i class="material-icons prefix"><span id="logo_editar"></span></i>
+			</div>
+				<div class="input-field col s12">
+			</div>
+							
+		</div>
+    	<div class="collapsible-header active">
+				<a class="modal-action modal-close waves-effect waves-red btn-flat " data-th-href="@{/usuarios}" id="cancelar_editar_categoria">Cancelar</a>
+            	<a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_categoria"/></a>
+       </div> 
+
+</form>
+<div id="modal1" class="modal modal-fixed-footer">
+<form id="eliminar_categoria">
+          <div class="modal-content center">
+            <h4>Seguro que desea eliminar la categoria</h4>
+            
+        
+             <input type="hidden" name="id_eliminar_categoria" id="id_eliminar_categoria"/>
+			 <div class="input-field col s6 offset-s4 center">
+			 <label for="first_name">Categoria:</label>
+					<input placeholder="Placeholder" disabled id="nombre_eliminar" type="text" class="validate"
+					name="nombre_eliminar" />
+			</div>
+			 <div class="input-field col s6 offset-s4 center">
+			 <label for="first_name">detalle</label>
+					<input placeholder="Placeholder" disabled id="detalle_eliminar" type="text" class="validate center-aling"
+					name="detalle_eliminar" />
+			</div>
+				 <div class="input-field col s6 offset-s4 center">
+					<label for="first_name">Logo:</label>
+					<input placeholder="Placeholder" disabled id="logo_eliminar" type="text" class="validate center-aling"
+					name="logo_eliminar" />
+			</div>
+		
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+            <a href="#" id="btn_eliminar_categoria"class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
+          </div>
+          </form>
+</div>
+
+
+<div class="col-sm-offset-2 col-sm-8">
+	<p class="mensaje">
+	
+	</p>
+</div>
+<div id="tabLisUsu">
+	<table id="categoria_tablas" class="display highlight" cellspacing="0" width="100%"  >  
+       <thead>
+            <tr>
+                <th>nombre</th>
+				<th>detalle</th>
+                <th>logo</th>
+                <th></th>
+                 <th></th>
+                 
+            </tr>
+        </thead>
+        <!-- Footer Table -->
+
+    </table>
+		
+		</div>	
+	
+</div>
+
+
