@@ -21,7 +21,7 @@ import com.comercio.web.dao.ProveedorDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Producto;
-import com.comercio.web.model.bean.ProveedoresBean;
+import com.comercio.web.model.bean.ProductoBean;
 
 @RestController
 public class ProductoRestControler {
@@ -48,9 +48,9 @@ public class ProductoRestControler {
 	}
 
 	@PostMapping(value = "/productos")
-	public String editarusuario(@RequestBody ProveedoresBean p) {
+	public String editarusuario(@RequestBody ProductoBean p) {
 		String mensaje="llego";
-		
+		System.out.println(p.getNombre());
 		return mensaje;
 	}
 
