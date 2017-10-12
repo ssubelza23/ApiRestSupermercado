@@ -37,6 +37,7 @@ public class Usuario implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 	@NotEmpty(message = "*Por favor ontroduzca su nombre")
 	private String Nombre;
 	@NotEmpty(message = "*Por favor ontroduzca su apellido paterno.")

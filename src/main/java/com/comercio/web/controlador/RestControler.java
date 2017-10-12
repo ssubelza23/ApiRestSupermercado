@@ -74,7 +74,6 @@ public String logout(Model model) {
 }
 @GetMapping(value="/Lista_Usuarios")
 public List<Usuario> tablas(Model model) {
-	System.out.println(userDao.getAll());
 	return userDao.getAll();
 }
 @PostMapping(value="/eliminarUsuario")
@@ -116,21 +115,17 @@ public String editarusuario(@RequestParam("nombre") String nombre,
 	usuario.setTelefono(Integer.parseInt(telefono));
 	usuario.setCorreo(correo);
 	Dato d=new Dato();
-	System.out.println(id_dato+"iddatos");
 	if(!id_dato.equals("0")) {
 		d.setId(Long.parseLong(id_dato));
 		d.setLogin(login);
 		d.setClave(clave);
-		//datoDao.update(d);
 		usuario.setDatos(d);
-		
-		
+	
 	}else {
 		d.setLogin(login);
 		d.setClave(clave);
 		long iddato=datoDao.create(d);
 		usuario.setDatos(datoDao.getById(iddato));
-		System.out.println(datoDao.getById(iddato)+"datos**");
 	}
 	
 	String dni1="";
@@ -165,7 +160,6 @@ public String editarusuario(@RequestParam("nombre") String nombre,
 			usuario.setFechaNacimiento(sqlDate);
 
 		}
-		System.out.println(usuario+"///////////");
 		userDao.create(usuario);
 		mensaje="BIEN, usuario creado correctamenta";
 	}
