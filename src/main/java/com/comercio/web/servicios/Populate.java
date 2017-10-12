@@ -1,4 +1,4 @@
-package com.comercio.servicios;
+package com.comercio.web.servicios;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.comercio.web.dao.DatoDao;
@@ -18,8 +19,9 @@ import com.comercio.web.model.Rol;
 import com.comercio.web.model.Usuario;
 
 
-@Service
+@Component
 @Transactional
+
 public class Populate {
 @Autowired
 private UsuarioDao userDao;
@@ -82,7 +84,7 @@ public void createUsers() {
 	usuario.setSexo('M');
 	usuario.setDireccion("direccion");
 	usuario.setTelefono(123456789);
-	usuario.setCorreo("correo");
+	usuario.setCorreo("correo@gmsil.com");
 	usuario.setEstado(1);
 	usuario.setRoles(roles);
 	usuario.setDatos(datosDao.getById(idDatos));

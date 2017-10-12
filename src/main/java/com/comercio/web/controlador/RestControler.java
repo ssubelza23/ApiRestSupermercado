@@ -53,7 +53,7 @@ public ResponseEntity<?> valida(@RequestBody DatoBean datos, Errors errors){
 				.collect(Collectors.joining(",")));
 		return ResponseEntity.badRequest().body(result);
 	}
-	List<Dato> d=userDao.getByDato(datos.getLogin(), datos.getClave());
+	List<Usuario> d=userDao.getByDato(datos.getLogin(), datos.getClave());
 	if(d.isEmpty()) {
 		result.setMsg("el usuario no existe");
 	}else {
@@ -65,6 +65,7 @@ public ResponseEntity<?> valida(@RequestBody DatoBean datos, Errors errors){
 		result.setFragmento("notificaciones");
 	}
 	result.setDato(d);
+	System.out.println(result+"85236//////////");
 	return ResponseEntity.ok(result);
 }
 @GetMapping(value="/logout")

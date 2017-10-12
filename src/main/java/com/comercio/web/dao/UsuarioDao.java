@@ -23,7 +23,7 @@ public class UsuarioDao {
 
 	//creacion de usuaio
 	public void create(Usuario usuario) {
-		entityManager.persist(usuario);
+		entityManager.merge(usuario);
 	}
 	
 	//asignacion de clave
@@ -57,8 +57,8 @@ public class UsuarioDao {
 		return entityManager.createQuery("select u from Usuario u").getResultList();
 	}
 	@SuppressWarnings("unchecked")
-	public List<Dato> getByDato(String login,String clave) {
-		return  entityManager.createQuery("select d from Dato d  where d.login=:login and d.clave=:clave")
+	public List<Usuario> getByDato(String login,String clave) {
+		return   entityManager.createQuery("select d from Usuario d  where d.datos.login=:login and d.datos.clave=:clave and d.Estado=1")
 				.setParameter("login", login).setParameter("clave", clave)
 				.getResultList();
 	}

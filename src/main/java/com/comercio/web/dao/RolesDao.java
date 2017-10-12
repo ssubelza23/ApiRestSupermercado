@@ -17,7 +17,7 @@ public class RolesDao {
 
 	//creacion de nuevo Rol
 	public long create(Rol rol) {
-		entityManager.persist(rol);
+		entityManager.merge(rol);
 		entityManager.flush();
 		return rol.getId();
 	}

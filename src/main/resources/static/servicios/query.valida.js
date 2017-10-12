@@ -37,14 +37,7 @@ $( document ).ready(function() {
 				
 					
 					
-					var dato=(result.dato[0]);
-					console.log(dato.id);
-					console.log(dato.usuario.nombre);
-					var roles=(dato.usuario.roles[0]);
-					console.log(roles);
-					console.log(roles.nombre);
-					var procesos=(roles.procesos);
-					console.log(procesos);
+					
 					window.location.replace("http://localhost:8080/index/"+dato.id);
 				}
 					
