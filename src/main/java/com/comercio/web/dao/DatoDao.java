@@ -20,7 +20,7 @@ public class DatoDao {
 
 	
 	public long create(Dato p) {
-		entityManager.persist(p);
+		entityManager.merge(p);
 		entityManager.flush();
 		return p.getId();
 	}

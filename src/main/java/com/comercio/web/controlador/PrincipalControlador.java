@@ -49,7 +49,7 @@ public class PrincipalControlador {
 	@GetMapping(value="/index/{idDato}")
 	public String index(@PathVariable("idDato") long id, Model model) {
 		List<Dato> datos=usuarioDao.getDatoById(id);
-		model.addAttribute("proceso", "Acceso al sistema");
+		model.addAttribute("proceso", "");
 		model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
 		model.addAttribute("fragmento", "notificaciones");
 		model.addAttribute("plantilla", "notificaciones");
