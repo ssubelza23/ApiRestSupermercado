@@ -14,7 +14,7 @@ public void setMsg(String msg) {
 	this.msg = msg;
 }
 private boolean existe;
- private List<Dato> dato;
+ private List<Usuario> dato;
 
 
 
@@ -22,11 +22,11 @@ public String getPlantilla() {
 	return plantilla;
 }
 
-public List<Dato> getDato() {
+public List<Usuario> getDato() {
 	return dato;
 }
 
-public void setDato(List<Dato> dato) {
+public void setDato(List<Usuario> dato) {
 	this.dato = dato;
 }
 

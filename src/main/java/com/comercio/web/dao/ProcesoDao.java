@@ -22,7 +22,7 @@ public class ProcesoDao {
 
 	//creacion de nuevo Rol
 	public long create(Proceso proceso) {
-		entityManager.persist(proceso);
+		entityManager.merge(proceso);
 		entityManager.flush();
 		return proceso.getId();
 	}
