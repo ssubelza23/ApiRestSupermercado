@@ -95,7 +95,6 @@ public class Usuario implements Serializable{
   
    
 	@OneToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name = "datos_id")
 	private Dato datos;
 
 

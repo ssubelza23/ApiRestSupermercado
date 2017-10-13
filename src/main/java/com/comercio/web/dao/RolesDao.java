@@ -19,6 +19,7 @@ public class RolesDao {
 	public long create(Rol rol) {
 		entityManager.merge(rol);
 		entityManager.flush();
+
 		return rol.getId();
 	}
 
@@ -26,14 +27,14 @@ public class RolesDao {
 	public List<Rol> getAll() {
 		return entityManager.createQuery("select r from Rol r where estado=1").getResultList();
 	}
+
 	public Rol getById(long id) {
 		return entityManager.find(Rol.class, id);
 	}
-	@SuppressWarnings("unchecked")
-	public List<Rol> getByNombre(String nombre) {
-		return  entityManager.createQuery("select d from Rol d  where d.nombre=:nombre")
+	public Rol getByNombre(String nombre) {
+		return  (Rol) entityManager.createQuery("select d from Rol d  where d.nombre=:nombre")
 				.setParameter("nombre", nombre)
-				.getResultList();
+				.getSingleResult();
 	}
 	public void update(Rol rol) {
 		entityManager.merge(rol);

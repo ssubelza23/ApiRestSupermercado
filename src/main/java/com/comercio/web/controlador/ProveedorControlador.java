@@ -50,12 +50,11 @@ public class ProveedorControlador {
 			model.addAttribute("usulog",datos);
 			model.addAttribute("dato",1);
 		}
-		List<Rol> roles = rolDao.getByNombre("Proveedor");
-		Rol rol = new Rol();
+		Rol roles = rolDao.getByNombre("Proveedor");
 		long id = 0;
-		if (!roles.isEmpty()) {
-			rol = roles.get(0);
-			id = rol.getId();
+		if (!roles.equals(null)) {
+			
+			id = roles.getId();
 		}
 		model.addAttribute("empresas",empresaDao.getEmpresaSinProveedor());
 		

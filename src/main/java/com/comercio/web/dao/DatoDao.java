@@ -16,23 +16,27 @@ public class DatoDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
 
-	
 	public long create(Dato p) {
 		entityManager.merge(p);
 		entityManager.flush();
 		return p.getId();
 	}
-	public void delete(long id) {
-		entityManager.createQuery("update Proveedor SET estado=0 where id=:id")
-		.setParameter("id", id)
-		.executeUpdate();
+
+	public Dato getByLoginClave(String login, String clave) {
+		return (Dato) entityManager.createQuery("select d from Dato d where d.login=:login and d.clave=:clave")
+				.setParameter("login", login).setParameter("clave", clave).getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Dato> getByDatos(String login, String clave) {
+		return (List<Dato>) entityManager.createQuery("select d from Dato d where d.login=:login and d.clave=:clave")
+				.setParameter("login", login).setParameter("clave", clave).getResultList();
 	}
 
 	public void update(Dato p) {
 		entityManager.merge(p);
-		
+
 	}
 
 	public Dato getById(long id) {
