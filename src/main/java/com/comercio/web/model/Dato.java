@@ -1,6 +1,5 @@
 package com.comercio.web.model;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -10,13 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 @Entity
 @Table(name = "datos")
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
 public class Dato implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -43,9 +38,12 @@ public class Dato implements Serializable{
 	this.clave=clave;
 	}
 	
-
-
 	public Dato() {
+	}
+	public Dato( String login,String clave) {
+		this.login=login;
+		this.clave=clave;
+		
 	}
 
 	public String getLogin() {

@@ -22,7 +22,7 @@ import com.comercio.web.dao.RolesDao;
 import com.comercio.web.model.Dato;
 import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
-
+import com.comercio.web.model.Usuario;
 import com.comercio.web.model.bean.RolBean;
 
 @Controller
@@ -49,12 +49,10 @@ public class RolesControlador {
 		
 		model.addAttribute("fragmento", "roles");
 		model.addAttribute("plantilla", "roles");
-		
-		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		System.out.println(datos+"*/////////////////////////////////////////");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
+	
+		Usuario usuario =  (Usuario) httpSession.getAttribute("userLog");
+		if(usuario!=null) {
+			model.addAttribute("usulog",usuario);
 			model.addAttribute("dato",1);
 		}
 	
@@ -76,13 +74,22 @@ public class RolesControlador {
 	
 	@GetMapping(value="/asignarProcesos/{id}")
 	public String asignarProcesos(@PathVariable("id") long id, Model model) {
-	Rol rol=rolesDao.getById(id);
-	model.addAttribute("rol_ref",rol);
-	List<Proceso> procesos=procesosDao.getAll();
-	model.addAttribute("listProcesos",procesos);
-	System.out.println(procesos+"procesos con un rol asignado **********");
-	model.addAttribute("proceso","Asignar procesos");
-	model.addAttribute("descripcion","Los procesos son asignados a los roles");
+	List<Proceso> p=rolesDao.getProcesosAsignados(id);
+	List<Proceso> pa=procesosDao.getAll();
+	for(int i=0;i<pa.size();i++) {
+		for(int j=0;j<p.size();j++) {
+			if(pa.get(i).equals(p.get(j))) {
+				pa.remove(i);
+			}
+		}
+	}
+	Rol rol_ref=new Rol();
+	rol_ref=rolesDao.getById(id);
+	model.addAttribute("proceso", "Asinar procesos");
+	model.addAttribute("descripcion", "asignar");
+	model.addAttribute("asignados", p);
+	model.addAttribute("noasignados", pa);
+	model.addAttribute("rol_ref", rol_ref);
 	
 	model.addAttribute("fragmento", "asignarProcesos");
 	model.addAttribute("plantilla", "roles");
@@ -96,8 +103,9 @@ public class RolesControlador {
 	System.out.println(rol_id+"**********"+procesos_id+"****bandera" +bandera);
 	if(bandera==1){
 		List<Proceso> procesos=new ArrayList<>();
-		procesos.add(procesosDao.getById(procesos_id));
 		Rol rol=rolesDao.getById(rol_id);
+		procesos=rol.getProcesos();
+		procesos.add(procesosDao.getById(procesos_id));
 		rol.setProcesos(procesos);
 		System.out.println(procesos+" **************roles");
 		rolesDao.update(rol);
@@ -108,7 +116,7 @@ public class RolesControlador {
 		rol.removeProceso(proceso);
 		rolesDao.update(rol);
 	}
-	System.out.println("sale----------------------------------------");
+	
 	return "redirect:/roles/asignarProcesos/"+rol_id;
 	}	
 	
