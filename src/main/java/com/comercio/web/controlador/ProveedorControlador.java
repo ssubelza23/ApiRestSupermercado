@@ -18,6 +18,7 @@ import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Dato;
 import com.comercio.web.model.Rol;
+import com.comercio.web.model.Usuario;
 
 
 @Controller
@@ -44,24 +45,24 @@ public class ProveedorControlador {
 		
 		model.addAttribute("fragmento", "proveedores");
 		model.addAttribute("plantilla", "proveedores");
-		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
-			model.addAttribute("dato",1);
-		}
+		
 		Rol roles = rolDao.getByNombre("Proveedor");
 		long id = 0;
 		if (!roles.equals(null)) {
-			
 			id = roles.getId();
 		}
 		model.addAttribute("empresas",empresaDao.getEmpresaSinProveedor());
-		
 		model.addAttribute("rolList",rolDao.getAll());
 		model.addAttribute("contactos",userDao.getRol(id));
 		model.addAttribute("marcas",marcaDao.getAll());
 	
+		
+		Usuario usuario = (Usuario) httpSession.getAttribute("userLog");
+		if (usuario != null) {
+			model.addAttribute("usulog", usuario);
+			model.addAttribute("dato", 1);
+		}
+		
 		return "Principal";
 	}	
 	

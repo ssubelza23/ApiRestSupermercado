@@ -20,6 +20,7 @@ import com.comercio.web.dao.ProveedorDao;
 import com.comercio.web.dao.SectorDao;
 import com.comercio.web.model.Dato;
 import com.comercio.web.model.Producto;
+import com.comercio.web.model.Usuario;
 
 
 @Controller
@@ -63,13 +64,11 @@ public class ProductosControlador {
 		
 		
 		
-		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
-			model.addAttribute("dato",1);
+		Usuario usuario = (Usuario) httpSession.getAttribute("userLog");
+		if (usuario != null) {
+			model.addAttribute("usulog", usuario);
+			model.addAttribute("dato", 1);
 		}
-		
 		return "Principal";
 	}
 }
