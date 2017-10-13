@@ -2,8 +2,7 @@ package com.comercio.web.controlador;
 
 
 import java.text.ParseException;
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -96,10 +95,11 @@ public class RolesControlador {
 	public String loq(@PathVariable("rol_id") long rol_id,@PathVariable("procesos_id") long procesos_id,@PathVariable("bandera") int bandera,Model model) {
 	System.out.println(rol_id+"**********"+procesos_id+"****bandera" +bandera);
 	if(bandera==1){
-		Proceso proceso=procesosDao.getById(procesos_id);
+		List<Proceso> procesos=new ArrayList<>();
+		procesos.add(procesosDao.getById(procesos_id));
 		Rol rol=rolesDao.getById(rol_id);
-		rol.addProceso(proceso);
-		System.out.println(proceso+" **************roles");
+		rol.setProcesos(procesos);
+		System.out.println(procesos+" **************roles");
 		rolesDao.update(rol);
 	}	
 	if(bandera==2){

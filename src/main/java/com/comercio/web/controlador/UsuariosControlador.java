@@ -1,7 +1,5 @@
 package com.comercio.web.controlador;
 
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,43 +16,41 @@ import com.comercio.web.model.Dato;
 import com.comercio.web.model.Usuario;
 import com.comercio.web.model.bean.UsuarioBean;
 
-
-
 @Controller
-@RequestMapping(value="/usuarios")
+@RequestMapping(value = "/usuarios")
 public class UsuariosControlador {
-	
+
 	@Autowired
 	private UsuarioDao usuarioDao;
 	@Autowired
 	private RolesDao rolDao;
 	@Autowired
 	private HttpSession httpSession;
-	@GetMapping(value="")
-	
-	public String Usuarios(Model model){
-		//Dato autor = (Dato) httpSession.getAttribute("userLog");
-		List<Usuario> listUsuarios=usuarioDao.getAll();
-		model.addAttribute("usuarios",listUsuarios);
-		
-		model.addAttribute("proceso","Usuarios");
-		model.addAttribute("descripcion","Gestion de usuarios, al añadir nuevo usuario se asigma el rol del usuario y contraseñas de acceso al sistema si aplica.");
-		
-		model.addAttribute("nuevoUsuario",new UsuarioBean());
-		
+
+	@GetMapping(value = "")
+
+	public String Usuarios(Model model) {
+		// Dato autor = (Dato) httpSession.getAttribute("userLog");
+		List<Usuario> listUsuarios = usuarioDao.getAll();
+		model.addAttribute("usuarios", listUsuarios);
+
+		model.addAttribute("proceso", "Usuarios");
+		model.addAttribute("descripcion",
+				"Gestion de usuarios, al añadir nuevo usuario se asigma el rol del usuario y contraseñas de acceso al sistema si aplica.");
+
+		model.addAttribute("nuevoUsuario", new UsuarioBean());
+
 		model.addAttribute("fragmento", "usuarios");
 		model.addAttribute("plantilla", "usuarios");
 		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
-			model.addAttribute("dato",1);
+		List<Dato> datos = (List<Dato>) httpSession.getAttribute("userLog");
+		if (datos != null) {
+			model.addAttribute("usulog", datos);
+			model.addAttribute("dato", 1);
 		}
-		model.addAttribute("rolList",rolDao.getAll());
-	
-		return "Principal";
-	}	
+		model.addAttribute("rolList", rolDao.getAll());
 
-	
-	
+		return "Principal";
+	}
+
 }

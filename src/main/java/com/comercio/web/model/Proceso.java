@@ -32,10 +32,7 @@ public class Proceso implements Serializable{
 
 	private int estado;
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="rol_id")
-	private Rol rol;
+
 
 	public Proceso() {
 	}
@@ -46,12 +43,7 @@ public class Proceso implements Serializable{
 	this.logo=logo;
 	this.estado=estado;
 }
-	public Rol getRol() {
-		return rol;
-	}
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
+
 	public long getId() {
 		return id;
 	}

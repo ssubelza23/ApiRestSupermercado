@@ -22,8 +22,10 @@ public class UsuarioDao {
 	
 
 	//creacion de usuaio
-	public void create(Usuario usuario) {
+	public long create(Usuario usuario) {
 		entityManager.merge(usuario);
+		entityManager.flush();
+		return usuario.getId();
 	}
 	
 	//asignacion de clave
@@ -50,6 +52,12 @@ public class UsuarioDao {
 	public List<Usuario> getAll() {
 		
 		return entityManager.createQuery("select u from Usuario u where estado=1").getResultList();
+	}
+	
+	public Usuario getByDatos(Dato datos) {
+		return (Usuario) entityManager.createQuery("select u from Usuario u where u.datos=:datos and estado=1")
+				.setParameter("datos", datos)
+				.getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")

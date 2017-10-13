@@ -32,13 +32,9 @@ $( document ).ready(function() {
 					$("#feedback").html("<strong class='red-text'>" + result.msg +"</strong>");
 				
 				}else{
-					
-					
-				
-					
-					
-					
-					window.location.replace("http://localhost:8080/index/"+dato.id);
+					console.log("llego usuario autneticado"+result.usuario.id);
+					console.log(result);
+					window.location.replace("http://localhost:8080/index/"+result.usuario.id);
 				}
 					
 			},

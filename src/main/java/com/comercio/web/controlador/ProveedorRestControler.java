@@ -52,10 +52,6 @@ public class ProveedorRestControler {
 		String mensaje = "Bien!, Datos mofificados correctamente";
 		proveedor.setContactos(userDao.getById(p.getIdcontacto()));
 		proveedor.setMarcas(marcaDao.getById(p.getIdmarca()));
-		System.out.println(proveedor);
-		System.out.println(p.getIdcontacto());
-		System.out.println(p.getIdempresa());
-		System.out.println(p.getIdmarca());
 		if(p.getId()>0) {
 		proveedor.setId(p.getId());
 		proveedorDao.update(proveedor);

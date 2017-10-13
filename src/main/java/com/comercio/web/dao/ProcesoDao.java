@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.comercio.web.model.Proceso;
+import com.comercio.web.model.Rol;
 
 
 
@@ -23,7 +24,6 @@ public class ProcesoDao {
 	//creacion de nuevo Rol
 	public long create(Proceso proceso) {
 		entityManager.merge(proceso);
-		entityManager.flush();
 		return proceso.getId();
 	}
 	@SuppressWarnings("unchecked")
@@ -69,5 +69,10 @@ public class ProcesoDao {
 			entityManager.createNativeQuery("Update roles  Set procesos=:procesos Where id=:id")
 			.setParameter("procesos", procesos).setParameter("id", id)
 			.executeUpdate();
+	}
+	public Proceso getByNombre(String nombre) {
+		return  (Proceso) entityManager.createQuery("select d from Proceso d  where d.nombre=:nombre and d.estado=1")
+				.setParameter("nombre", nombre)
+				.getSingleResult();
 	}
 }
