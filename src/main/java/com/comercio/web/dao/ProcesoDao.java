@@ -75,4 +75,14 @@ public class ProcesoDao {
 				.setParameter("nombre", nombre)
 				.getSingleResult();
 	}
+	
+
+	@SuppressWarnings("unchecked")
+	public List<Proceso> ProcesosAsignados(long id){
+		return  entityManager.createNativeQuery("select p from procesos p, roles r, roles_procesos rp where rp.rol_id = :id and p.id=rp.procesos_id and r.id=rp.rol_id",Proceso.class)
+		
+		.setParameter("id",id)
+		
+		.getResultList();
+}
 }

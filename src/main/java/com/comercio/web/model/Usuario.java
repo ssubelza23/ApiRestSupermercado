@@ -88,11 +88,6 @@ public class Usuario implements Serializable{
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
-
-
-
-
-  
    
 	@OneToOne(cascade = CascadeType.ALL)
 	private Dato datos;

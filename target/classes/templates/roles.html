@@ -62,24 +62,20 @@
 <p class="caption" data-th-text="${descripcion}">descripcion</p>
  <div id="circle" class="section scrollspy" >
         <div class="row">
-         
-      <div class="col s12"><span class="flow-text" data-th-text="${rol_ref.nombre}">I am always full-width (col s12)</span></div>
-      
-    
           <div class="col s12">
             <div class="collection">
-            	<data-th-block data-th-each="procesos:${listProcesos}">
-   				<a data-th-if="${rol_ref} == ${procesos.rol}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/2'}" class="collection-item avatar grey lighten-2">
+            	
+   				<a data-th-each="procesos:${asignados}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/2'}" class="collection-item avatar grey lighten-2">
             	<i class="material-icons mdi-social-group icon blue-text"><span data-th-text="${procesos.logo}"></span></i>
             	<span class="title" data-th-text="${procesos.nombre}">nombre</span><br/>
             	<span class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
              	</a>
-             	<a data-th-if="${rol_ref} != ${procesos.rol}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/1'}" class="collection-item avatar">
+             	<a data-th-each="procesos:${noasignados}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/1'}" class="collection-item avatar">
             	<i class="material-icons mdi-social-group icon blue-text"><span data-th-text="${procesos.logo}"></span></i>
             	<span class="title" data-th-text="${procesos.nombre}">nombre</span><br/>
             	<span class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
             	 </a> 
-            	</data-th-block> 
+            	
   			</div>
        	</div>
 	</div>

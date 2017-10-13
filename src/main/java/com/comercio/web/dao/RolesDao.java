@@ -7,6 +7,9 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+
+import com.comercio.web.model.Empresa;
+import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
 
 @Repository
@@ -26,6 +29,13 @@ public class RolesDao {
 	@SuppressWarnings("unchecked")
 	public List<Rol> getAll() {
 		return entityManager.createQuery("select r from Rol r where estado=1").getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Proceso> getProcesosAsignados(long id) {
+		return entityManager.createQuery("select r.procesos from Rol r where exists ( select p from Proceso p) and r.id=:id ")
+				.setParameter("id", id)
+				.getResultList();
 	}
 
 	public Rol getById(long id) {

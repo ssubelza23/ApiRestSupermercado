@@ -30,7 +30,7 @@ public class Rol implements Serializable {
 
 	private int estado;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany
 	private List<Proceso> procesos = new ArrayList<>();
 
 	public void setProcesos(List<Proceso> procesos) {

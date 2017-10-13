@@ -3,7 +3,7 @@ package com.comercio.web.controlador;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,17 +53,19 @@ public class RestControler {
 					errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
 			return ResponseEntity.badRequest().body(result);
 		}
-		List<Dato> da = new ArrayList<>();
-		da = datoDao.getByDatos(datos.getLogin(), datos.getClave());
-		if (da.isEmpty()) {
+		
+		if (datoDao.getByDatos(datos.getLogin(), datos.getClave()).isEmpty()) {
 			result.setMsg("el usuario no existe");
 		} else {
 			Dato d = new Dato();
 			d = datoDao.getByLoginClave(datos.getLogin(), datos.getClave());
-			httpSession.setAttribute("userLog", d);
+			
 			result.setMsg("succes");
 			Usuario usuario = new Usuario();
 			usuario = userDao.getByDatos(d);
+			System.out.println();
+			httpSession.setAttribute("userLog", usuario);
+			System.out.println(usuario);
 			result.setUsuario(usuario);
 			result.setExiste(true);
 			result.setPlantilla("notificaciones");
