@@ -37,15 +37,15 @@ public class ContactosProveedorRestControler {
 
 	@PostMapping("/contactos")
 	public String editarusuario(@RequestBody UsuarioBean u) {
-		Usuario user=new Usuario();
-		String mensaje="";
+		Usuario user = new Usuario();
+		String mensaje = "";
 		Rol roles = rolDao.getByNombre("Proveedor");
-		
+
 		if (!roles.equals(null)) {
 			user.addRol(roles);
-			
-		}else {
-			rolDao.create(new Rol("Proveedor","sin privilegios",1));	
+
+		} else {
+			rolDao.create(new Rol("Proveedor", "sin privilegios", 1));
 			user.addRol(rolDao.getByNombre("Proveedor"));
 		}
 		user.setNombre(u.getNombre());
@@ -56,22 +56,19 @@ public class ContactosProveedorRestControler {
 		user.setPuestoTrabajo(u.getPuestotrabajo());
 		user.setMovil(u.getMovil());
 		user.setCorreo(u.getCorreo());
-		
+
 		user.setEstado(1);
-	System.out.println(u.getId()+"id para modifcar");
-		
-		if(u.getId()>0) {
+		System.out.println(u.getId() + "id para modifcar");
+
+		if (u.getId() > 0) {
 			user.setId(u.getId());
 			usuarioDao.update(user);
-			mensaje="BIEN, datos modificados correctamenta";
-			
-		}else {
+			mensaje = "BIEN, datos modificados correctamenta";
+
+		} else {
 			usuarioDao.create(user);
-			mensaje="BIEN, datos creados correctamente";
+			mensaje = "BIEN, datos creados correctamente";
 		}
-	
-		
-		
 
 		return mensaje;
 	}

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
-import com.comercio.web.model.Dato;
 import com.comercio.web.model.Usuario;
 import com.comercio.web.model.bean.UsuarioBean;
 
@@ -32,8 +31,7 @@ public class UsuariosControlador {
 	@GetMapping(value = "")
 
 	public String Usuarios(Model model) {
-		// Dato autor = (Dato) httpSession.getAttribute("userLog");
-		System.out.println("llega aqui");
+		
 		List<Usuario> listUsuarios = usuarioDao.getAll();
 		
 		model.addAttribute("usuarios", listUsuarios);

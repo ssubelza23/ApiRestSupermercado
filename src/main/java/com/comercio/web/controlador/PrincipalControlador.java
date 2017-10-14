@@ -39,8 +39,8 @@ public class PrincipalControlador {
 	public String index(@PathVariable("idDato") long id, Model model) {
 		Usuario usuariolog = new Usuario();
 		usuariolog = usuarioDao.getById(id);
-		model.addAttribute("proceso", "");
-		model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
+		model.addAttribute("proceso", "Notificaciones");
+
 		model.addAttribute("fragmento", "notificaciones");
 		model.addAttribute("plantilla", "notificaciones");
 		model.addAttribute("usulog", usuariolog);

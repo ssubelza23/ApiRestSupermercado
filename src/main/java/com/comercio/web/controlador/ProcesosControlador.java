@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.comercio.web.dao.ProcesoDao;
-import com.comercio.web.model.Dato;
 import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Usuario;
 import com.comercio.web.model.bean.ProcesoBean;
@@ -55,7 +54,6 @@ public class ProcesosControlador {
 
 	@GetMapping(value = "/editProceso/{id}")
 	public String editProceso(@PathVariable("id") long id, Model model) {
-		System.out.println("****************" + id);
 		model.addAttribute("fragmento", "editprocesos");
 		model.addAttribute("plantilla", "procesos");
 		Proceso proceso = procesosDao.getById(id);
@@ -69,7 +67,6 @@ public class ProcesosControlador {
 	@PostMapping(value = "/addProceso")
 	public String submitProceso(@ModelAttribute("nuevoProceso") ProcesoBean r, BindingResult result, Model model)
 			throws ParseException {
-		System.out.println(r);
 		procesosDao.create(new Proceso(r.getNombre(), r.getDescripcion(), r.getEnlace(), r.getLogo(), 1));
 		return "redirect:/procesos";
 	}

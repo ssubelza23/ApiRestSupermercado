@@ -53,13 +53,13 @@ public class RestControler {
 					errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
 			return ResponseEntity.badRequest().body(result);
 		}
-		
+
 		if (datoDao.getByDatos(datos.getLogin(), datos.getClave()).isEmpty()) {
 			result.setMsg("el usuario no existe");
 		} else {
 			Dato d = new Dato();
 			d = datoDao.getByLoginClave(datos.getLogin(), datos.getClave());
-			
+
 			result.setMsg("succes");
 			Usuario usuario = new Usuario();
 			usuario = userDao.getByDatos(d);

@@ -17,12 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class DataBaseConfig {
 
-	/**
-	 * Definición del DataSource para la conexión a nuestra base de datos. Las
-	 * propiedades son establecidas desde el fichero de properties, y asignadas
-	 * usando el objeto env.
-	 * 
-	 */
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -33,10 +27,6 @@ public class DataBaseConfig {
 		return dataSource;
 	}
 
-	/**
-	 *
-	 * Declaración del EntityManagerFactory de JPA
-	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
@@ -74,8 +64,7 @@ public class DataBaseConfig {
 	/**
 	 * 
 	 * Este bean es un postprocessor que ayuda a relanzar las excepciones
-	 * específicas de cada plataforma en aquellas clases anotadas
-	 * con @Repository
+	 * específicas de cada plataforma en aquellas clases anotadas con @Repository
 	 * 
 	 */
 	@Bean

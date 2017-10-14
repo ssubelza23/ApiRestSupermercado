@@ -20,7 +20,6 @@ import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Empresa;
 import com.comercio.web.model.bean.EmpresaBean;
 
-
 @RestController
 public class EmpresaRestControler {
 	@Autowired
@@ -34,46 +33,43 @@ public class EmpresaRestControler {
 	EmpresaDao empresaDao;
 
 	@Autowired
-ProveedorDao proveedorDao;
+	ProveedorDao proveedorDao;
 
-
-@GetMapping(value="/empresas")
-public List<Empresa> tablas_categoria(Model model) {
-	System.out.println(empresaDao.getAll()+"///////////");
-	return empresaDao.getAll();
-}
-@PostMapping(value="/empresas")
-public String editarusuario(@RequestBody EmpresaBean e) {
-	String mensaje="";
-	Empresa empresa=new Empresa();
-	empresa.setNombre(e.getNombre());
-	empresa.setDireccioncomercial(e.getDireccioncomercial());
-	empresa.setCorreo(e.getCorre());
-	empresa.setSitioweb(e.getSitioweb());
-	empresa.setTelefono(e.getTelefono());
-	empresa.setFax(e.getFax());
-	empresa.setDetalle(e.getDetalles());
-	empresa.setEspecialidades(e.getEspecialidades());
-	empresa.setSector(e.getSector());
-	empresa.setSede(e.getSede());
-	if(e.getId()!=0) {
-		empresa.setId(e.getId());
-		empresaDao.update(empresa);
-		mensaje="Bien! datos modificados correctamente";
-	}else {
-		empresaDao.create(empresa);
-		mensaje="Bien! datos creados correctamente";
+	@GetMapping(value = "/empresas")
+	public List<Empresa> tablas_categoria(Model model) {
+		System.out.println(empresaDao.getAll() + "///////////");
+		return empresaDao.getAll();
 	}
-return mensaje;
-}
 
+	@PostMapping(value = "/empresas")
+	public String editarusuario(@RequestBody EmpresaBean e) {
+		String mensaje = "";
+		Empresa empresa = new Empresa();
+		empresa.setNombre(e.getNombre());
+		empresa.setDireccioncomercial(e.getDireccioncomercial());
+		empresa.setCorreo(e.getCorre());
+		empresa.setSitioweb(e.getSitioweb());
+		empresa.setTelefono(e.getTelefono());
+		empresa.setFax(e.getFax());
+		empresa.setDetalle(e.getDetalles());
+		empresa.setEspecialidades(e.getEspecialidades());
+		empresa.setSector(e.getSector());
+		empresa.setSede(e.getSede());
+		if (e.getId() != 0) {
+			empresa.setId(e.getId());
+			empresaDao.update(empresa);
+			mensaje = "Bien! datos modificados correctamente";
+		} else {
+			empresaDao.create(empresa);
+			mensaje = "Bien! datos creados correctamente";
+		}
+		return mensaje;
+	}
 
-
-@DeleteMapping(value="/empresas/{id}")
-public String eliminarempresa(@PathVariable  long id) {
-	System.out.println(id);
-empresaDao.delete(empresaDao.getById(id));
-return "Bien!. Proveedor eliminado correctamente.";
+	@DeleteMapping(value = "/empresas/{id}")
+	public String eliminarempresa(@PathVariable long id) {
+		System.out.println(id);
+		empresaDao.delete(empresaDao.getById(id));
+		return "Bien!. Proveedor eliminado correctamente.";
+	}
 }
-}
-	    
