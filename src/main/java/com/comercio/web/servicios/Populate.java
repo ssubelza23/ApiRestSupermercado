@@ -86,6 +86,24 @@ public class Populate {
 		procesoProductos.setLogo("shoping");
 		procesoProductos.setEstado(1);
 		procesoDao.create(procesoProductos);
+
+		// Proceso Ventas
+		Proceso procesoVentas = new Proceso();
+		procesoVentas.setNombre("Ventas");
+		procesoVentas.setEnlace("ventas");
+		procesoVentas.setDescripcion("Gestion de Ventas, ...............");
+		procesoVentas.setLogo("trending_up");
+		procesoVentas.setEstado(1);
+		procesoDao.create(procesoVentas);
+
+		// Proceso pedidos
+		Proceso procesoPedidos = new Proceso();
+		procesoPedidos.setNombre("Pedidos");
+		procesoPedidos.setEnlace("pedidos");
+		procesoPedidos.setDescripcion("Gestion de Pedidos, ...............");
+		procesoPedidos.setLogo("assignment");
+		procesoPedidos.setEstado(1);
+		procesoDao.create(procesoPedidos);
 		// Creacion de Roles: Administrador, Cajero, Gerente General y cliente
 
 		// procesos para administrador
@@ -95,6 +113,7 @@ public class Populate {
 		procesos.add(procesoDao.getByNombre("Procesos"));
 		procesos.add(procesoDao.getByNombre("Proveedores"));
 		procesos.add(procesoDao.getByNombre("Productos"));
+		procesos.add(procesoDao.getByNombre("Pedidos"));
 
 		Rol rolAdministrador = new Rol();
 		// Rol Administrador
@@ -125,7 +144,14 @@ public class Populate {
 		rolCliente.setEstado(1);
 		rolDao.create(rolCliente);
 
-		// ROles para usuario
+		// Rol Proveedor
+		Rol rolProveedor = new Rol();
+		rolProveedor.setNombre("Proveedor");
+		rolProveedor.setDescripcion("Sin privilegios");
+		rolProveedor.setEstado(1);
+		rolDao.create(rolProveedor);
+
+		// Roles para usuario Admin prueba
 		List<Rol> roles = new ArrayList<>();
 		roles.add(rolDao.getByNombre("Administrador"));
 		roles.add(rolDao.getByNombre("Cajero"));
@@ -137,8 +163,8 @@ public class Populate {
 		datosDao.create(d);
 
 		Usuario usuario = new Usuario();
-		usuario.setNombre("nonbre");
-		usuario.setAp("ap");
+		usuario.setNombre("Juan");
+		usuario.setAp("Peres");
 		usuario.setAm("am");
 		usuario.setDNI(123456789);
 		usuario.setSexo('M');

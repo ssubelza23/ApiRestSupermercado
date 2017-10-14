@@ -2,7 +2,6 @@ package com.comercio.web.controlador;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
@@ -52,18 +51,19 @@ public class ProveedorRestControler {
 		String mensaje = "Bien!, Datos mofificados correctamente";
 		proveedor.setContactos(userDao.getById(p.getIdcontacto()));
 		proveedor.setMarcas(marcaDao.getById(p.getIdmarca()));
-		if(p.getId()>0) {
-		proveedor.setId(p.getId());
-		proveedorDao.update(proveedor);
-		mensaje="Bien!, datos modificados correctamente";
-		}else {
-			mensaje="Bien!, datos creados correctamente";
-			 proveedorDao.create(proveedor);
+		
+		if (p.getId() > 0) {
+			proveedor.setId(p.getId());
+			proveedorDao.update(proveedor);
+			mensaje = "Bien!, datos modificados correctamente";
+		} else {
+			mensaje = "Bien!, datos creados correctamente";
+			proveedorDao.create(proveedor);
 		}
 		return mensaje;
 	}
 
-	@DeleteMapping(value="/proveedores/{id}")
+	@DeleteMapping(value = "/proveedores/{id}")
 	public String eliminarProveedor(@PathVariable long id) {
 		empresaDao.limpiarEmpresa(id);
 		proveedorDao.delete(id);
