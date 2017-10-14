@@ -36,7 +36,7 @@ public class ProveedorRestControler {
 	MarcaDao marcaDao;
 	@Autowired
 	ProveedorDao proveedorDao;
-
+//cometario
 	@GetMapping(value = "/listaproveedores")
 	public List<Proveedor> tablas_categoria(Model model) {
 		return proveedorDao.getAll();
