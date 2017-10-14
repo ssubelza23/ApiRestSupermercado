@@ -17,8 +17,6 @@ public class FileUploadUtility {
 	private static final Logger logger=LoggerFactory.getLogger(FileUploadUtility.class);
 	public static void uploadFile(HttpServletRequest request, MultipartFile foto,String dni) {
 		
-		//ger the real path
-		
 		REAL_PATH=request.getSession().getServletContext().getRealPath("/assets/images/");
 		
 		logger.info(REAL_PATH);

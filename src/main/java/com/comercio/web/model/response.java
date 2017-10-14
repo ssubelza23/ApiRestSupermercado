@@ -1,6 +1,5 @@
 package com.comercio.web.model;
 
-import java.util.List;
 
 public class response {
  private String plantilla;
@@ -14,7 +13,7 @@ public void setMsg(String msg) {
 	this.msg = msg;
 }
 private boolean existe;
- private List<Dato> dato;
+ private Usuario usuario;
 
 
 
@@ -22,12 +21,12 @@ public String getPlantilla() {
 	return plantilla;
 }
 
-public List<Dato> getDato() {
-	return dato;
+public Usuario getUsuario() {
+	return usuario;
 }
 
-public void setDato(List<Dato> dato) {
-	this.dato = dato;
+public void setUsuario(Usuario usuario) {
+	this.usuario = usuario;
 }
 
 public void setPlantilla(String plantilla) {

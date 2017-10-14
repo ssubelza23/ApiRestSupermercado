@@ -27,11 +27,9 @@ public class ContactosProveedorRestControler {
 
 	@GetMapping(value = "/contactos")
 	public List<Usuario> tablas_categoria(Model model) {
-		List<Rol> roles = rolDao.getByNombre("Proveedor");
-		Rol rol = new Rol();
+		Rol rol = rolDao.getByNombre("Proveedor");
 		long id = 0;
-		if (!roles.isEmpty()) {
-			rol = roles.get(0);
+		if (!rol.equals(null)) {
 			id = rol.getId();
 		}
 		return usuarioDao.getRol(id);
@@ -39,18 +37,16 @@ public class ContactosProveedorRestControler {
 
 	@PostMapping("/contactos")
 	public String editarusuario(@RequestBody UsuarioBean u) {
-		Usuario user=new Usuario();
-		String mensaje="";
-		List<Rol> roles = rolDao.getByNombre("Proveedor");
-		Rol rol = new Rol();
-		if (roles.size()>0) {
-			rol = roles.get(0);
-			
-			
-		}else {
-			long idRol=rolDao.create(new Rol("Proveedor","sin privilegios",1));	
-			System.out.println(rolDao.getById(idRol)+"seras");
-			rol=rolDao.getById(idRol);
+		Usuario user = new Usuario();
+		String mensaje = "";
+		Rol roles = rolDao.getByNombre("Proveedor");
+
+		if (!roles.equals(null)) {
+			user.addRol(roles);
+
+		} else {
+			rolDao.create(new Rol("Proveedor", "sin privilegios", 1));
+			user.addRol(rolDao.getByNombre("Proveedor"));
 		}
 		user.setNombre(u.getNombre());
 		user.setAp(u.getAp());
@@ -60,22 +56,19 @@ public class ContactosProveedorRestControler {
 		user.setPuestoTrabajo(u.getPuestotrabajo());
 		user.setMovil(u.getMovil());
 		user.setCorreo(u.getCorreo());
-		user.addRol(rol);
+
 		user.setEstado(1);
-	System.out.println(u.getId()+"id para modifcar");
-		
-		if(u.getId()>0) {
+		System.out.println(u.getId() + "id para modifcar");
+
+		if (u.getId() > 0) {
 			user.setId(u.getId());
 			usuarioDao.update(user);
-			mensaje="BIEN, datos modificados correctamenta";
-			
-		}else {
+			mensaje = "BIEN, datos modificados correctamenta";
+
+		} else {
 			usuarioDao.create(user);
-			mensaje="BIEN, datos creados correctamente";
+			mensaje = "BIEN, datos creados correctamente";
 		}
-	
-		
-		
 
 		return mensaje;
 	}

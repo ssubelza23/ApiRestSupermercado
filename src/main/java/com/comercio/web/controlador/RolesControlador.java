@@ -1,9 +1,7 @@
 package com.comercio.web.controlador;
 
-
 import java.text.ParseException;
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.comercio.web.dao.ProcesoDao;
 import com.comercio.web.dao.RolesDao;
-import com.comercio.web.model.Dato;
 import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
-
+import com.comercio.web.model.Usuario;
 import com.comercio.web.model.bean.RolBean;
 
 @Controller
-@RequestMapping(value="/roles")
+@RequestMapping(value = "/roles")
 public class RolesControlador {
 
 	@Autowired
@@ -36,92 +33,87 @@ public class RolesControlador {
 	private ProcesoDao procesosDao;
 	@Autowired
 	private HttpSession httpSession;
-	
-	@GetMapping(value="")
-	public String ShowForm(Model model){
-		List<Rol> listRoles=rolesDao.getAll();
-		model.addAttribute("listRoles",listRoles);
-		List<Proceso> listProcesos=procesosDao.getAll();
-		model.addAttribute("listProcesos",listProcesos);
-		model.addAttribute("newRol",new RolBean());
-		
-		model.addAttribute("proceso","Roles");
-		model.addAttribute("descripcion","Gestion de roles cada rol cuenta con diferentes procesos");
-		
+
+	@GetMapping(value = "")
+	public String ShowForm(Model model) {
+		List<Rol> listRoles = rolesDao.getAll();
+		model.addAttribute("listRoles", listRoles);
+		List<Proceso> listProcesos = procesosDao.getAll();
+		model.addAttribute("listProcesos", listProcesos);
+		model.addAttribute("newRol", new RolBean());
+
+		model.addAttribute("proceso", "Roles");
+		model.addAttribute("descripcion", "Gestion de roles cada rol cuenta con diferentes procesos");
+
 		model.addAttribute("fragmento", "roles");
 		model.addAttribute("plantilla", "roles");
-		
-		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		System.out.println(datos+"*/////////////////////////////////////////");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
-			model.addAttribute("dato",1);
+
+		Usuario usuario = (Usuario) httpSession.getAttribute("userLog");
+		if (usuario != null) {
+			model.addAttribute("usulog", usuario);
+			model.addAttribute("dato", 1);
 		}
-	
 		return "Principal";
-	}	
-	@PostMapping(value="/addRol")
-	public String submit(@ModelAttribute("newRol") RolBean r,
-	BindingResult result,Model model) throws ParseException{
-		Rol rol=new Rol();
+	}
+
+	@PostMapping(value = "/addRol")
+	public String submit(@ModelAttribute("newRol") RolBean r, BindingResult result, Model model) throws ParseException {
+		Rol rol = new Rol();
 		rol.setNombre(r.getNombre());
 		rol.setDescripcion(r.getDescripcion());
 		rol.setEstado(1);
-	rolesDao.create(rol);	
-	model.addAttribute("proceso","Roles");
-	model.addAttribute("descripcion","Gestion de roles cada rol cuenta con diferentes procesos");
-	
-	return "redirect:/roles";
+		rolesDao.create(rol);
+		model.addAttribute("proceso", "Roles");
+		model.addAttribute("descripcion", "Gestion de roles cada rol cuenta con diferentes procesos");
+
+		return "redirect:/roles";
 	}
-	
-	@GetMapping(value="/asignarProcesos/{id}")
+
+	@GetMapping(value = "/asignarProcesos/{id}")
 	public String asignarProcesos(@PathVariable("id") long id, Model model) {
-	Rol rol=rolesDao.getById(id);
-	model.addAttribute("rol_ref",rol);
-	List<Proceso> procesos=procesosDao.getAll();
-	model.addAttribute("listProcesos",procesos);
-	System.out.println(procesos+"procesos con un rol asignado **********");
-	model.addAttribute("proceso","Asignar procesos");
-	model.addAttribute("descripcion","Los procesos son asignados a los roles");
-	
-	model.addAttribute("fragmento", "asignarProcesos");
-	model.addAttribute("plantilla", "roles");
-	
-	return "Principal";
-	}	
-	
-	
-	@GetMapping(value="/addrolpro/{rol_id}/{procesos_id}/{bandera}")
-	public String loq(@PathVariable("rol_id") long rol_id,@PathVariable("procesos_id") long procesos_id,@PathVariable("bandera") int bandera,Model model) {
-	System.out.println(rol_id+"**********"+procesos_id+"****bandera" +bandera);
-	if(bandera==1){
-		Proceso proceso=procesosDao.getById(procesos_id);
-		Rol rol=rolesDao.getById(rol_id);
-		rol.addProceso(proceso);
-		System.out.println(proceso+" **************roles");
-		rolesDao.update(rol);
-	}	
-	if(bandera==2){
-		Proceso proceso=procesosDao.getById(procesos_id);
-		Rol rol=rolesDao.getById(rol_id);
-		rol.removeProceso(proceso);
-		rolesDao.update(rol);
+		List<Proceso> p = rolesDao.getProcesosAsignados(id);
+		List<Proceso> pa = procesosDao.getAll();
+		for (int i = 0; i < pa.size(); i++) {
+			for (int j = 0; j < p.size(); j++) {
+				if (pa.get(i).equals(p.get(j))) {
+					pa.remove(i);
+				}
+			}
+		}
+		Rol rol_ref = new Rol();
+		rol_ref = rolesDao.getById(id);
+		model.addAttribute("proceso", "Asinar procesos");
+		model.addAttribute("descripcion", "asignar");
+		model.addAttribute("asignados", p);
+		model.addAttribute("noasignados", pa);
+		model.addAttribute("rol_ref", rol_ref);
+
+		model.addAttribute("fragmento", "asignarProcesos");
+		model.addAttribute("plantilla", "roles");
+
+		return "Principal";
 	}
-	System.out.println("sale----------------------------------------");
-	return "redirect:/roles/asignarProcesos/"+rol_id;
-	}	
-	
-	
-	
-	
 
-	
-	
+	@GetMapping(value = "/addrolpro/{rol_id}/{procesos_id}/{bandera}")
+	public String loq(@PathVariable("rol_id") long rol_id, @PathVariable("procesos_id") long procesos_id,
+			@PathVariable("bandera") int bandera, Model model) {
+		if (bandera == 1) {
+			List<Proceso> procesos = new ArrayList<>();
+			Rol rol = rolesDao.getById(rol_id);
+			procesos = rol.getProcesos();
+			procesos.add(procesosDao.getById(procesos_id));
+			rol.setProcesos(procesos);
 
+			rolesDao.update(rol);
+		}
+		if (bandera == 2) {
+			Proceso proceso = procesosDao.getById(procesos_id);
+			Rol rol = rolesDao.getById(rol_id);
+			rol.removeProceso(proceso);
+			rolesDao.update(rol);
+		}
 
-	
-
-	
+		return "redirect:/roles/asignarProcesos/" + rol_id;
+	}
 
 }

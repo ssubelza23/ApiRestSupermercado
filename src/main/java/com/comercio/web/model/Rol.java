@@ -4,18 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "roles")
-public class Rol implements Serializable{
+public class Rol implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,21 +27,25 @@ public class Rol implements Serializable{
 	private String logo;
 
 	private int estado;
-	@JsonManagedReference
-	@OneToMany(mappedBy="rol",cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany
 	private List<Proceso> procesos = new ArrayList<>();
-	
-	
+
+	public void setProcesos(List<Proceso> procesos) {
+		this.procesos = procesos;
+	}
+
 	public List<Proceso> getProcesos() {
 		return procesos;
 	}
 
 	public Rol() {
 	}
-	public Rol(String nombre,String descripcion,int estado){
-		this.nombre=nombre;
-		this.descripcion=descripcion;
-		this.estado=estado;
+
+	public Rol(String nombre, String descripcion, int estado) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.estado = estado;
 	}
 
 	public long getId() {
@@ -85,25 +87,22 @@ public class Rol implements Serializable{
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
+
 	public void addProceso(Proceso proceso) {
 		procesos.add(proceso);
-		proceso.setRol(this);
+
 	}
 
 	public void removeProceso(Proceso proceso) {
-		//procesos.remove(proceso);
-		proceso.setRol(null);
+		procesos.remove(proceso);
+
 	}
-/*	@Override
-	public String toString() {
-		return "roles [id=" + id + ", nombre=" + nombre + ", descripcion="+ descripcion +"]";
-	}*/
 	@Override
 	public String toString() {
 		try {
-			return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
-			
+			return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter()
+					.writeValueAsString(this);
+
 		} catch (com.fasterxml.jackson.core.JsonProcessingException e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,5 @@
 package com.comercio.web.controlador;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class ProductoRestControler {
 	MarcaDao marcaDao;
 	@Autowired
 	ProveedorDao proveedorDao;
-	
+
 	@Autowired
 	ProductoDao productoDao;
 
@@ -49,12 +48,12 @@ public class ProductoRestControler {
 
 	@PostMapping(value = "/productos")
 	public String editarusuario(@RequestBody ProductoBean p) {
-		String mensaje="llego";
+		String mensaje = "llego";
 		System.out.println(p.getNombre());
 		return mensaje;
 	}
 
-	@DeleteMapping(value="/productos/{id}")
+	@DeleteMapping(value = "/productos/{id}")
 	public String eliminarProveedor(@PathVariable long id) {
 		productoDao.delete(id);
 		return "Bien!. Proveedor eliminado correctamente.";

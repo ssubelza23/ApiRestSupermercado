@@ -12,8 +12,8 @@
 			
 			<li data-th-if="${dato}==1">
 				<div class="center-align" >
-			    	<a href="#!user"><img class="circle" width="20%" height="20%" data-th-src="@{'/assets/images/usuarios/'+${usulog[0].usuario.DNI}+'.jpg'}"/></a><br/>
-					<a class="btn-flat dropdown-button waves-effect waves-light profile-btn" href="#" data-activates="profile-dropdown" data-th-text="${usulog[0].usuario.nombre}+' '+${usulog[0].usuario.ap}+' '+${usulog[0].usuario.am}">Juan Perez<i class=" material-icons right">keyboard_arrow_down</i></a>
+			    	<a href="#!user"><img class="circle" width="20%" height="20%" data-th-src="@{'/assets/images/usuarios/'+${usulog.DNI}+'.jpg'}"/></a><br/>
+					<a class="btn-flat dropdown-button waves-effect waves-light profile-btn" href="#" data-activates="profile-dropdown" data-th-text="${usulog.nombre}+'  '+${usulog.ap}+'  '+${usulog.am}">Juan Perez<i class=" material-icons right">keyboard_arrow_down</i></a>
             	</div>
               	<div class="col col s8 m8 l8">
                         <ul id="profile-dropdown" class="dropdown-content">
@@ -23,11 +23,11 @@
                 </div>
 			</li>
           	<li data-th-if="${dato}==1">
-          		<h6 class="center" data-th-text="${usulog[0].usuario.roles[0].nombre}">Rol</h6>
+          		<h6 class="center" data-th-text="${usulog.roles[0].nombre}">Rol</h6>
           		<div class="divider"></div>
           	</li>
            	<li data-th-if="${dato}==1"  class="bold" >
-           	<a  data-th-each="p:${usulog[0].usuario.roles[0].procesos}" data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
+           	<a  data-th-each="p:${usulog.roles[0].procesos}" data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
            	</li>
          
 		</ul>

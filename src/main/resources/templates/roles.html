@@ -1,87 +1,93 @@
 <div data-th-fragment="roles">
-    	    	<h2 class="header" data-th-text="${proceso}">Roles</h2>
- 				 <p class="caption" data-th-text="${descripcion}">descripcion</p>
+	<h2 class="header" data-th-text="${proceso}">Roles</h2>
+	<p class="caption" data-th-text="${descripcion}">descripcion</p>
 
-				<div class="row left-align">
-					<a href="#modal1" class="text-light-p left-align modal-trigger"><i
-						class="material-icons">person_add</i>Agregar nuevo Rol. </a>
-				</div>
-				<div id="modal1" class="modal">
-				
-   					<form id="roles_form" method="POST" data-th-action="@{/roles/addRol}" data-th-object="${newRol}">
-  						<div class="modal-content">
-  						<h4>Agregar nuevo rol.</h4>
-      					<ul>
-						<li>
-							<div class="input-field col s12">
-							<input  type="text" name="nombre" id="nombre"  data-th-field="*{nombre}" class="validate"/> 
-							<label for="login">Nombre</label>
-							</div>
-						</li>
-						<li><div class="input-field col s12">
-								<input type="text" id="clave" name="descripcion"  data-th-field="*{descripcion}" class="validate" /> 
-								<label for="clave">Descripcion</label>
-							</div>
-						</li>
-						<li class="divider">&nbsp;
-						<input type="hidden" value="on" name="_active"/></li>
-					<li>
-					<div class="divider"></div>
-					</li>
-	</ul>
+	<div class="row left-align">
+		<a href="#modal1" class="text-light-p left-align modal-trigger"><i
+			class="material-icons">person_add</i>Agregar nuevo Rol. </a>
 	</div>
-	
-	<div class="modal-footer">
-            <a class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-            <a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar" onClick="runTest(this.form, this)" type="submit"></a>
-          </div>
-	   </form>
-    </div>
-    
-          <div id="circle" class="section scrollspy" >
-        <div class="row">
-          <div class="col s12">
-            <div class="collection">
-            	
-            <a  data-th-each="rol:${listRoles}" data-th-href="@{'/roles/asignarProcesos/'+${rol.id}}" class="collection-item avatar">
-                <i class="material-icons circle">grade</i>
-                <span class="title" data-th-text="${rol.nombre}">nombre</span><br/>
-                <span data-th-text="${rol.descripcion}" class="black-text">descripcion</span>
-      			
-              </a>
-             
-            </div>
+	<div id="modal1" class="modal">
 
-          </div>
+		<form id="roles_form" method="POST" data-th-action="@{/roles/addRol}"
+			data-th-object="${newRol}">
+			<div class="modal-content">
+				<h4>Agregar nuevo rol.</h4>
+				<ul>
+					<li>
+						<div class="input-field col s12">
+							<input type="text" name="nombre" id="nombre"
+								data-th-field="*{nombre}" class="validate" /> <label for="login">Nombre</label>
+						</div>
+					</li>
+					<li><div class="input-field col s12">
+							<input type="text" id="clave" name="descripcion"
+								data-th-field="*{descripcion}" class="validate" /> <label
+								for="clave">Descripcion</label>
+						</div></li>
+					<li class="divider">&nbsp; <input type="hidden" value="on"
+						name="_active" /></li>
+					<li>
+						<div class="divider"></div>
+					</li>
+				</ul>
+			</div>
 
-        </div>
-      </div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+				<a class="modal-action modal-close waves-effect waves-red btn-flat"><input
+					name="4" value="Guardar" onClick="runTest(this.form, this)"
+					type="submit"></a>
+			</div>
+		</form>
+	</div>
+
+	<div id="circle" class="section scrollspy">
+		<div class="row">
+			<div class="col s12">
+				<div class="collection">
+
+					<a data-th-each="rol:${listRoles}"
+						data-th-href="@{'/roles/asignarProcesos/'+${rol.id}}"
+						class="collection-item avatar"> <i
+						class="material-icons circle">grade</i> <span class="title"
+						data-th-text="${rol.nombre}">nombre</span><br /> <span
+						data-th-text="${rol.descripcion}" class="black-text">descripcion</span>
+
+					</a>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
 </div>
 <div data-th-fragment="asignarProcesos">
-<h2 class="header" data-th-text="${proceso}">Roles</h2>
-<p class="caption" data-th-text="${descripcion}">descripcion</p>
- <div id="circle" class="section scrollspy" >
-        <div class="row">
-         
-      <div class="col s12"><span class="flow-text" data-th-text="${rol_ref.nombre}">I am always full-width (col s12)</span></div>
-      
-    
-          <div class="col s12">
-            <div class="collection">
-            	<data-th-block data-th-each="procesos:${listProcesos}">
-   				<a data-th-if="${rol_ref} == ${procesos.rol}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/2'}" class="collection-item avatar grey lighten-2">
-            	<i class="material-icons mdi-social-group icon blue-text"><span data-th-text="${procesos.logo}"></span></i>
-            	<span class="title" data-th-text="${procesos.nombre}">nombre</span><br/>
-            	<span class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
-             	</a>
-             	<a data-th-if="${rol_ref} != ${procesos.rol}" data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/1'}" class="collection-item avatar">
-            	<i class="material-icons mdi-social-group icon blue-text"><span data-th-text="${procesos.logo}"></span></i>
-            	<span class="title" data-th-text="${procesos.nombre}">nombre</span><br/>
-            	<span class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
-            	 </a> 
-            	</data-th-block> 
-  			</div>
-       	</div>
+	<h2 class="header" data-th-text="${proceso}">Roles</h2>
+	<p class="caption" data-th-text="${descripcion}">descripcion</p>
+	<div id="circle" class="section scrollspy">
+		<div class="row">
+			<div class="col s12">
+				<div class="collection">
+
+					<a data-th-each="procesos:${asignados}"
+						data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/2'}"
+						class="collection-item avatar grey lighten-2"> <i
+						class="material-icons mdi-social-group icon blue-text"><span
+							data-th-text="${procesos.logo}"></span></i> <span class="title"
+						data-th-text="${procesos.nombre}">nombre</span><br /> <span
+						class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
+					</a> <a data-th-each="procesos:${noasignados}"
+						data-th-href="@{'/roles/addrolpro/'+${rol_ref.id}+'/'+${procesos.id}+'/1'}"
+						class="collection-item avatar"> <i
+						class="material-icons mdi-social-group icon blue-text"><span
+							data-th-text="${procesos.logo}"></span></i> <span class="title"
+						data-th-text="${procesos.nombre}">nombre</span><br /> <span
+						class="black-text" data-th-text="${procesos.descripcion}">descripcion</span>
+					</a>
+
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 </div>

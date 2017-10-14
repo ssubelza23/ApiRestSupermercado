@@ -22,8 +22,10 @@ public class UsuarioDao {
 	
 
 	//creacion de usuaio
-	public void create(Usuario usuario) {
-		entityManager.persist(usuario);
+	public long create(Usuario usuario) {
+		entityManager.merge(usuario);
+		entityManager.flush();
+		return usuario.getId();
 	}
 	
 	//asignacion de clave
@@ -51,14 +53,20 @@ public class UsuarioDao {
 		
 		return entityManager.createQuery("select u from Usuario u where estado=1").getResultList();
 	}
+	
+	public Usuario getByDatos(Dato datos) {
+		return (Usuario) entityManager.createQuery("select u from Usuario u where u.datos=:datos and estado=1")
+				.setParameter("datos", datos)
+				.getSingleResult();
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuRol() {
 		return entityManager.createQuery("select u from Usuario u").getResultList();
 	}
 	@SuppressWarnings("unchecked")
-	public List<Dato> getByDato(String login,String clave) {
-		return  entityManager.createQuery("select d from Dato d  where d.login=:login and d.clave=:clave")
+	public List<Usuario> getByDato(String login,String clave) {
+		return   entityManager.createQuery("select d from Usuario d  where d.datos.login=:login and d.datos.clave=:clave and d.Estado=1")
 				.setParameter("login", login).setParameter("clave", clave)
 				.getResultList();
 	}
