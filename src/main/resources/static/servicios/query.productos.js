@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	listar_productos();
 	eliminar_productos();
+	
 	limpiarformulario_productos();
 	$("#btn_submit_productos").click(function(event) {
 		event.preventDefault();
@@ -30,6 +31,7 @@ var eliminar_productos = function() {
 				listar_productos();
 				mostrar_mensaje_productos(result);
 				limpiarformulario_productos();
+				Materialize.toast('Bien, Producto eliminado', 4000);
 			},
 			error : function(e) {
 				alert("Error!")
@@ -44,11 +46,10 @@ function fire_ajax_submit_productos() {
 	var data=new FormData(form);
 	$("#btn_submit_usuario").prop("disabled",true);
 	data.append("CustomField","this is some extra data for testing");
-	console.log(data);
 	$.ajax({
 		type:"POST",
 		enctype:"multipart/form-data",
-		url:"/editarusuario",
+		url:"/productos",
 		data:data,
 		processData: false,
 		contentType: false,
@@ -58,7 +59,7 @@ function fire_ajax_submit_productos() {
 			console.log(data);
 			$("#btn_submit_usuario").prop("disabled",false);
 			listar();
-			mostrar_mensaje(data);
+			Materialize.toast('Bien, nuevo producto añadido', 4000);
 			limpiarformulario();
 		},
 		error: function(e){

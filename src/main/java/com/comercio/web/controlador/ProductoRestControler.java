@@ -2,6 +2,8 @@ package com.comercio.web.controlador;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
@@ -47,9 +49,9 @@ public class ProductoRestControler {
 	}
 
 	@PostMapping(value = "/productos")
-	public String editarusuario(@RequestBody ProductoBean p) {
+	public String editarusuario(@RequestBody ProductoBean p,HttpServletRequest request) {
 		String mensaje = "llego";
-		System.out.println(p.getNombre());
+		System.out.println(p.getNombre()+"nomrbes productos/////");
 		return mensaje;
 	}
 

@@ -5,8 +5,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.slf4j.*;
 
 public class FileUploadUtility {
@@ -42,6 +43,13 @@ public class FileUploadUtility {
 		catch(IOException ex){
 			
 		}
+	}
+	
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver multipartResolver() {
+	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	    multipartResolver.setMaxUploadSize(100000);
+	    return new CommonsMultipartResolver();
 	}
 	
 	

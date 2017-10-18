@@ -1,36 +1,46 @@
 package com.comercio.web.model.bean;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductoBean {
 
 	private long id;
-	private long codigoBarra;
 	private String nombre;
+	private String contenidoNeto;
 	private int cantidad;
 	private String medida;
-	private String contenidoneto;
-	private String detalles;
+	private String detalle;
 	private String presentacion;
-	private String imagen;
+	private MultipartFile imagen;
+	private long codigoBarras;
 	private String industria;
-	private int estado;
+	private long idProveedor;
+	private long idCategoria;
+	private long idSector;
+	private String porcentajeGanancia;
+	private String costo;
+	private String precioDeVenta;
+	private int cantidadMinima;
+	private String medidaMinima;
+	private String contenidoxcaja;
+	private String medidacontenidoxcaja;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getCodigoBarra() {
-		return codigoBarra;
-	}
-	public void setCodigoBarra(long codigoBarra) {
-		this.codigoBarra = codigoBarra;
-	}
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getContenidoNeto() {
+		return contenidoNeto;
+	}
+	public void setContenidoNeto(String contenidoNeto) {
+		this.contenidoNeto = contenidoNeto;
 	}
 	public int getCantidad() {
 		return cantidad;
@@ -44,17 +54,11 @@ public class ProductoBean {
 	public void setMedida(String medida) {
 		this.medida = medida;
 	}
-	public String getContenidoneto() {
-		return contenidoneto;
+	public String getDetalle() {
+		return detalle;
 	}
-	public void setContenidoneto(String contenidoneto) {
-		this.contenidoneto = contenidoneto;
-	}
-	public String getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
 	}
 	public String getPresentacion() {
 		return presentacion;
@@ -62,11 +66,17 @@ public class ProductoBean {
 	public void setPresentacion(String presentacion) {
 		this.presentacion = presentacion;
 	}
-	public String getImagen() {
+	public MultipartFile getImagen() {
 		return imagen;
 	}
-	public void setImagen(String imagen) {
+	public void setImagen(MultipartFile imagen) {
 		this.imagen = imagen;
+	}
+	public long getCodigoBarras() {
+		return codigoBarras;
+	}
+	public void setCodigoBarras(long codigoBarras) {
+		this.codigoBarras = codigoBarras;
 	}
 	public String getIndustria() {
 		return industria;
@@ -74,13 +84,66 @@ public class ProductoBean {
 	public void setIndustria(String industria) {
 		this.industria = industria;
 	}
-	public int getEstado() {
-		return estado;
+	public long getIdProveedor() {
+		return idProveedor;
 	}
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setIdProveedor(long idProveedor) {
+		this.idProveedor = idProveedor;
+	}
+	public long getIdCategoria() {
+		return idCategoria;
+	}
+	public void setIdCategoria(long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+	public long getIdSector() {
+		return idSector;
+	}
+	public void setIdSector(long idSector) {
+		this.idSector = idSector;
+	}
+	public String getPorcentajeGanancia() {
+		return porcentajeGanancia;
+	}
+	public void setPorcentajeGanancia(String porcentajeGanancia) {
+		this.porcentajeGanancia = porcentajeGanancia;
+	}
+	public String getCosto() {
+		return costo;
+	}
+	public void setCosto(String costo) {
+		this.costo = costo;
+	}
+	public String getPrecioDeVenta() {
+		return precioDeVenta;
+	}
+	public void setPrecioDeVenta(String precioDeVenta) {
+		this.precioDeVenta = precioDeVenta;
+	}
+	public int getCantidadMinima() {
+		return cantidadMinima;
+	}
+	public void setCantidadMinima(int cantidadMinima) {
+		this.cantidadMinima = cantidadMinima;
+	}
+	public String getMedidaMinima() {
+		return medidaMinima;
+	}
+	public void setMedidaMinima(String medidaMinima) {
+		this.medidaMinima = medidaMinima;
+	}
+	public String getContenidoxcaja() {
+		return contenidoxcaja;
+	}
+	public void setContenidoxcaja(String contenidoxcaja) {
+		this.contenidoxcaja = contenidoxcaja;
+	}
+	public String getMedidacontenidoxcaja() {
+		return medidacontenidoxcaja;
+	}
+	public void setMedidacontenidoxcaja(String medidacontenidoxcaja) {
+		this.medidacontenidoxcaja = medidacontenidoxcaja;
 	}
 	
-
-
+	
 }
