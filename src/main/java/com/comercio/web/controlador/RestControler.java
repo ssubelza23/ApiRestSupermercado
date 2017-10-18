@@ -63,7 +63,6 @@ public class RestControler {
 			result.setMsg("succes");
 			Usuario usuario = new Usuario();
 			usuario = userDao.getByDatos(d);
-			System.out.println();
 			httpSession.setAttribute("userLog", usuario);
 			System.out.println(usuario);
 			result.setUsuario(usuario);
