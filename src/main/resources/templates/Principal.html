@@ -17,59 +17,57 @@
 <link th:href="@{/assets/css/prism.css}" rel="stylesheet" />
 <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
 <link th:href="@{/assets/css/ghpages-materialize.css}" type="text/css"
-rel="stylesheet" media="screen,projection" />
+	rel="stylesheet" media="screen,projection" />
 
 <!-- Data Tables -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" type="text/css">
 
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-  
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css"
+	type="text/css">
+<script
+	src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body>
 	<div th:replace="~{header :: he}"></div>
-<main>
-<div class="container">
-  <div class="row">
-  	<div class="col s12 m9 l10">
-<div id="cuerpo">
-  		<div  th:replace="${plantilla} :: ${fragmento}">
-  	</div>	
-  		</div>
-  	 <!-- Table of Contents -->
-    <div class="col hide-on-small-only m3 l2">
-      <div class="toc-wrapper">
-        <div style="height: 1px;">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div><!-- End Container -->
-</main>
-		<div th:replace="~{footer :: fo}"></div>
-	
+	<main>
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m9 l10">
+				<div id="cuerpo">
+					<div th:replace="${plantilla} :: ${fragmento}"></div>
+				</div>
+				<!-- Table of Contents -->
+				<div class="col hide-on-small-only m3 l2">
+					<div class="toc-wrapper">
+						<div style="height: 1px;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Container --> </main>
+	<div th:replace="~{footer :: fo}"></div>
+
 	<!--  Scripts-->
-	<!-- <script th:src="@{/assets/bin/jquery-3.2.1.min.js}"></script> -->
 	<script th:src="@{/assets/js/jquery.timeago.min.js}"></script>
 	<script th:src="@{/assets/js/prism.js}"></script>
 	<script th:src="@{/assets/jade/lunr.min.js}"></script>
 	<script th:src="@{/assets/jade/search.js}"></script>
 	<script th:src="@{/assets/bin/materialize.js}"></script>
-	
 	<script th:src="@{/assets/js/init.js}"></script>
-	
-
-		<script th:src="@{/servicios/query.valida.js}"></script>
-		
-		<script th:src="@{/servicios/query.table.js}"></script>
-		<script th:src="@{/servicios/query.categoria.js}"></script>
-		<script th:src="@{/servicios/query.empresas.js}"></script>
-		<script th:src="@{/servicios/query.marcas.js}"></script>
-		<script th:src="@{/servicios/query.contactos.js}"></script>
-		
-		<script th:src="@{/servicios/query.proveedores.js}"></script>
-		<script th:src="@{/servicios/query.productos.js}"></script>
+	<script th:src="@{/servicios/query.valida.js}"></script>
+	<script th:src="@{/servicios/query.table.js}"></script>
+	<script th:src="@{/servicios/query.categoria.js}"></script>
+	<script th:src="@{/servicios/query.empresas.js}"></script>
+	<script th:src="@{/servicios/query.marcas.js}"></script>
+	<script th:src="@{/servicios/query.contactos.js}"></script>
+	<script th:src="@{/servicios/query.proveedores.js}"></script>
+	<script th:src="@{/servicios/query.productos.js}"></script>
 
 </body>
 </html>

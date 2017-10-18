@@ -1,150 +1,160 @@
 <div data-th-fragment="productos">
-<br/>
+	<br />
+
 	<div class="row">
-	<form id="formulario_productos">
-		<div class="row card">
-		<div class="col s12">
-			<ul class="tabs">
-				<li class="tab col s3"><a class="active" href="#test1"><span
-						id="opcion_productos">Productos</span></a></li>
-				<li class="tab col s3"><a href="#test2"><span id="opcion">Ventas</span></a></li>
-				<li class="tab col s3"><a href="#test3"><span id="opcion">Logistica</span></a></li>
-			</ul>
-		</div>
-
-		<div id="test1" class="col s12">
+		<form id="formulario_productos">
+			<div class="row card ">
+				<div class="col s12 card-title">
+					<ul class="tabs">
+						<li class="tab col s3"><a class="active" href="#test1"><span
+								id="opcion_productos">Productos</span></a></li>
+						<li class="tab col s3"><a href="#test2"><span id="opcion">Ventas</span></a></li>
+						<li class="tab col s3"><a href="#test3"><span id="opcion">Logistica</span></a></li>
+					</ul>
+				</div>
+				<div id="test1" class="col s12">
+				
+					<input type="hidden" name="id" id="id" />
+					<div class="input-field col s12 m6 l6 grey-text">
+						<input id="nombre" type="text" class="validate" name="nombre" />
+						<label>Nombre</label>
+					</div>
 			
-				<input type="hidden" name="id" id="id" />
-
-				<div class="input-field col s12 m6 l6 grey-text">
-					<i class="material-icons prefix">playlist_add_check</i> <input
-						id="nombre" type="text" class="validate" name="nombre" /> <label>Nombre</label>
-				</div>
-				<div class="input-field col s12 m6 l1 grey-text">
-					<input id="cantidad" type="text" class="validate" name="cantidad" />
-					<label for="icon_telephone">cantidad</label>
-				</div>
-
-				<div class="input-field col s12 m6 l1 grey-text">
-					<select>
-						<option value="" disabled selected>Kg</option>
-						<option value="1">L</option>
-						<option value="2">ml</option>
-						<option value="3">Kg</option>
-						<option value="3">gr</option>
-					</select> <label>medida</label>
-				</div>
-				<div class="input-field col s12 m6 l4 grey-text">
-					<input id="cantidad" type="text" class="validate" name="cantidad" />
-					<label for="icon_telephone">Contenido Neto</label>
-				</div>
-				<div class="input-field col s12 m6 l4 grey-text">
-					<i class="material-icons prefix">text_format</i> <input
-						id="detalle" type="text" class="validate" name="detalle"
-						placeholder="sabor,color.." /> <label for="icon_telephone">Detalles</label>
-				</div>
-				<div class="input-field col s12 m6 l4 grey-text">
-					<input id="presentacio" type="text" class="validate"
-						name="presentacion" placeholder="botella,sachet,bolsa,caja....." />
-					<label for="icon_telephone">Presentacion</label>
-				</div>
-				<div class="input-field col s12 m6 l4 grey-text">
-					<i class="material-icons prefix">insert_photo</i> <input
-						id="imagen" type="text" class="validate" name="imagen" /> <label
-						for="icon_telephone">Imagen</label>
-				</div>
-				<div class="input-field col s12 m6 l6 grey-text">
-					<i class="material-icons prefix">view_column</i> <input
-						id="codigobarras" type="text" class="validate" name="codigobarras" />
-					<label for="icon_telephone">Codigo de barras</label>
-				</div>
-				<div class="input-field col s12 m6 l6 grey-text">
-					<input id="industria" type="text" class="validate" name="industria" />
-					<label for="icon_telephone">Industria</label>
-				</div>
-				<div class="input-field col s12 m4 l3 grey-text">
-					<select id="idproveedores" name="idproveedores">
-						<option value="" disabled selected>Proveedor</option>
-						<option data-th-each="p:${proveedores}" data-th-value="${p.id}"
-							data-th-text="${p.contactos.nombre}+ '- '+${p.marcas.nombre} "></option>
-					</select>
-
-				</div>
-				<div class="input-field col s12 m6 l3 grey-text">
-					<select id="idcategorias" name="idcategrorias">
-						<option value="0">Categoria</option>
-						<option data-th-each="c:${categorias}" data-th-value="${c.id}"
-							data-th-text="${c.nombre}"></option>
-					</select>
-				</div>
-				<div class="input-field col s12 m4 l3 grey-text">
-					<select multiple id="idcontactos" name="idcontactos">
-						<option value="" disabled selected>sector</option>
-						<option data-th-each="s:${sectores}" data-th-value="${s.id}"
-							data-th-text="${s.nombre}+' '+${c.ap}"></option>
-					</select>
-				</div>
-				</div>
-	   <div id="test2" class="col s12">
-                <div class="input-field col s12 m6 l12 grey-text">
-                    <i class="material-icons prefix">more_horiz</i> <input id="nombre"
-                        type="text" class="validate" name="nombre" /> <label>Nombre
-                        de la Empresa</label>
+					<div class="input-field col s12 m6 l4 grey-text">
+						<input id="contenidoNeto" type="text" class="validate" name="contenidoNeto" />
+						<label for="icon_telephone">Contenido Neto</label>
+					</div>
+					       <div class="input-field col s12 m6 l1 grey-text">
+                        <input id="cantidad" type="text" class="validate" name="cantidad" />
+                        <label for="icon_telephone">cantidad</label>
+                    </div>
+                    <div class="input-field col s12 m6 l1 grey-text">
+                        <select id="medida">
+                            <option value="" disabled selected>Kg</option>
+                            <option value="1">L</option>
+                            <option value="2">ml</option>
+                            <option value="3">Kg</option>
+                            <option value="3">gr</option>
+                        </select> <label>medida</label>
+                    </div>
+					<div class="input-field col s12 m6 l4 grey-text">
+						<input id="detalle" type="text" class="validate" name="detalle"
+							placeholder="sabor,color.." /> <label for="icon_telephone">Detalles</label>
+					</div>
+					<div class="input-field col s12 m6 l4 grey-text">
+						<input id="presentacio" type="text" class="validate"
+							name="presentacion" placeholder="botella,sachet,bolsa,caja....." />
+						<label for="icon_telephone">Presentacion</label>
+					</div>
+					   <div class="file-field input-field col s12 m6 l4 grey-text center">
+                    <div class="btn grey center-alingh">
+                        <span>Imagen</span> <input type="file" id="imagen" name="imagen">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
                 </div>
+					<div class="input-field col s12 m6 l6 grey-text">
+						<input id="codigobarras" type="text" class="validate"
+							name="codigobarras" /> <label for="icon_telephone">Codigo
+							de barras</label>
+					</div>
+					<div class="input-field col s12 m6 l6 grey-text">
+						<input id="industria" type="text" class="validate"
+							name="industria" /> <label for="icon_telephone">Industria</label>
+					</div>
+					<div class="input-field col s12 m4 l3 grey-text">
+						<select id="idproveedores" name="idproveedores">
+							<option value="" disabled selected>Proveedor</option>
+							<option data-th-each="p:${proveedores}" data-th-value="${p.id}"
+								data-th-text="${p.contactos.nombre}+ '- '+${p.marcas.nombre} "></option>
+						</select>
+					</div>
+					<div class="input-field col s12 m6 l3 grey-text">
+						<select id="idcategorias" name="idcategrorias">
+							<option value="0">Categoria</option>
+							<option data-th-each="c:${categorias}" data-th-value="${c.id}"
+								data-th-text="${c.nombre}"></option>
+						</select>
+					</div>
+					<div class="input-field col s12 m4 l3 grey-text">
+						<select multiple id="idcontactos" name="idcontactos">
+							<option value="" disabled selected>sector</option>
+							<option data-th-each="s:${sectores}" data-th-value="${s.id}"
+								data-th-text="${s.nombre}+' '+${c.ap}"></option>
+						</select>
+					</div>
+				</div>
+				<div id="test2" class="col s12">
+					<div class="input-field col s12 m6 l12 grey-text">
+						<input id="porcentajeGanancia" type="text" class="validate"
+							name="porcentajeGanancia" /> <label>Porcentaje de
+							ganancia. %</label>
+					</div>
+					<div class="input-field col s12 m6 l12 grey-text">
+                        <input id="porcentajeGanancia" type="text" class="validate"
+                            name="porcentajeGanancia" /> <label>Costo $.</label>
+                    </div>
+				<div class="input-field col s12 m6 l12 grey-text">
+                        <input id="porcentajeGanancia" type="text" class="validate"
+                            name="porcentajeGanancia" /> <label>precio de venta $.</label>
+                </div>
+			
 
-                <div class="input-field col s12 m6 l12 grey-text">
-                    <i class="material-icons prefix ">location_on</i> <input
-                        id="direccioncomercial" type="text" class="validate"
-                        name="direccioncomercial" /> <label>Direccion Comerial</label>
-                </div>
-                <div class="input-field col s12 m4 l12 grey-text">
-                    <i class="material-icons prefix">mail</i> <input id="correo"
-                        type="text" class="validate" name="correo" /> <label>Correo</label>
-                </div>
-        </div>
+				</div>
+				<div id="test3" class="col s12">
+					<div class="input-field col s12 m6 l12 grey-text">
+						<p>Reglas de aprovicionamiento</p>
+					</div>
+					<div class="row">
+						<div class="input-field col s12 m6 l10 grey-text">
+							<input id="cantidad" type="text" class="validate" name="cantidad" />
+							<label>cantidad minima</label>
+						</div>
+						<div class="input-field col s12 m6 l2 grey-text">
+							<select>
+								<option value="" disabled selected>Kg</option>
+								<option value="1">Unidades</option>
+							</select> <label>medida</label>
+						</div>
 				
-				
-				
-        <div id="test3" class="col s12">
-                <input type="hidden" name="id" id="id" />
+					
+						<div class="input-field col s12 m6 l12 grey-text">
+							<p>Una caja contiene:</p>
+						</div>
+						
+							<div class="input-field col s12 m6 l10 grey-text">
+								<input id="cantidad" type="text" class="validate"
+									name="cantidad" /> <label>cantidad</label>
+							</div>
+							<div class="input-field col s12 m6 l2 grey-text">
+								<select>
+									<option value="" disabled selected>Kg</option>
+									<option value="1">Unidades</option>
+								</select> <label>medida</label>
+							</div>
+					
 
-                <div class="input-field col s12 m6 l6 grey-text">
-                    <i class="material-icons prefix">credit_card</i> <input id="dni"
-                        type="text" class="validate" name="dni" /> <label>DNI</label>
-                </div>
-                <div class="input-field col s12 m6 l6 grey-text">
-                    <i class="material-icons prefix">credit_card</i> <input
-                        id="puestoTrabajo" type="text" class="validate"
-                        name="puestoTrabajo" /> <label>Puesto de Trabajo</label>
-                </div>
+					</div>
+				</div>
 
-                <div class="input-field col s12 m6 l3 grey-text">
-                    <i class="material-icons prefix">person</i> <input id="nombre"
-                        type="text" class="validate" name="nombre" /> <label>Nombre</label>
-                </div>
-
-                <div class="input-field col s12 m6 l3 grey-text">
-                    <input id="ap" type="text" class="validate" name="ap" /> <label>Ap</label>
-                </div>
-                <div class="input-field col s12 m4 l3 grey-text">
-                    <input id="am" type="text" class="validate" name="am" /> <label>Am</label>
-                </div>
-        </div>
-        
-
-				<div class="collapsible-header active col s12 m6 l12">
+				<div class="collapsible-header active col s12 m6 l12 card-action ">
 					<a
-						class="modal-action modal-close waves-effect waves-red btn-flat "
+						class="modal-action modal-close waves-effect waves-red btn-flat black-text"
 						data-th-href="@{/usuarios}" id="cancelar_editar_productos">Cancelar</a>
-					<a class="modal-action modal-close waves-effect waves-red btn-flat"><input
-						name="4" value="Guardar" type="submit" id="btn_submit_productos" /></a>
+					<a
+						class="modal-action modal-close waves-effect waves-red btn-flat black-text">
+						<input name="4" value="Guardar" type="submit"
+						id="btn_submit_productos" />
+					</a>
 				</div>
-				</div>
-			</form>
-    <div class="col-sm-offset-2 col-sm-8">
-        <p class="mensaje"></p>
-    </div>
-    <div class="row card">
+			</div>
+		</form>
+
+		<div class="col-sm-offset-2 col-sm-8">
+			<p class="mensaje"></p>
+		</div>
+		<div class="row card">
 			<table id="productos_tabla"
 				class="responsive-table display dataTable cell-border"
 				cellspacing="0" width="100%">
@@ -159,10 +169,7 @@
 					</tr>
 				</thead>
 			</table>
-		
-</div>
-
-
+		</div>
 	</div>
 	<div id="modaleliminarmarcas" class="modal modal-fixed-footer">
 		<form id="eliminar_marcas">
@@ -183,8 +190,6 @@
 			</div>
 		</form>
 	</div>
-
-
 </div>
 
 

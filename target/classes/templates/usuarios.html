@@ -1,5 +1,6 @@
 <div data-th-fragment="usuarios">
 	<p class="caption" data-th-text="${descripcion}"></p>
+	
 	<form id="formulario_usuario" method="POST"
 		data-th-action="@{/usuarios/create}" data-th-object="${nuevoUsuario}"
 		enctype="multipart/form-data">
