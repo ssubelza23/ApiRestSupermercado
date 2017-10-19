@@ -41,6 +41,6 @@ public class SectorDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Sector> getAll() {
-		return entityManager.createQuery("select u from Sector u").getResultList();
+		return entityManager.createQuery("select u from Sector u where estado=1").getResultList();
 	}
 }

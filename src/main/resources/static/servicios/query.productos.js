@@ -45,7 +45,6 @@ function fire_ajax_submit_productos() {
 	var form=$("#formulario_usuario")[0];
 	var data=new FormData(form);
 	$("#btn_submit_usuario").prop("disabled",true);
-	data.append("CustomField","this is some extra data for testing");
 	$.ajax({
 		type:"POST",
 		enctype:"multipart/form-data",

@@ -1,0 +1,82 @@
+<div data-th-fragment="sectores" >
+    <p class="caption" data-th-text="${descripcion}"></p>   
+        <form id="formulario_sectores" class="card">
+            <div class="col s12 ">
+                <ul class="tabs">
+                    <li class="tab col s3">
+                        <a class="active" href="#test1"><span id="opcion">Nuevo</span></a>
+                    </li>
+                </ul><br>
+            </div>
+            
+            <div id="test1" class="col s12">
+                <input type="hidden" name="id" id="id"/>
+                <div class="input-field col s12">
+				    <i class="material-icons prefix">playlist_add_check</i>
+				    <input  id="nombre" type="text" name="nombre"/>
+				    <label >Nombre</label>
+                </div>
+                
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">short_text</i>
+			        <input id="detalle" type="text" name="detalle"/>
+			        <label>Detalle</label>
+			    </div>
+			    
+			    <div class="input-field col s6">
+			         <i class="material-icons prefix">insert_photo</i>
+				    <input id="logo" type="text"/>
+				    <label for="icon_telephone">Logo</label>
+			    </div>	
+			     <div class="input-field col s6">
+			         <i class="large material-icons"><span id="logo_editar">edit</span></i>
+			     </div>				
+		  </div>
+		  
+    	  <div class="collapsible-header active">
+				<a class="modal-action modal-close waves-effect waves-red btn-flat " data-th-href="@{/usuarios}" id="cancelar_editar_sectores">Cancelar</a>
+            	<a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_sectores"/></a>
+          </div> 
+          
+        </form>
+        <div id="modal1" class="modal modal-fixed-footer">
+        <form id="eliminar_sector">
+          <div class="modal-content center">
+            <h4>Seguro que desea eliminar</h4>
+             <input type="hidden" id="id"/>
+			     <div class="input-field col s6 offset-s4 center">
+			         <label>Sector:</label>
+				     <input placeholder="Placeholder" disabled id="nombre" type="text"/>
+			     </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+            <a href="#" id="btn_eliminar_sector"class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
+          </div>
+          </form>
+</div>
+
+
+<div class="col-sm-offset-2 col-sm-8">
+	<p class="mensaje">
+	
+	</p>
+</div>
+<div id="tabLisUsu">
+	<table id="sectores_tablas" class="display highlight card" cellspacing="0" width="100%"  >  
+       <thead>
+            <tr>
+                <th>nombre</th>
+				<th>detalle</th>
+                <th>logo</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <!-- Footer Table -->
+    </table>
+</div>	
+	
+</div>
+
+

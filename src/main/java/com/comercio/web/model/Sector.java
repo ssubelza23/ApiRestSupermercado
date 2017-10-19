@@ -20,6 +20,15 @@ public class Sector {
 	private long id;
 	private String nombre;
 	private String detalle;
+	private String logo;
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+
 	private int estado;
 
 
