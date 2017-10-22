@@ -1,26 +1,26 @@
 <div data-th-fragment="login" id="formulario_login">
 	<h2 class="header" data-th-text="${proceso}">Proceso</h2>
 <p class="caption" data-th-text="${descripcion}"></p>
+<div class="row">
  <div class="card">
  <div class="card-content">
       <form class="login-form" id="login_usuario" method="POST" action="/validacion" data-th-object="${datos}">
-          <div class="input-field">
-            <i class="material-icons.icon-demo"></i>
+          <div class="input-field col s12 m6 l4 grey-text">
             <input id="login" type="text" name="login" data-th-field="*{login}"/>
             <label for="username" class="center-align">Login:</label>
           </div>
-          <div class="input-field">
-            <i class="material-icons"></i>
+          <div class="input-field col s12 m6 l4 grey-text">
             <input id="clave" type="password" name="clave" data-th-field="*{clave}"/>
             <label for="password">Clave</label>
         </div>
-        <div class="input-field">
+        <div class="input-field col s12 m6 l4 grey-text">
             <div id="feedback"></div>
         </div>
-         <div class="card-action">
+         <div class="card-action col s12 ">
          <button class="btn waves-effect waves-light" type="submit" id="btn_validar">Login.</button>
          </div>
       </form>
        </div>  
   </div>     
+    </div>
     </div>

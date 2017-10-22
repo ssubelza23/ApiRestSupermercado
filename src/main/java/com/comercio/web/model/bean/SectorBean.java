@@ -1,11 +1,22 @@
 package com.comercio.web.model.bean;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 
 public class SectorBean {
 	private long id;
+	@NotNull(message="No puede estar vacio")
+	@Size(min = 3, max = 50,message="Introduzca nombre válido")
+	@Column (unique=true)
 	private String nombre;
+	@NotNull(message="No puede estar vacio")
+	@Size(min = 3, max = 50,message="Introduzca nombre válido")
 	private String detalle;
+	@NotNull(message="No puede estar vacio")
+	@Size(min = 3, max = 50,message="Introduzca nombre válido")
 	private String logo;
 	public String getLogo() {
 		return logo;

@@ -1,20 +1,19 @@
 <div data-th-fragment="usuarios">
 	<p class="caption" data-th-text="${descripcion}"></p>
-	
-	<form id="formulario_usuario" method="POST"
-		data-th-action="@{/usuarios/create}" data-th-object="${nuevoUsuario}"
-		enctype="multipart/form-data">
+	<form id="formulario_usuario" enctype="multipart/form-data">
 		<div class="row card">
 			<div class="col s12">
 				<ul class="tabs">
-					<li class="tab col s3"><a class="active" href="#test1"><i
-							class="material-icons center">keyboard_arrow_right</i>Informacion
-							Basica</a></li>
-					<li class="tab col s3"><a href="#test2"><i
-							class="material-icons center">expand_more</i>Completar
-							Informacion</a></li>
+					<li class="tab col s3"><a class="active" href="#test1"> <i
+							class="material-icons center">keyboard_arrow_right</i>
+							Informacion Basica
+					</a></li>
+					<li class="tab col s3"><a href="#test2"> <i
+							class="material-icons center">expand_more</i> Completar
+							Informacion
+					</a></li>
 					<li class="tab col s3"><a href="#test3"> <i
-							class="material-icons center">lock</i>Asignar Login y Clave
+							class="material-icons center">lock</i> Asignar Login y Clave
 					</a></li>
 				</ul>
 			</div>
@@ -23,17 +22,17 @@
 				<div class="input-field col s4">
 					<i class="material-icons prefix">person</i> <input
 						placeholder="nombres" id="Nombre" type="text" class="validate"
-						name="Nombre" data-th-field="*{nombre}" /> <label
+						name="Nombre"/> <label
 						for="icon_prefix">Nombre(s).</label>
 				</div>
 				<div class="input-field col s4">
 					<input placeholder="Ap" id="Ap" type="text" class="validate"
-						name="Ap" data-th-field="*{ap}" /> <label for="icon_telephone">Apellido
+						name="Ap" /> <label for="icon_telephone">Apellido
 						Paterno.</label>
 				</div>
 				<div class="input-field col s4">
 					<input placeholder="Am" id="Am" type="text" class="validate"
-						name="Am" data-th-field="*{am}" /> <label for="icon_telephone">Apellido
+						name="Am" /> <label for="icon_telephone">Apellido
 						Materno.</label>
 				</div>
 
@@ -41,13 +40,13 @@
 				<div class="input-field col s6">
 					<i class="material-icons prefix">credit_card</i> <input
 						placeholder="dni" id="DNI" type="number" class="validate"
-						name="DNI" data-th-field="*{DNI}" /> <label for="icon_prefix">DNI:</label>
+						name="DNI"  /> <label for="icon_prefix">DNI:</label>
 				</div>
 
 
 				<div class="input-field col s6">
 					<i class="material-icons prefix">credit_card</i> <select
-						id="id_Rol" name="id_Rol" data-th-field="*{id_Rol}">
+						id="id_Rol" name="id_Rol">
 						<option value="0">Selecionar Rol</option>
 						<option data-th-each="rol:${rolList}" data-th-value="${rol.id}"
 							data-th-text="${rol.nombre}"></option>
@@ -62,17 +61,17 @@
 
 				<div class="input-field col s4">
 					<i class="material-icons prefix">email</i> <input id="Correo"
-						placeholder="correo" name="Correo" data-th-field="*{Correo}"
+						placeholder="correo" name="Correo"
 						type="email" class="validate" /> <label for="icon_prefix">Correo:</label>
 				</div>
 				<div class="input-field col s4">
 					<i class="material-icons prefix">phone</i> <input id="Telefono"
-						name="Telefono" data-th-field="*{Telefono}" type="number"
+						name="Telefono" type="number"
 						class="validate" /> <label for="icon_prefix">Telefono:</label>
 				</div>
 				<div class="input-field col s4">
 					<i class="material-icons prefix">location_on</i> <input
-						id="Direccion" name="Direccion" data-th-field="*{Direccion}"
+						id="Direccion" name="Direccion" 
 						type="text" class="validate" /> <label for="icon_prefix">Direccion:</label>
 				</div>
 
@@ -82,43 +81,42 @@
 						<i class="material-icons prefix">insert_invitation</i> <label
 							for="birthdate">Fecha de Nacimiento</label> <input type="text"
 							class="datepicker" id="fechaNacimiento" name="fechaNacimiento"
-							data-th-field="*{fechaNacimiento}" />
+							 />
 					</div>
 				</div>
 
 				<div class="input-field col s6">
 					<i class="material-icons prefix">wc</i> <select id="Sexo"
-						name="Sexo" data-th-field="*{Sexo}">
+						name="Sexo">
 						<option value="M">Masculino</option>
 						<option value="F">Femenino</option>
 					</select> <label for="icon_prefix">Sexo:</label>
 				</div>
 				<div class="input-field col s6 right-aling">
 					<i class="material-icons prefix">attachment</i> <input type="file"
-						id="Foto" name="Foto" data-th-field="*{Foto}" />
+						id="Foto" name="Foto" />
 				</div>
 
 			</div>
 			<div id="test3" class="col s12">
 				<div class="input-field col s12">
-					<input type="text" name="Login" id="Login" data-th-field="*{Login}"
+					<input type="text" name="Login" id="Login"
 						class="validate" placeholder="login" /> <label for="login">Login</label>
 				</div>
 
 
 				<div class="input-field col s12">
 					<input type="password" name="Clave" id="Clave"
-						data-th-field="*{Clave}" placeholder="clave" /> <label for="login">Clave</label>
-					<input type="hidden" name="id_dato" id="id_dato"
-						data-th-field="*{id_dato}" class="id_dato" />
+						 placeholder="clave" /> <label
+						for="login">Clave</label> <input type="hidden" name="id_dato"
+						id="id_dato" class="id_dato" />
 				</div>
 
 			</div>
 			<div class="collapsible-header active">
-				<a class="modal-action modal-close waves-effect waves-red btn-flat "
-					data-th-href="@{/usuarios}">Cancelar</a> <a
-					class="modal-action modal-close waves-effect waves-red btn-flat"><input
-					name="4" value="Guardar" type="submit" id="btn_submit_usuario" /></a>
+				<a class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a> 
+				<a class="modal-action modal-close waves-effect waves-red btn-flat">
+				<input name="4" value="Guardar" type="submit" id="btn_submit_usuario" /></a>
 			</div>
 		</div>
 	</form>
@@ -162,12 +160,9 @@
 		<p class="mensaje"></p>
 	</div>
 
-
-
-
 	<div id="tabLisUsu" class=" row card">
 		<div class="col s12 m6 l12">
-			<table id="employeesTable"
+			<table id="tablaUsuarios"
 				class="table table-striped table-bordered responsive-table display dataTable cell-border compact hover "
 				cellspacing="0" width="100%">
 				<!-- Header Table -->

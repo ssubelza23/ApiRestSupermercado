@@ -40,11 +40,10 @@ function fire_ajax_submit(){
 
 
 	var listar=function(){
-	 var table = $('#employeesTable').DataTable({
+	 var table = $('#tablaUsuarios').DataTable({
 		 responsive: true,
 		 "destroy": true,
-		 
-			"sAjaxSource": "Lista_Usuarios",
+			"sAjaxSource": "listaUsuarios",
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
@@ -61,11 +60,8 @@ function fire_ajax_submit(){
 			"language": idioma_español,
 			
 	 });
-	 /*$("select").val('10');
-	  $('select').addClass("browser-default");
-	  $('select').material_select();*/
-	 obtener_data_editar("#employeesTable tbody",table);
-	 obtener_data_eliminar("#employeesTable tbody",table);
+	 obtener_data_editar("#tablaUsuarios tbody",table);
+	 obtener_data_eliminar("#tablaUsuarios tbody",table);
 	};
 	
 	var eliminar = function(){

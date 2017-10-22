@@ -9380,7 +9380,6 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .clockpicker-canvas-bg-trans {
   fill: #26a69a;
 }
-
 .clockpicker-canvas line {
   stroke: #26a69a;
   stroke-width: 4;
