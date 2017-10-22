@@ -1,26 +1,36 @@
 <div data-th-fragment="login" id="formulario_login">
-	<h2 class="header" data-th-text="${proceso}">Proceso</h2>
 <p class="caption" data-th-text="${descripcion}"></p>
-<div class="row">
- <div class="card">
- <div class="card-content">
-      <form class="login-form" id="login_usuario" method="POST" action="/validacion" data-th-object="${datos}">
-          <div class="input-field col s12 m6 l4 grey-text">
-            <input id="login" type="text" name="login" data-th-field="*{login}"/>
+<div class="row card">
+
+<div class="card-content">
+      <form class="login-form" id="login_usuario" method="POST">
+      <div class="col s12">
+         <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#test1"><i
+                            class="material-icons center">lock</i>
+                            <span id="opcion">Nuevo</span></a></li>
+      </ul>
+      </div>
+      <div id="test1">
+          <div class="input-field col s12 m6 l12 grey-text">
+            <input id="login" type="text" name="login"/>
             <label for="username" class="center-align">Login:</label>
           </div>
-          <div class="input-field col s12 m6 l4 grey-text">
-            <input id="clave" type="password" name="clave" data-th-field="*{clave}"/>
+          <div class="input-field col s12 m6 l12 grey-text">
+            <input id="clave" type="password" name="clave"/>
             <label for="password">Clave</label>
         </div>
-        <div class="input-field col s12 m6 l4 grey-text">
+        <div class="input-field col s12 m6 l12 grey-text">
             <div id="feedback"></div>
         </div>
-         <div class="card-action col s12 ">
-         <button class="btn waves-effect waves-light" type="submit" id="btn_validar">Login.</button>
          </div>
-      </form>
-       </div>  
-  </div>     
+         <div class="card-action col s12 m6 l12">
+         <button class="btn waves-effect waves-light col s12 m6 l12" type="submit" id="btn_validar">Login.</button>
+         </div>
+         </form>
+         
+       </div>
     </div>
-    </div>
+
+
+</div>
