@@ -13,12 +13,12 @@
 			<li data-th-if="${dato}==1">
 				<div class="center-align" >
 			    	<a href="#!user"><img class="circle" width="20%" height="20%" data-th-src="@{'/assets/images/usuarios/'+${usulog.DNI}+'.jpg'}"/></a><br/>
-					<a class="btn-flat dropdown-button waves-effect waves-light profile-btn" href="#" data-activates="profile-dropdown" data-th-text="${usulog.nombre}+'  '+${usulog.ap}+'  '+${usulog.am}">Juan Perez<i class=" material-icons right">keyboard_arrow_down</i></a>
+					<a class="btn-flat dropdown-button waves-effect waves-light profile-btn black-text" href="#" data-activates="profile-dropdown"><span data-th-text="${usulog.nombre}+'  '+${usulog.ap}+'  '+${usulog.am}"></span><i class="material-icons navigation-arrow-drop-down right">keyboard_arrow_down</i></a>
             	</div>
-              	<div class="col col s8 m8 l8">
+              	<div>
                         <ul id="profile-dropdown" class="dropdown-content">
-                            <li><a href="#"><i class="mdi-action-face-unlock"></i>Perfil</a></li>
-                            <li><a href="cerrarSesion"><i class="mdi-hardware-keyboard-tab"></i>Salir</a></li>
+                            <li><a href="#"><i class="material-icons">child_care</i>Perfil</a></li>
+                            <li><a href="logout"><i class="material-icons">keyboard_tab</i>Salir</a></li>
                         </ul>
                 </div>
 			</li>
@@ -26,10 +26,11 @@
           		<h6 class="center" data-th-text="${usulog.roles[0].nombre}">Rol</h6>
           		<div class="divider"></div>
           	</li>
-           	<li data-th-if="${dato}==1"  class="bold" >
-           	<a  data-th-each="p:${usulog.roles[0].procesos}" data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
+          	<th:block data-th-if="${dato}==1">
+           	<li   class="bold" data-th-each="p:${usulog.roles[0].procesos}">
+           	<a   data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
            	</li>
-         
+           	</th:block>    
 		</ul>
 	
 		<div class="section no-pad-bot" id="index-banner">

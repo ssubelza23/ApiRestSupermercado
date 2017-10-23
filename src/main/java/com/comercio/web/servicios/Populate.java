@@ -1,3 +1,4 @@
+
 package com.comercio.web.servicios;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import com.comercio.web.dao.ProcesoDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Dato;
+import com.comercio.web.model.Marca;
 import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
 import com.comercio.web.model.Usuario;
@@ -95,6 +97,15 @@ public class Populate {
 		procesoVentas.setLogo("trending_up");
 		procesoVentas.setEstado(1);
 		procesoDao.create(procesoVentas);
+		
+		// Proceso Marcas
+		Proceso procesoMarcas = new Proceso();
+		procesoMarcas.setNombre("Marcas");
+		procesoMarcas.setEnlace("marcas");
+		procesoMarcas.setDescripcion("marcas");
+		procesoMarcas.setLogo("child_care");
+		procesoMarcas.setEstado(1);
+		procesoDao.create(procesoMarcas);
 
 		// Proceso pedidos
 		Proceso procesoPedidos = new Proceso();
@@ -114,6 +125,7 @@ public class Populate {
 		procesos.add(procesoDao.getByNombre("Proveedores"));
 		procesos.add(procesoDao.getByNombre("Productos"));
 		procesos.add(procesoDao.getByNombre("Pedidos"));
+		procesos.add(procesoDao.getByNombre("Marcas"));
 
 		Rol rolAdministrador = new Rol();
 		// Rol Administrador

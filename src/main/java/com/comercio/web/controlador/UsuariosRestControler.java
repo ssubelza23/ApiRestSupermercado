@@ -33,7 +33,7 @@ import com.comercio.web.model.response;
 import com.comercio.web.model.bean.DatoBean;
 
 @RestController
-public class RestControler {
+public class UsuariosRestControler {
 	@Autowired
 	UsuarioDao userDao;
 	@Autowired
@@ -53,7 +53,6 @@ public class RestControler {
 					errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
 			return ResponseEntity.badRequest().body(result);
 		}
-
 		if (datoDao.getByDatos(datos.getLogin(), datos.getClave()).isEmpty()) {
 			result.setMsg("el usuario no existe");
 		} else {
@@ -73,13 +72,9 @@ public class RestControler {
 		return ResponseEntity.ok(result);
 	}
 
-	@GetMapping(value = "/logout")
-	public String logout(Model model) {
-		httpSession.removeAttribute("userLoggedIn");
-		return "redirect:/";
-	}
 
-	@GetMapping(value = "/Lista_Usuarios")
+
+	@GetMapping(value = "/listaUsuarios")
 	public List<Usuario> tablas(Model model) {
 		return userDao.getAll();
 	}
@@ -100,6 +95,7 @@ public class RestControler {
 			@RequestParam("Login") String login, @RequestParam("Clave") String clave,
 			@RequestParam("id_dato") String id_dato, @RequestParam("Foto") MultipartFile foto,
 			HttpServletRequest request) throws ParseException {
+		System.out.println(nombre+"vnjfdnvsdjnvjn");
 		String mensaje = "";
 		Usuario usuario = new Usuario();
 		usuario.setNombre(nombre);
@@ -159,6 +155,7 @@ public class RestControler {
 				usuario.setFechaNacimiento(sqlDate);
 
 			}
+			System.out.println(usuario+"***************");
 			userDao.create(usuario);
 			mensaje = "BIEN, usuario creado correctamenta";
 		}

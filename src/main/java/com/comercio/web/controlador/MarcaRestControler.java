@@ -25,11 +25,10 @@ public class MarcaRestControler {
 	@Autowired
 	MarcaDao marcaDao;
 
-	@GetMapping(value = "/marcas")
+	@GetMapping(value = "/listamarcas")
 	public List<Marca> tablas_categoria(Model model) {
 		return marcaDao.getAll();
 	}
-
 	@PostMapping(value = "/marcas")
 	public String editarusuario(@RequestParam("nombre") String nombre, @RequestParam("id") String id,
 			@RequestParam("detalle") String detalles, @RequestParam("logo") MultipartFile logo,
@@ -54,7 +53,6 @@ public class MarcaRestControler {
 		}
 		return mensaje;
 	}
-
 	@DeleteMapping(value = "/marcas/{id}")
 	public String eliminarempresa(@PathVariable long id) {
 		System.out.println(id);

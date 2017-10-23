@@ -12,9 +12,8 @@ $(document).ready( function () {
 		$("#opcion").text("Nuevo");
 		limpiarformulario();
 	})
+
 });
-
-
 var eliminar_sector = function(){
 	$("#btn_eliminar_sector").on("click", function(){
 		var id=$("#eliminar_sector #id").val();
@@ -23,8 +22,8 @@ var eliminar_sector = function(){
 			url: "/sectores/"+id,
 			success : function(result) {
 				listar_sectores();
-				Materialize.toast(result, 4000);
-				limpiarformulario_proveedores();
+				Materialize.toast(result, 3000);
+				limpiarformulario_sectores();
 				},
 			error : function(e) {
 					alert("Error!")
@@ -49,9 +48,18 @@ function fire_ajax_submit_sectores(){
 		data : JSON.stringify(formData),
 		contentType : "application/json",
 		success:function(data){
-			mostrar_mensaje(data);
-			Materialize.toast(data, 4000);
-			$("#btn_submit_sectores").prop("disabled",false);
+			if(data.error){
+				$("#error").html("<div id='card-alert' class='card card red lighten-5 red-text'>" +
+						"<div class='alert card-content green-text'>" +
+						"<p>"+data.mensaje+"</p>" +
+						" </div></div>");
+				$("#error").fadeIn(300);
+			}else{
+				$("#error").fadeOut(300);
+				Materialize.toast(data.mensaje, 4000);
+				$("#btn_submit_sectores").prop("disabled",false);
+			}
+			
 			listar_sectores();
 			limpiarformulario();
 		},
@@ -109,8 +117,7 @@ var listar_sectores=function(){
 		})
 		
 	}
-
-	var limpiarformulario = function(){
+	var limpiarformulario_sectores = function(){
 		$("#formulario_sectores #id").val("");
 		$("#formulario_sectores #nombre").val("");
 		$("#formulario_sectores #detalle").val("");

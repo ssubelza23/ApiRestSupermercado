@@ -30,8 +30,8 @@ public class CategoriaControlador {
 	private CategoriaDao categoriaDao;
 	@Autowired
 	private HttpSession httpSession;
-	@GetMapping(value="")
 	
+	@GetMapping(value="")
 	public String Usuarios(Model model){
 		List<Categoria> lista=categoriaDao.getAll();
 		model.addAttribute("lista",lista);

@@ -73,7 +73,7 @@ var listar_marcas=function(){
 	 var table = $('#marcas_tabla').DataTable({
 		 "responsive": true,
 		 "destroy": true,
-			"sAjaxSource": "marcas",
+			"sAjaxSource": "listamarcas",
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [

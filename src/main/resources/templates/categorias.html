@@ -1,6 +1,6 @@
 <div data-th-fragment="categorias" >
 <p class="caption" data-th-text="${descripcion}"></p>   
-	<form id="formulario_categorias" method="POST"  data-th-object="${nuevo}" class="card">
+	<form id="formulario_categorias" method="POST"  class="card">
     <div class="col s12 ">
       <ul class="tabs">
         <li class="tab col s3"><a class="active" href="#test1"><span id="opcion">Nuevo</span></a></li>
@@ -12,19 +12,19 @@
 			<div class="input-field col s12">
 				<i class="material-icons prefix">playlist_add_check</i>
 				<input  id="nombre" type="text" class="validate"
-					name="nombre" data-th-field="*{nombre}" />
+					name="nombre"/>
 				<label >Nombre</label>
 			</div>
 			<div class="input-field col s12">
 			<i class="material-icons prefix">short_text</i>
 			<input id="detalle" type="text" class="validate" name="detalle"
-				data-th-field="*{detalle}" />
+				/>
 			<label for="icon_telephone">Detalle</label>
 			</div>
 			<div class="input-field col s6">
 			<i class="material-icons prefix">insert_photo</i>
 				<input id="logo" type="text" class="validate" name="logo"
-					data-th-field="*{logo}" />
+					/>
 				<label for="icon_telephone">Logo</label>
 			</div>	
 			<div class="input-field col s6">
@@ -44,8 +44,6 @@
 <form id="eliminar_categoria">
           <div class="modal-content center">
             <h4>Seguro que desea eliminar la categoria</h4>
-            
-        
              <input type="hidden" name="id_eliminar_categoria" id="id_eliminar_categoria"/>
 			 <div class="input-field col s6 offset-s4 center">
 			 <label for="first_name">Categoria:</label>
