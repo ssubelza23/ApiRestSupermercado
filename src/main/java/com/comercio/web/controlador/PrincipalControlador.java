@@ -1,6 +1,9 @@
 package com.comercio.web.controlador;
 
 import java.util.Calendar;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,8 @@ import com.comercio.web.model.bean.DatoBean;
 
 @Controller
 public class PrincipalControlador {
+	@Autowired
+	private HttpSession httpSession;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -48,5 +53,14 @@ public class PrincipalControlador {
 
 		return "Principal";
 	}
-
+	@GetMapping(value = "/logout")
+	public String logout(Model model) {
+		httpSession.removeAttribute("userLoggedIn");
+		model.addAttribute("proceso", "Acceso al sistema");
+		model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
+		model.addAttribute("datos", new DatoBean());
+		model.addAttribute("fragmento", "login");
+		model.addAttribute("plantilla", "formulario");
+		return "Principal";
+	}
 }

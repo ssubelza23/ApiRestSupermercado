@@ -29,6 +29,10 @@ $( document ).ready(function() {
 				console.log(result);
 				if(result.existe == false){
 					console.log(result.msg);
+					$("#error").html("<div id='card-alert' class='card card red lighten-5 red-text'>" +
+							"<div class='alert card-content red-text'>" +
+							"<p><i class='material-icons'>report_problem</i>"+result.msg+"</p>" +
+							" </div></div>");
 					$("#feedback").html("<strong class='red-text'>" + result.msg +"</strong>");
 				
 				}else{

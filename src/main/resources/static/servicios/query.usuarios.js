@@ -47,6 +47,10 @@ function fire_ajax_submit(){
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
+				  { "mData": "dni","render":function(mData,type,row){
+		        	  return "<img class='circle' width='30%' height='30%' src='/assets/images/usuarios/"+mData+".jpg'/>"
+		        	  }
+				  },
 			      { "mData": "dni"},
 		          { "mData": "nombre"},
 				  { "mData": "ap" },

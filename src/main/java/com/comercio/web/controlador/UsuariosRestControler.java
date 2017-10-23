@@ -72,11 +72,7 @@ public class UsuariosRestControler {
 		return ResponseEntity.ok(result);
 	}
 
-	@GetMapping(value = "/logout")
-	public String logout(Model model) {
-		httpSession.removeAttribute("userLoggedIn");
-		return "redirect:/";
-	}
+
 
 	@GetMapping(value = "/listaUsuarios")
 	public List<Usuario> tablas(Model model) {
@@ -99,6 +95,7 @@ public class UsuariosRestControler {
 			@RequestParam("Login") String login, @RequestParam("Clave") String clave,
 			@RequestParam("id_dato") String id_dato, @RequestParam("Foto") MultipartFile foto,
 			HttpServletRequest request) throws ParseException {
+		System.out.println(nombre+"vnjfdnvsdjnvjn");
 		String mensaje = "";
 		Usuario usuario = new Usuario();
 		usuario.setNombre(nombre);
@@ -158,6 +155,7 @@ public class UsuariosRestControler {
 				usuario.setFechaNacimiento(sqlDate);
 
 			}
+			System.out.println(usuario+"***************");
 			userDao.create(usuario);
 			mensaje = "BIEN, usuario creado correctamenta";
 		}

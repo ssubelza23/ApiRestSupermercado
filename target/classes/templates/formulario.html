@@ -1,31 +1,30 @@
 <div data-th-fragment="login" id="formulario_login">
 <p class="caption" data-th-text="${descripcion}"></p>
-<div class="row card">
+  <div id="error">
+  </div>
+<div class="row card ">
 
 <div class="card-content">
       <form class="login-form" id="login_usuario" method="POST">
       <div class="col s12">
          <ul class="tabs">
-        <li class="tab col s3"><a class="active" href="#test1"><i
+        <li class="tab col s3 center"><a class="active black-text center" href="#test1"><i
                             class="material-icons center">lock</i>
-                            <span id="opcion">Nuevo</span></a></li>
+                            <span id="opcion center" >Acceso al sistema</span></a></li>
       </ul>
       </div>
       <div id="test1">
-          <div class="input-field col s12 m6 l12 grey-text">
+          <div class="input-field col s12 m12 l12 grey-text">
             <input id="login" type="text" name="login"/>
             <label for="username" class="center-align">Login:</label>
           </div>
-          <div class="input-field col s12 m6 l12 grey-text">
+          <div class="input-field col s12 m12 l12 grey-text">
             <input id="clave" type="password" name="clave"/>
             <label for="password">Clave</label>
         </div>
-        <div class="input-field col s12 m6 l12 grey-text">
-            <div id="feedback"></div>
-        </div>
          </div>
-         <div class="card-action col s12 m6 l12">
-         <button class="btn waves-effect waves-light col s12 m6 l12" type="submit" id="btn_validar">Login.</button>
+         <div class="card-action col s12 m12 l12 center">
+         <button class="modal-action waves-effect waves-red btn-flat center" type="submit" id="btn_validar">Login.</button>
          </div>
          </form>
          

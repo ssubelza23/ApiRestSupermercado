@@ -77,7 +77,7 @@ var listar_proveedores=function(){
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
 			      { "mData": "empresa.nombre"},
-				  { "mData": "contactos.nombre" },
+				  { "mData": "contacto.nombre" },
 				  { "mData": "marcas.nombre" },
 		          { "mData": "detalles"},
 		          { "defaultContent": "<a  href='#' class='editar_proveedores grey-text'><i class='material-icons'>edit</i></button>"},
