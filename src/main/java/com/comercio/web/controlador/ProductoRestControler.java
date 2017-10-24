@@ -1,9 +1,13 @@
 package com.comercio.web.controlador;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,9 +48,9 @@ public class ProductoRestControler {
 	}
 
 	@PostMapping(value = "/productos")
-	public String editarusuario(@ModelAttribute ProductoBean p) {
+	public String editarusuario(@ModelAttribute @Valid ProductoBean p, Errors errors) {
 		String mensaje = "llego";
-		System.out.println(p.getNombre()+"nomrbes productos/////");
+		System.out.println(p.getId()+"nomrbes productos/////");
 		return mensaje;
 	}
 	@DeleteMapping(value = "/productos/{id}")

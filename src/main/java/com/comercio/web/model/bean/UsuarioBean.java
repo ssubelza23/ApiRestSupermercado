@@ -1,200 +1,149 @@
 package com.comercio.web.model.bean;
 
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UsuarioBean {
-
-	private String Nombre;
-
-	private long DNI;
-
-	private String Ap;
-
-	private String Am;
-	
-	private long id_Rol;
-
-
-	public long getId_Rol() {
-		return id_Rol;
-	}
-
-	public void setId_Rol(long id_Rol) {
-		this.id_Rol = id_Rol;
-	}
-
+	private String id;
+	@Size(min = 3, max = 50,message="Introduzca nombre válido")
+	private String nombre;
+	private String am;
+	@Size(min = 3, max = 50,message="Introduzca apellido válido")
+	private String ap;
+	@NotNull(message="Verifique datos de DNI")
+	@Min(100000000)
+	private long dni;
+	@NotNull(message="Seleccione un ROl")
+	private long id_rol;
 	private String fechaNacimiento;
-
-	private char Sexo;
-
-	private String Direccion;
-
-	private int Telefono;
-
-	private String Correo;
-
-	private MultipartFile Foto;
-
-	private int Estado;
-
-	private int Nit;
-	
-	private String Login;
-	
-	private String Clave;
-	private String puestotrabajo;
+	private char sexo;
+	private String direccion;
+	private String telefono;
+	@Email
+	private String correo;
+	private long idDato;
+	private String login;
+	private String clave;
+	private String nit;
+	private MultipartFile foto;
+	private String puestoTrabajo;
 	private String movil;
-	public String getPuestotrabajo() {
-		return puestotrabajo;
+	
+	
+	public String getPuestoTrabajo() {
+		return puestoTrabajo;
 	}
-
-	public void setPuestotrabajo(String puestotrabajo) {
-		this.puestotrabajo = puestotrabajo;
+	public void setPuestoTrabajo(String puestoTrabajo) {
+		this.puestoTrabajo = puestoTrabajo;
 	}
-
 	public String getMovil() {
 		return movil;
 	}
-
 	public void setMovil(String movil) {
 		this.movil = movil;
 	}
-
-	private long id;
-	private long id_dato;
-	public long getId_dato() {
-		return id_dato;
-	}
-
-	public void setId_dato(long id_dato) {
-		this.id_dato = id_dato;
-	}
-
-
-
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getLogin() {
-		return Login;
-	}
-
-	public void setLogin(String login) {
-		Login = login;
-	}
-
-	public String getClave() {
-		return Clave;
-	}
-
-	public void setClave(String clave) {
-		Clave = clave;
-	}
-
-	public UsuarioBean(){}
-
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
-
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
-
-	public long getDNI() {
-		return DNI;
-	}
-
-	public void setDNI(long DNI) {
-		this.DNI = DNI;
-	}
-
-	public String getAp() {
-		return Ap;
-	}
-
-	public void setAp(String ap) {
-		Ap = ap;
-	}
-
 	public String getAm() {
-		return Am;
+		return am;
 	}
-
 	public void setAm(String am) {
-		Am = am;
+		this.am = am;
 	}
-
+	public String getAp() {
+		return ap;
+	}
+	public void setAp(String ap) {
+		this.ap = ap;
+	}
+	public long getDni() {
+		return dni;
+	}
+	public void setDni(long dni) {
+		this.dni = dni;
+	}
+	public long getId_rol() {
+		return id_rol;
+	}
+	public void setId_rol(long id_rol) {
+		this.id_rol = id_rol;
+	}
 	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
 	public char getSexo() {
-		return Sexo;
+		return sexo;
 	}
-
 	public void setSexo(char sexo) {
-		Sexo = sexo;
+		this.sexo = sexo;
 	}
-
 	public String getDireccion() {
-		return Direccion;
+		return direccion;
 	}
-
 	public void setDireccion(String direccion) {
-		Direccion = direccion;
+		this.direccion = direccion;
 	}
-
-	public int getTelefono() {
-		return Telefono;
+	public String getTelefono() {
+		return telefono;
 	}
-
-	public void setTelefono(int telefono) {
-		Telefono = telefono;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
-
 	public String getCorreo() {
-		return Correo;
+		return correo;
 	}
-
 	public void setCorreo(String correo) {
-		Correo = correo;
+		this.correo = correo;
 	}
-
+	public long getIdDato() {
+		return idDato;
+	}
+	public void setIdDato(long idDato) {
+		this.idDato = idDato;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getClave() {
+		return clave;
+	}
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+	public String getNit() {
+		return nit;
+	}
+	public void setNit(String nit) {
+		this.nit = nit;
+	}
 	public MultipartFile getFoto() {
-		return Foto;
+		return foto;
 	}
-
 	public void setFoto(MultipartFile foto) {
-		Foto = foto;
-	}
-
-	public int getEstado() {
-		return Estado;
-	}
-
-	public void setEstado(int estado) {
-		Estado = estado;
-	}
-
-	public int getNit() {
-		return Nit;
-	}
-
-	public void setNit(int nit) {
-		Nit = nit;
+		this.foto = foto;
 	}
 	
 	
-
-
+	
 }

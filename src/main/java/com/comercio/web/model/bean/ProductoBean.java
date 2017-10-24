@@ -1,17 +1,24 @@
 package com.comercio.web.model.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductoBean {
 
-	private long id;
+	private String id;
 	private String nombre;
 	private String contenidoNeto;
-	private int cantidad;
 	private String medida;
 	private String detalle;
 	private String presentacion;
 	private MultipartFile imagen;
+	@NotNull(message="Codigo de barra, no puede estar vacio")
+	@NumberFormat(pattern="Codigo de barra, debe ser numerico")
+	@Size(min = 3, max = 50,message="Introduzca nombre un codigo de barras válido")
+	
 	private long codigoBarras;
 	private String industria;
 	private long idProveedor;
@@ -24,10 +31,10 @@ public class ProductoBean {
 	private String medidaMinima;
 	private String contenidoxcaja;
 	private String medidacontenidoxcaja;
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -41,12 +48,6 @@ public class ProductoBean {
 	}
 	public void setContenidoNeto(String contenidoNeto) {
 		this.contenidoNeto = contenidoNeto;
-	}
-	public int getCantidad() {
-		return cantidad;
-	}
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
 	}
 	public String getMedida() {
 		return medida;

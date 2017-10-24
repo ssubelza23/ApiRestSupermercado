@@ -51,17 +51,17 @@ public class ContactosProveedorRestControler {
 		user.setNombre(u.getNombre());
 		user.setAp(u.getAp());
 		user.setAm(u.getAm());
-		user.setDNI(u.getDNI());
+		user.setDNI(u.getDni());
 		user.setSexo(u.getSexo());
-		user.setPuestoTrabajo(u.getPuestotrabajo());
+		user.setPuestoTrabajo(u.getPuestoTrabajo());
 		user.setMovil(u.getMovil());
 		user.setCorreo(u.getCorreo());
 
 		user.setEstado(1);
 		System.out.println(u.getId() + "id para modifcar");
 
-		if (u.getId() > 0) {
-			user.setId(u.getId());
+		if (u.getId().equals("")) {
+			user.setId(Long.parseLong(u.getId()));
 			usuarioDao.update(user);
 			mensaje = "BIEN, datos modificados correctamenta";
 

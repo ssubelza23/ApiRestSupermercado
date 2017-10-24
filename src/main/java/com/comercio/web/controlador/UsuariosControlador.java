@@ -37,7 +37,7 @@ public class UsuariosControlador {
 		}else {
 			model.addAttribute("proceso", "Acceso al sistema");
 			model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
-			model.addAttribute("datos", new DatoBean());
+
 			model.addAttribute("fragmento", "login");
 			model.addAttribute("plantilla", "formulario");
 			return "Principal";

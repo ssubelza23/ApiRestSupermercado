@@ -1,36 +1,39 @@
 package com.comercio.web.controlador;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.comercio.web.config.FileUploadUtility;
 import com.comercio.web.dao.DatoDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Dato;
+import com.comercio.web.model.FeedBack;
 import com.comercio.web.model.Usuario;
 import com.comercio.web.model.response;
 import com.comercio.web.model.bean.DatoBean;
+
+import com.comercio.web.model.bean.UsuarioBean;
 
 @RestController
 public class UsuariosRestControler {
@@ -63,7 +66,6 @@ public class UsuariosRestControler {
 			Usuario usuario = new Usuario();
 			usuario = userDao.getByDatos(d);
 			httpSession.setAttribute("userLog", usuario);
-			System.out.println(usuario);
 			result.setUsuario(usuario);
 			result.setExiste(true);
 			result.setPlantilla("notificaciones");
@@ -72,93 +74,110 @@ public class UsuariosRestControler {
 		return ResponseEntity.ok(result);
 	}
 
-
-
-	@GetMapping(value = "/listaUsuarios")
+	@GetMapping(value = "listaUsuarios")
 	public List<Usuario> tablas(Model model) {
 		return userDao.getAll();
 	}
 
-	@PostMapping(value = "/eliminarUsuario")
-	public String eliminarUsuario(@RequestParam("id") long id) {
+	@DeleteMapping(value = "/usuarios/{id}")
+	public String eliminarUsuario(@PathVariable long id) {
 		userDao.delete(id);
 		return "Bien!. usuario eliminado correctamente.";
 	}
 
-	@PostMapping(value = "/editarusuario")
-	public String editarusuario(@RequestParam("nombre") String nombre, @RequestParam("id") String id,
-			@RequestParam("ap") String ap, @RequestParam("am") String am, @RequestParam("DNI") String dni,
-			@RequestParam("id_Rol") String id_rol, @RequestParam("fechaNacimiento") String fechaNacimiento,
-			@RequestParam("Sexo") char sexo, @RequestParam("Direccion") String direccion,
-			@RequestParam("Telefono") String telefono, @RequestParam("Correo") String correo,
-			// @RequestParam("Nit") String nit,
-			@RequestParam("Login") String login, @RequestParam("Clave") String clave,
-			@RequestParam("id_dato") String id_dato, @RequestParam("Foto") MultipartFile foto,
-			HttpServletRequest request) throws ParseException {
-		System.out.println(nombre+"vnjfdnvsdjnvjn");
-		String mensaje = "";
-		Usuario usuario = new Usuario();
-		usuario.setNombre(nombre);
-		usuario.setAp(ap);
-		usuario.setAm(am);
-		usuario.setDNI(Integer.parseInt(dni));
-		usuario.setEstado(1);
+	@PostMapping(value = "/usuarios")
+	public FeedBack editarusuario(@Valid @ModelAttribute UsuarioBean u, BindingResult result,
+			HttpServletRequest request) {
 
-		if (id_rol != "")
-			usuario.addRol(rolDao.getById(Long.parseLong(id_rol)));
+		FeedBack feedBack = new FeedBack();
+		if (result.hasErrors()) {
+			feedBack.setLista_errores(result.getAllErrors());
 
-		usuario.setSexo(sexo);
-		usuario.setDireccion(direccion);
-
-		usuario.setTelefono(Integer.parseInt(telefono));
-		usuario.setCorreo(correo);
-		Dato d = new Dato();
-		if (!id_dato.equals("0")) {
-			d.setId(Long.parseLong(id_dato));
-			d.setLogin(login);
-			d.setClave(clave);
-			usuario.setDatos(d);
-
-		} else {
-			d.setLogin(login);
-			d.setClave(clave);
-			long iddato = datoDao.create(d);
-			usuario.setDatos(datoDao.getById(iddato));
+			return feedBack;
 		}
 
-		String dni1 = "";
-		if (!foto.getOriginalFilename().equals("")) {
-			FileUploadUtility.uploadFile(request, foto, dni1 + dni);
-		}
+		try {
 
-		if (!id.equals("")) {
+			Usuario usuario = new Usuario();
 
-			usuario.setId(Long.parseLong(id));
-			if (fechaNacimiento != " " && fechaNacimiento != null && !fechaNacimiento.equals("")) {
+			usuario.setNombre(u.getNombre());
+			usuario.setAp(u.getAp());
+			usuario.setAm(u.getAm());
+			usuario.setDNI(u.getDni());
+			usuario.setSexo(u.getSexo());
 
-				String startDateString = fechaNacimiento;
+			usuario.setDireccion(u.getDireccion());
+			if (!u.getTelefono().equals("") && !u.getTelefono().equals(null)) {
+				usuario.setTelefono(Integer.parseInt(u.getTelefono()));
+			}
+			usuario.setCorreo(u.getCorreo());
+			usuario.setEstado(1);
+			System.out.println(usuario + "" + u.getNit());
+			if (!(u.getNit() == null)) {
+				usuario.setNIT(Integer.parseInt(u.getNit()));
+			}
+			System.out.println(usuario + "" + u.getId_rol());
+			usuario.setPuestoTrabajo(u.getPuestoTrabajo());
+			usuario.setMovil(u.getMovil());
+
+			if (u.getId_rol() != 0) {
+
+				usuario.addRol(rolDao.getById(u.getId_rol()));
+			}
+
+			Dato d = new Dato();
+			if (u.getIdDato() == 0) {
+				d.setId(u.getIdDato());
+				d.setLogin(u.getLogin());
+				d.setClave(u.getClave());
+				usuario.setDatos(d);
+
+			} else {
+				d.setLogin(u.getLogin());
+				d.setClave(u.getClave());
+				long iddato = datoDao.create(d);
+				usuario.setDatos(datoDao.getById(iddato));
+			}
+
+			String dni1 = "";
+			if (!u.getFoto().getOriginalFilename().equals("")) {
+				FileUploadUtility.uploadFile(request, u.getFoto(), dni1 + u.getDni());
+			}
+			if (u.getFechaNacimiento() != " " && u.getFechaNacimiento() != null && !u.getFechaNacimiento().equals("")) {
+
+				String startDateString = u.getFechaNacimiento();
 				DateFormat df = new SimpleDateFormat("yyyy-dd-mm");
 				Date startDate = df.parse(startDateString);
 				java.sql.Date sqlDate = new java.sql.Date(startDate.getTime());
 				usuario.setFechaNacimiento(sqlDate);
 
-			}
-			mensaje = "BIEN, datos modificados correctamenta";
-			userDao.update(usuario);
+			} else {
+				if (u.getFechaNacimiento() != " " && u.getFechaNacimiento() != null
+						&& !u.getFechaNacimiento().equals("")) {
+					String startDateString = u.getFechaNacimiento();
+					DateFormat df = new SimpleDateFormat("yyyy/dd/mm");
+					Date startDate = df.parse(startDateString);
+					java.sql.Date sqlDate = new java.sql.Date(startDate.getTime());
+					usuario.setFechaNacimiento(sqlDate);
 
-		} else {
-			if (fechaNacimiento != " " && fechaNacimiento != null && !fechaNacimiento.equals("")) {
-				String startDateString = fechaNacimiento;
-				DateFormat df = new SimpleDateFormat("yyyy/dd/mm");
-				Date startDate = df.parse(startDateString);
-				java.sql.Date sqlDate = new java.sql.Date(startDate.getTime());
-				usuario.setFechaNacimiento(sqlDate);
-
+				}
 			}
-			System.out.println(usuario+"***************");
-			userDao.create(usuario);
-			mensaje = "BIEN, usuario creado correctamenta";
+			System.out.println(usuario);
+			if (!u.getId().equals("")) {
+				usuario.setId(Long.parseLong(u.getId()));
+				userDao.update(usuario);
+				feedBack.setMensaje("BIEN, datos modificados correctamenta");
+			} else {
+				userDao.create(usuario);
+				feedBack.setMensaje("BIEN, usuario creado correctamenta");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			feedBack.setMensaje("Ya existe el DNI registrado");
 		}
-		return mensaje;
+
+		return feedBack;
 	}
+
 }

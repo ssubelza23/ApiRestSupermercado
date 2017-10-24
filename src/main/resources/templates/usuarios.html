@@ -1,6 +1,12 @@
-<div data-th-fragment="usuarios">
+<div data-th-fragment="usuarios" id="usuariosFrag">
 	<p class="caption" data-th-text="${descripcion}"></p>
-	<form id="formulario_usuario" enctype="multipart/form-data">
+	<div id="errores">
+	           <div id="card-alert" class="card red lighten-5">
+                      <div class="card-content red-text" id="error">
+                      </div>
+                    </div>
+	</div>
+	<form id="formularioUsuarios" enctype="multipart/form-data" class="left-alert">
 		<div class="row card">
 			<div class="col s12">
 				<ul class="tabs">
@@ -38,16 +44,16 @@
 
 
 				<div class="input-field col s6">
-					<i class="material-icons prefix">credit_card</i> <input
-						placeholder="dni" id="DNI" type="number" class="validate"
-						name="DNI"  /> <label for="icon_prefix">DNI:</label>
+					<i class="material-icons prefix">credit_card</i> 
+					<input
+						id="dni" min="10000000"
+						name="dni" type="number" class="validate"/> <label for="icon_prefix">DNI:</label>
 				</div>
 
 
 				<div class="input-field col s6">
 					<i class="material-icons prefix">credit_card</i> <select
-						id="id_Rol" name="id_Rol">
-						<option value="0">Selecionar Rol</option>
+						id="id_rol" name="id_rol">
 						<option data-th-each="rol:${rolList}" data-th-value="${rol.id}"
 							data-th-text="${rol.nombre}"></option>
 					</select> <label for="icon_prefix">Definir Rol:</label>
@@ -114,21 +120,21 @@
 
 			</div>
 			<div class="collapsible-header active">
-				<a class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a> 
+				<a class="modal-action modal-close waves-effect waves-red btn-flat" id="cancelar">Cancelar</a> 
 				<a class="modal-action modal-close waves-effect waves-red btn-flat">
 				<input name="4" value="Guardar" type="submit" id="btn_submit_usuario" /></a>
 			</div>
 		</div>
 	</form>
 	<div id="modal1" class="modal modal-fixed-footer">
-		<form id="eliminar_usuario">
+		<form id="eliminarUsuario">
 			<div class="modal-content center">
 				<h4>Seguro que desea eliminar al usuario</h4>
 
 				<div class="input-field col s12" id="foto_usuario">
 					<img class="circle" width="20%" height="20%" id="img" />
 				</div>
-				<input type="hidden" name="id_eliminar" id="id_eliminar" />
+				<input type="hidden" name="id" id="id" />
 				<div class="input-field col s6 offset-s4 center">
 					<label for="first_name">Usuario:</label> <input
 						placeholder="Placeholder" disabled id="usuario_eliminar"
@@ -148,7 +154,7 @@
 			</div>
 			<div class="modal-footer">
 				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+					class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelar">Cancelar</a>
 				<a href="#" id="btn_eliminar_usuario"
 					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
 			</div>

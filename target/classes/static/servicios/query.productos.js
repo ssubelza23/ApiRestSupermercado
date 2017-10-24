@@ -42,9 +42,9 @@ var eliminar_productos = function() {
 	})
 }
 function fire_ajax_submit_productos() {
-	var form=$("#formulario_usuario")[0];
+	var form=$("#formulario_productos")[0];
 	var data=new FormData(form);
-	$("#btn_submit_usuario").prop("disabled",true);
+	$("#btn_submit_productos").prop("disabled",true);
 	$.ajax({
 		type:"POST",
 		enctype:"multipart/form-data",
@@ -56,7 +56,7 @@ function fire_ajax_submit_productos() {
 		timeout: 600000,
 		success:function(data){
 			console.log(data);
-			$("#btn_submit_usuario").prop("disabled",false);
+			$("#btn_submit_productos").prop("disabled",false);
 			listar();
 			Materialize.toast('Bien, nuevo producto añadido', 4000);
 			limpiarformulario();
