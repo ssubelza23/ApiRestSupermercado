@@ -68,6 +68,6 @@ public class RolesRestControler {
 	@DeleteMapping(value = "/roles/{id}")
 	public String eliminarProveedor(@PathVariable long id) {
 		rolesDao.delete(id);
-		return "Bien!. Rol eliminado correctamente.";
+		return "Bien!. Rol Eliminado correctamente.";
 	}
 }
