@@ -23,27 +23,29 @@
 					</a></li>
 				</ul>
 			</div>
-			<div id="test1" class="col s12 ">
+			<div id="test1" class="row">
+			
+           <div class="input-field col s12 m8 right-aling">
 				<input type="hidden" name="id" id="id" />
-				<div class="input-field col s4">
+				<div class="input-field col s12 m12 l4">
 					<i class="material-icons prefix">person</i> <input
 						placeholder="nombres" id="Nombre" type="text" class="validate"
 						name="Nombre"/> <label
 						for="icon_prefix">Nombre(s).</label>
 				</div>
-				<div class="input-field col s4">
+				<div class="input-field col s12 m12 l4">
 					<input placeholder="Ap" id="Ap" type="text" class="validate"
 						name="Ap" /> <label for="icon_telephone">Apellido
 						Paterno.</label>
 				</div>
-				<div class="input-field col s4">
+				<div class="input-field col s12 m12 l4">
 					<input placeholder="Am" id="Am" type="text" class="validate"
 						name="Am" /> <label for="icon_telephone">Apellido
 						Materno.</label>
 				</div>
 
 
-				<div class="input-field col s6">
+				<div class="input-field col s12 m12 l6">
 					<i class="material-icons prefix">credit_card</i> 
 					<input
 						id="dni" min="10000000"
@@ -51,15 +53,21 @@
 				</div>
 
 
-				<div class="input-field col s6">
+				<div class="input-field col s12 m12 l6">
 					<i class="material-icons prefix">credit_card</i> <select
 						id="id_rol" name="id_rol">
 						<option data-th-each="rol:${rolList}" data-th-value="${rol.id}"
 							data-th-text="${rol.nombre}"></option>
 					</select> <label for="icon_prefix">Definir Rol:</label>
 				</div>
-				<div class="input-field col s12"></div>
-
+				
+            </div>
+            <div class="input-field col s12 m4 center-aling">
+            <div class="input-field col s12 m12 l12 center">
+                  <input type="file" id="Foto" class="dropify center-aling" data-max-file-size="2M" name="Foto"/>
+           <p>Foto</p>
+           </div>
+           </div>
 			</div>
 
 			<div id="test2" class="col s12">
@@ -98,10 +106,7 @@
 						<option value="F">Femenino</option>
 					</select> <label for="icon_prefix">Sexo:</label>
 				</div>
-				<div class="input-field col s6 right-aling">
-					<i class="material-icons prefix">attachment</i> <input type="file"
-						id="Foto" name="Foto" />
-				</div>
+				
 
 			</div>
 			<div id="test3" class="col s12">

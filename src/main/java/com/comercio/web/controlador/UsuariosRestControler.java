@@ -116,17 +116,16 @@ public class UsuariosRestControler {
 			if (!(u.getNit() == null)) {
 				usuario.setNIT(Integer.parseInt(u.getNit()));
 			}
-			System.out.println(usuario + "" + u.getId_rol());
+			
 			usuario.setPuestoTrabajo(u.getPuestoTrabajo());
 			usuario.setMovil(u.getMovil());
-
+			
 			if (u.getId_rol() != 0) {
-
 				usuario.addRol(rolDao.getById(u.getId_rol()));
 			}
-
+			
 			Dato d = new Dato();
-			if (u.getIdDato() == 0) {
+			if (u.getIdDato() == 0 && !u.getClave().equals("") && !u.getClave().equals("")) {
 				d.setId(u.getIdDato());
 				d.setLogin(u.getLogin());
 				d.setClave(u.getClave());
@@ -138,7 +137,7 @@ public class UsuariosRestControler {
 				long iddato = datoDao.create(d);
 				usuario.setDatos(datoDao.getById(iddato));
 			}
-
+			System.out.println(usuario + "" + u.getIdDato()+""+u.getClave()+"*******"+u.getFoto());
 			String dni1 = "";
 			if (!u.getFoto().getOriginalFilename().equals("")) {
 				FileUploadUtility.uploadFile(request, u.getFoto(), dni1 + u.getDni());

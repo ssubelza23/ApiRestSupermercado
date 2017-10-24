@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	cargarTablaUsuarios();
 	eliminarUsuario();
-	limpiarFormularioUsuarios();
 	$("#usuariosFrag #errores").hide();
 	$("#btn_submit_usuario").click(function(event) {
 		event.preventDefault();

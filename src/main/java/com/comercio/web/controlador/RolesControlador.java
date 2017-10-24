@@ -41,19 +41,30 @@ public class RolesControlador {
 		List<Proceso> listProcesos = procesosDao.getAll();
 		model.addAttribute("listProcesos", listProcesos);
 		model.addAttribute("newRol", new RolBean());
-
-		model.addAttribute("proceso", "Roles");
-		model.addAttribute("descripcion", "Gestion de roles cada rol cuenta con diferentes procesos");
-
-		model.addAttribute("fragmento", "roles");
-		model.addAttribute("plantilla", "roles");
-
-		Usuario usuario = (Usuario) httpSession.getAttribute("userLog");
+		
+		Usuario usuario =  (Usuario) httpSession.getAttribute("userLog");
 		if (usuario != null) {
 			model.addAttribute("usulog", usuario);
 			model.addAttribute("dato", 1);
+			
+			model.addAttribute("proceso", "Roles");
+			model.addAttribute("descripcion", "Gestion de roles cada rol cuenta con diferentes procesos");
+
+			model.addAttribute("fragmento", "roles");
+			model.addAttribute("plantilla", "roles");
+			
+			return "Principal";
+		}else {
+			model.addAttribute("proceso", "Acceso al sistema");
+			model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
+
+			model.addAttribute("fragmento", "login");
+			model.addAttribute("plantilla", "formulario");
+			return "Principal";
+			
 		}
-		return "Principal";
+		
+		
 	}
 
 	@PostMapping(value = "/addRol")

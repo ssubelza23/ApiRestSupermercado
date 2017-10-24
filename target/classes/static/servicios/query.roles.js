@@ -1,26 +1,26 @@
 $(document).ready(function() {
-	cargarTablaUsuarios();
+	cargarTablaRoles();
 	eliminarUsuario();
-	$("#usuariosFrag #errores").hide();
+	$("#rolesFrag #errores").hide();
 	$("#btn_submit_usuario").click(function(event) {
 		event.preventDefault();
-		actualizarUsuarios();
+		actualizarRoles();
 	})
 
-	$("#formularioUsuarios #cancelar").click(function(event) {
-		limpiarFormularioUsuarios();
-		$("#usuariosFrag #errores").fadeOut(300);
+	$("#formularioRoles #cancelar").click(function(event) {
+		limpiarFormularioRoles();
+		$("#rolesFrag #errores").fadeOut(300);
 	})
 
 });
-function actualizarUsuarios() {
-	var form = $("#formularioUsuarios")[0];
+function actualizarRoles() {
+	var form = $("#formularioRoles")[0];
 	var data = new FormData(form);
 	$
 			.ajax({
 				type : "POST",
 				enctype : "multipart/form-data",
-				url : "/usuarios",
+				url : "/roles",
 				data : data,
 				processData : false,
 				contentType : false,
@@ -40,14 +40,14 @@ function actualizarUsuarios() {
 										+ errores[i].defaultMessage + "</p>"
 							}
 						}
-						$("#usuariosFrag #error").html(lista);
-						$("#usuariosFrag #errores").fadeIn(300);
+						$("#rolesFrag #error").html(lista);
+						$("#rolesFrag #errores").fadeIn(300);
 						limpiarformulario();
 					} else {
-						$("#usuariosFrag #errores").fadeOut(300);
-						cargarTablaUsuarios();
+						$("#rolesFrag #errores").fadeOut(300);
+						cargarTablaRoles();
 						Materialize.toast(data.mensaje, 4000);
-						limpiarFormularioUsuarios();
+						limpiarFormularioRoles();
 						
 					}
 
@@ -58,13 +58,13 @@ function actualizarUsuarios() {
 			})
 }
 
-var cargarTablaUsuarios = function() {
-	var table = $('#tablaUsuarios')
+var cargarTablaRoles = function() {
+	var table = $('#tablaRoles')
 			.DataTable(
 					{
 						responsive : true,
 						"destroy" : true,
-						"sAjaxSource" : "listaUsuarios",
+						"sAjaxSource" : "listaRoles",
 						"sAjaxDataProp" : "",
 						"order" : [ [ 0, "asc" ] ],
 						"aoColumns" : [
@@ -101,8 +101,8 @@ var cargarTablaUsuarios = function() {
 						"language" : idioma_español,
 
 					});
-	obtenerDatosModificar("#tablaUsuarios tbody", table);
-	obtener_datos_eliminar("#tablaUsuarios tbody", table);
+	obtenerDatosModificar("#tablaRoles tbody", table);
+	obtener_datos_eliminar("#tablaRoles tbody", table);
 };
 
 var eliminarUsuario = function() {
@@ -110,10 +110,10 @@ var eliminarUsuario = function() {
 		var id = $("#eliminarUsuario #id").val();
 		$.ajax({
 			type : "DELETE",
-			url : "/usuarios/" + id,
+			url : "/roles/" + id,
 			success : function(mensaje) {
-				cargarTablaUsuarios();
-				limpiarFormularioUsuarios();
+				cargarTablaRoles();
+				limpiarFormularioRoles();
 				Materialize.toast(mensaje, 4000);
 			},
 			error : function(e) {
@@ -124,8 +124,8 @@ var eliminarUsuario = function() {
 		});
 	})
 }
-var limpiarFormularioUsuarios = function() {
-		   $("#formularioUsuarios")[0].reset();
+var limpiarFormularioRoles = function() {
+		   $("#formularioRoles")[0].reset();
 }
 
 var obtenerDatosModificar = function(tbody, table) {
@@ -133,29 +133,29 @@ var obtenerDatosModificar = function(tbody, table) {
 			function() {
 				event.preventDefault();
 					var data = table.row($(this).parents("tr")).data();
-					var id = $("#formularioUsuarios #id").val(data.id), 
-					nombre = $("#formularioUsuarios #Nombre").val(data.nombre),
-						ap = $("#formularioUsuarios #Ap").val(data.ap), 
-						am = $("#formularioUsuarios #Am").val(data.am), 
-						dni = $("#formularioUsuarios #dni").val(data.dni), 
-						correo = $("#formularioUsuarios #Correo").val(data.correo), 
+					var id = $("#formularioRoles #id").val(data.id), 
+					nombre = $("#formularioRoles #Nombre").val(data.nombre),
+						ap = $("#formularioRoles #Ap").val(data.ap), 
+						am = $("#formularioRoles #Am").val(data.am), 
+						dni = $("#formularioRoles #dni").val(data.dni), 
+						correo = $("#formularioRoles #Correo").val(data.correo), 
 						telefono = $(
-								"#formularioUsuarios #Telefono").val(
+								"#formularioRoles #Telefono").val(
 								data.telefono), direccion = $(
-								"#formularioUsuarios #Direccion").val(
+								"#formularioRoles #Direccion").val(
 								data.direccion), fechaNacimiento = $(
-								"#formularioUsuarios #fechaNacimiento").val(
+								"#formularioRoles #fechaNacimiento").val(
 								data.fechaNacimiento), id_dato = $(
-								"#formularioUsuarios #id_dato").val(
+								"#formularioRoles #id_dato").val(
 								data.datos.id), sexo = $(
-								"#formularioUsuarios #Sexo").val(data.sexo), login = $(
-								"#formularioUsuarios #Login").val(
+								"#formularioRoles #Sexo").val(data.sexo), login = $(
+								"#formularioRoles #Login").val(
 								data.datos.login), clave = $(
-								"#formularioUsuarios #Clave").val(
+								"#formularioRoles #Clave").val(
 								data.datos.clave), clave = $(
-								"#formularioUsuarios #id_Rol").val(
+								"#formularioRoles #id_Rol").val(
 								data.roles[0].id), id_rol = $(
-								"#formularioUsuarios #id_Rol").val(
+								"#formularioRoles #id_Rol").val(
 								data.roles[0].id)
 
 					})

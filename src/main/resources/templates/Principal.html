@@ -21,6 +21,9 @@
     rel="stylesheet" media="screen,projection" />
 <link href="https://fonts.googleapis.com/css?family=Inconsolata"
     rel="stylesheet" type="text/css" />
+    
+<!--dropify-->
+  <link th:href="@{/assets/js/plugins/dropify/css/dropify.min.css}" type="text/css" rel="stylesheet" media="screen,projection">    
 
 
 
@@ -84,6 +87,35 @@
 	<script th:src="@{/servicios/query.proveedores.js}"></script>
 	<script th:src="@{/servicios/query.productos.js}"></script>
 	<script th:src="@{/servicios/query.sector.js}"></script>
+	<!-- dropify -->
+    <script type="text/javascript" th:src="@{/assets/js/plugins/dropify/js/dropify.min.js}"></script>
+	
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Basic
+            $('.dropify').dropify();
 
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove:  'Supprimer',
+                    error:   'Désolé, le fichier trop volumineux'
+                }
+            });
+
+            // Used events
+            var drEvent = $('.dropify-event').dropify();
+
+            drEvent.on('dropify.beforeClear', function(event, element){
+                return confirm("Do you really want to delete \"" + element.filename + "\" ?");
+            });
+
+            drEvent.on('dropify.afterClear', function(event, element){
+                alert('File deleted');
+            });
+        });
+    </script>
 </body>
 </html>
