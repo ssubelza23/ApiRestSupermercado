@@ -45,6 +45,9 @@ public class RolesDao {
 		return (Rol) entityManager.createQuery("select d from Rol d  where d.nombre=:nombre")
 				.setParameter("nombre", nombre).getSingleResult();
 	}
+	public void delete(long id) {
+		entityManager.createQuery("update Rol SET estado=0 where id=:id").setParameter("id", id).executeUpdate();
+	}
 
 	public void update(Rol rol) {
 		entityManager.merge(rol);

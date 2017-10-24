@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	cargarTablaRoles();
-	eliminarUsuario();
+	eliminarRol();
 	$("#rolesFrag #errores").hide();
-	$("#btn_submit_usuario").click(function(event) {
+	$("#btn_submit_roles").click(function(event) {
 		event.preventDefault();
 		actualizarRoles();
 	})
@@ -14,41 +14,46 @@ $(document).ready(function() {
 
 });
 function actualizarRoles() {
-	var form = $("#formularioRoles")[0];
-	var data = new FormData(form);
-	$
-			.ajax({
+	var formData = {
+			id : $("#formularioRoles #id").val(),
+			nombre : $("#formularioRoles #nombre").val(),
+			descripcion : $("#formularioRoles #descripcion").val(),
+			}
+			console.log(formData);
+			$.ajax({
 				type : "POST",
-				enctype : "multipart/form-data",
 				url : "/roles",
-				data : data,
-				processData : false,
-				contentType : false,
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
+				data : JSON.stringify(formData),
+				contentType : "application/json",
+				success:function(data){
+			
 					var errores = data.lista_errores;
 					var lista = "";
 					if (errores.length != 0) {
 						for (let i = 0; i < errores.length; i++) {
-							if (errores[i].field == "dni") {
-								lista = lista
-										+ "<p>ERROR : campo : "+errores[i].field.bold().toUpperCase()+" : --> Introduzca número de DNI válido</p>"
-							} else {
 								lista = lista + "<p>ERROR : campo :"
 										+ errores[i].field.bold().toUpperCase()+ " : --> "
 										+ errores[i].defaultMessage + "</p>"
-							}
+							
 						}
 						$("#rolesFrag #error").html(lista);
 						$("#rolesFrag #errores").fadeIn(300);
 						limpiarformulario();
 					} else {
+						if(data.mensaje=="existe"){
+							var lista = "";
+							$("#rolesFrag #error").html(lista);
+							lista ="<p>ERROR --> Ya existe Rol con el mismo nombre</p>";
+							$("#rolesFrag #error").html(lista);
+							$("#rolesFrag #errores").fadeIn(300);
+						}else{
+							
+						
 						$("#rolesFrag #errores").fadeOut(300);
 						cargarTablaRoles();
 						Materialize.toast(data.mensaje, 4000);
 						limpiarFormularioRoles();
-						
+						}
 					}
 
 				},
@@ -59,8 +64,7 @@ function actualizarRoles() {
 }
 
 var cargarTablaRoles = function() {
-	var table = $('#tablaRoles')
-			.DataTable(
+	var table = $('#tablaRoles').DataTable(
 					{
 						responsive : true,
 						"destroy" : true,
@@ -69,26 +73,10 @@ var cargarTablaRoles = function() {
 						"order" : [ [ 0, "asc" ] ],
 						"aoColumns" : [
 								{
-									"mData" : "dni",
-									"render" : function(mData, type, row) {
-										return "<img class='circle' width='30%' height='30%' src='/assets/images/usuarios/"
-												+ mData + ".jpg'/>"
-									}
-								},
-								{
-									"mData" : "dni"
-								},
-								{
 									"mData" : "nombre"
 								},
 								{
-									"mData" : "ap"
-								},
-								{
-									"mData" : "am"
-								},
-								{
-									"mData" : "roles[0].nombre"
+									"mData" : "descripcion"
 								},
 								{
 									"defaultContent" : "<a  href='#' class='editar grey-text'><i class='material-icons'>edit</i></button>"
@@ -105,9 +93,9 @@ var cargarTablaRoles = function() {
 	obtener_datos_eliminar("#tablaRoles tbody", table);
 };
 
-var eliminarUsuario = function() {
-	$("#btn_eliminar_usuario").on("click", function() {
-		var id = $("#eliminarUsuario #id").val();
+var eliminarRol = function() {
+	$("#btn_eliminar_rol").on("click", function() {
+		var id = $("#eliminarRol #id").val();
 		$.ajax({
 			type : "DELETE",
 			url : "/roles/" + id,
@@ -134,29 +122,8 @@ var obtenerDatosModificar = function(tbody, table) {
 				event.preventDefault();
 					var data = table.row($(this).parents("tr")).data();
 					var id = $("#formularioRoles #id").val(data.id), 
-					nombre = $("#formularioRoles #Nombre").val(data.nombre),
-						ap = $("#formularioRoles #Ap").val(data.ap), 
-						am = $("#formularioRoles #Am").val(data.am), 
-						dni = $("#formularioRoles #dni").val(data.dni), 
-						correo = $("#formularioRoles #Correo").val(data.correo), 
-						telefono = $(
-								"#formularioRoles #Telefono").val(
-								data.telefono), direccion = $(
-								"#formularioRoles #Direccion").val(
-								data.direccion), fechaNacimiento = $(
-								"#formularioRoles #fechaNacimiento").val(
-								data.fechaNacimiento), id_dato = $(
-								"#formularioRoles #id_dato").val(
-								data.datos.id), sexo = $(
-								"#formularioRoles #Sexo").val(data.sexo), login = $(
-								"#formularioRoles #Login").val(
-								data.datos.login), clave = $(
-								"#formularioRoles #Clave").val(
-								data.datos.clave), clave = $(
-								"#formularioRoles #id_Rol").val(
-								data.roles[0].id), id_rol = $(
-								"#formularioRoles #id_Rol").val(
-								data.roles[0].id)
+					nombre = $("#formularioRoles #nombre").val(data.nombre),
+					descripcion = $("#formularioRoles #descripcion").val(data.descripcion)
 
 					})
 }
@@ -167,15 +134,9 @@ var obtener_datos_eliminar = function(tbody, table) {
 			function() {
 
 				var data = table.row($(this).parents("tr")).data();
-				var id = $("#eliminarUsuario #id").val(data.id);
-				var usuario = $("#eliminarUsuario #usuario_eliminar").val(
-						data.nombre + " " + data.ap + " " + data.am);
-				var dni = $("#eliminarUsuario #dni_eliminar").val(data.dni);
-				var rol = $("#eliminarUsuario #rol_eliminar").val(
-						data.roles[0].nombre);
-				var dni = data.dni;
-				var src = "/assets/images/usuarios/" + dni + ".jpg";
-				$("#eliminar_usuario #img").attr("src", src);
+				var id = $("#eliminarRol #id").val(data.id);
+				var nombre = $("#eliminarRol #nombre").val(data.nombre);
+				var descripcion = $("#eliminarUsuario #dni_eliminar").val(data.descripcion);
 			})
 
 }

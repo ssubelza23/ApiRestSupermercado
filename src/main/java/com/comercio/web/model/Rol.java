@@ -20,13 +20,9 @@ public class Rol implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
+	@Column(unique=true)
 	private String nombre;
-	
 	private String descripcion;
-
-	private String logo;
-
 	private int estado;
 
 	@OneToMany
@@ -53,7 +49,7 @@ public class Rol implements Serializable {
 		return id;
 	}
 
-	public void setId_rol(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -73,13 +69,7 @@ public class Rol implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public String getLogo() {
-		return logo;
-	}
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
 
 	public int getEstado() {
 		return estado;

@@ -27,18 +27,10 @@
                 
                 <div class="input-field col s12">
                     <i class="material-icons prefix">short_text</i>
-                    <input id="detalle" type="text" name="detalle"/>
-                    <label>Detalle</label>
+                    <input id="descripcion" type="text" name="descripcion"/>
+                    <label>Descripcion</label>
                 </div>
                 
-                <div class="input-field col s6">
-                     <i class="material-icons prefix">insert_photo</i>
-                    <input id="logo" type="text"/>
-                    <label for="icon_telephone">Logo</label>
-                </div>  
-                 <div class="input-field col s6">
-                     <i class="large material-icons"><span id="logo_editar">edit</span></i>
-                 </div>             
           </div>
           <div id="asignarProcesos" class="col s12">
                 <input type="hidden" name="id" id="id"/>
@@ -65,19 +57,15 @@
           </div>
           
           <div class="collapsible-header active">
-                <a class="modal-action modal-close waves-effect waves-red btn-flat " data-th-href="@{/usuarios}" id="cancelar_editar_sectores">Cancelar</a>
-                <a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_sectores"/></a>
+                <a class="modal-action modal-close waves-effect waves-red btn-flat " data-th-href="@{/usuarios}" id="cancelar_editar_roles">Cancelar</a>
+                <a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_roles"/></a>
           </div> 
           
         </form>
     <div id="modal1" class="modal modal-fixed-footer">
-        <form id="eliminarUsuario">
+        <form id="eliminarRol">
             <div class="modal-content center">
-                <h4>Seguro que desea eliminar al usuario</h4>
-
-                <div class="input-field col s12" id="foto_usuario">
-                    <img class="circle" width="20%" height="20%" id="img" />
-                </div>
+                <h4>Seguro que desea eliminar al ROl</h4>
                 <input type="hidden" name="id" id="id" />
                 <div class="input-field col s6 offset-s4 center">
                     <label for="first_name">Usuario:</label> <input
@@ -99,7 +87,7 @@
             <div class="modal-footer">
                 <a href="#!"
                     class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelar">Cancelar</a>
-                <a href="#" id="btn_eliminar_usuario"
+                <a href="#" id="btn_eliminar_rol"
                     class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
             </div>
         </form>
@@ -112,7 +100,6 @@
             <tr>
                 <th>nombre</th>
                 <th>detalle</th>
-                <th>logo</th>
                 <th></th>
                 <th></th>
             </tr>

@@ -45,10 +45,7 @@ function fire_ajax_submit_proveedores(){
 	idempresa : $("#formulario_proveedores #idempresa").val(),
 	idmarca : $("#formulario_proveedores #idmarca").val(),
 	idcontacto : $("#formulario_proveedores #idcontacto").val(),
-	detalles : $("#formulario_proveedores #detalles").val()
-    	 
-    		
-    		
+	detalles : $("#formulario_proveedores #detalles").val()	
     	}
 	console.log(formData);
 	$.ajax({
