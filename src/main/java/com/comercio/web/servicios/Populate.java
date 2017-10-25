@@ -106,6 +106,67 @@ public class Populate {
 		procesoMarcas.setLogo("child_care");
 		procesoMarcas.setEstado(1);
 		procesoDao.create(procesoMarcas);
+		
+		// datos de marcas
+		Proceso crearMarcas1 = new Proceso();
+		crearMarcas1.setNombre("cocacola");
+		crearMarcas1.setLogo("cocacola.jpg");
+		crearMarcas1.setEstado(1);
+		procesoDao.create(crearMarcas1);
+		
+		Proceso crearMarcas2 = new Proceso();
+		crearMarcas2.setNombre("pepsico");
+		crearMarcas2.setLogo("pepsico.jpg");
+		crearMarcas2.setEstado(1);
+		procesoDao.create(crearMarcas2);
+		
+		Proceso crearMarcas3 = new Proceso();
+		crearMarcas3.setNombre("gillette");
+		crearMarcas3.setLogo("gillette.jpg");
+		crearMarcas3.setEstado(1);
+		procesoDao.create(crearMarcas3);
+		
+		Proceso crearMarcas4 = new Proceso();
+		crearMarcas4.setNombre("head&shoulders");
+		crearMarcas4.setLogo("head&shoulders.jpg");
+		crearMarcas4.setEstado(1);
+		procesoDao.create(crearMarcas4);
+		
+		Proceso crearMarcas5 = new Proceso();
+		crearMarcas5.setNombre("oldspice");
+		crearMarcas5.setLogo("oldspice.jpg");
+		crearMarcas5.setEstado(1);
+		procesoDao.create(crearMarcas5);
+		
+		Proceso crearMarcas6 = new Proceso();
+		crearMarcas6.setNombre("pantene");
+		crearMarcas6.setLogo("pantene.jpg");
+		crearMarcas6.setEstado(1);
+		procesoDao.create(crearMarcas6);
+		
+		Proceso crearMarcas7 = new Proceso();
+		crearMarcas7.setNombre("ace");
+		crearMarcas7.setLogo("ace.jpg");
+		crearMarcas7.setEstado(1);
+		procesoDao.create(crearMarcas7);
+		
+		Proceso crearMarcas8 = new Proceso();
+		crearMarcas8.setNombre("ariel");
+		crearMarcas8.setLogo("ariel.jpg");
+		crearMarcas8.setEstado(1);
+		procesoDao.create(crearMarcas8);
+		
+		Proceso crearMarcas9 = new Proceso();
+		crearMarcas9.setNombre("vick");
+		crearMarcas9.setLogo("vick.jpg");
+		crearMarcas9.setEstado(1);
+		procesoDao.create(crearMarcas9);
+		
+		Proceso crearMarcas10= new Proceso();
+		crearMarcas10.setNombre("pampers");
+		crearMarcas10.setLogo("pampers.jpg");
+		crearMarcas10.setEstado(1);
+		procesoDao.create(crearMarcas10);
 
 		// Proceso pedidos
 		Proceso procesoPedidos = new Proceso();
