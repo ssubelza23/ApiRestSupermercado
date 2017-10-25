@@ -12,6 +12,7 @@ import com.comercio.web.dao.DatoDao;
 import com.comercio.web.dao.ProcesoDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
+import com.comercio.web.dao.MarcaDao;
 import com.comercio.web.model.Dato;
 import com.comercio.web.model.Marca;
 import com.comercio.web.model.Proceso;
@@ -33,6 +34,9 @@ public class Populate {
 
 	@Autowired
 	private ProcesoDao procesoDao;
+	
+	@Autowired
+	private MarcaDao MarcaDao;
 
 	@PostConstruct
 	public void createUsers() {
@@ -108,65 +112,67 @@ public class Populate {
 		procesoDao.create(procesoMarcas);
 		
 		// datos de marcas
-		Proceso crearMarcas1 = new Proceso();
+		Marca crearMarcas1 = new Marca();
 		crearMarcas1.setNombre("cocacola");
 		crearMarcas1.setLogo("cocacola.jpg");
 		crearMarcas1.setEstado(1);
-		procesoDao.create(crearMarcas1);
+		MarcaDao.create(crearMarcas1);
 		
-		Proceso crearMarcas2 = new Proceso();
+		
+		Marca crearMarcas2 = new Marca();
 		crearMarcas2.setNombre("pepsico");
 		crearMarcas2.setLogo("pepsico.jpg");
 		crearMarcas2.setEstado(1);
-		procesoDao.create(crearMarcas2);
+		MarcaDao.create(crearMarcas2);
 		
-		Proceso crearMarcas3 = new Proceso();
+		Marca crearMarcas3 = new Marca();
 		crearMarcas3.setNombre("gillette");
 		crearMarcas3.setLogo("gillette.jpg");
 		crearMarcas3.setEstado(1);
-		procesoDao.create(crearMarcas3);
+		MarcaDao.create(crearMarcas3);
 		
-		Proceso crearMarcas4 = new Proceso();
+		Marca crearMarcas4 = new Marca();
 		crearMarcas4.setNombre("head&shoulders");
 		crearMarcas4.setLogo("head&shoulders.jpg");
 		crearMarcas4.setEstado(1);
-		procesoDao.create(crearMarcas4);
+		MarcaDao.create(crearMarcas4);
 		
-		Proceso crearMarcas5 = new Proceso();
+		Marca crearMarcas5 = new Marca();
 		crearMarcas5.setNombre("oldspice");
 		crearMarcas5.setLogo("oldspice.jpg");
 		crearMarcas5.setEstado(1);
-		procesoDao.create(crearMarcas5);
+		MarcaDao.create(crearMarcas5);
 		
-		Proceso crearMarcas6 = new Proceso();
+		Marca crearMarcas6 = new Marca();
 		crearMarcas6.setNombre("pantene");
 		crearMarcas6.setLogo("pantene.jpg");
 		crearMarcas6.setEstado(1);
-		procesoDao.create(crearMarcas6);
+		MarcaDao.create(crearMarcas6);
 		
-		Proceso crearMarcas7 = new Proceso();
+		Marca crearMarcas7 = new Marca();
 		crearMarcas7.setNombre("ace");
 		crearMarcas7.setLogo("ace.jpg");
 		crearMarcas7.setEstado(1);
-		procesoDao.create(crearMarcas7);
+		MarcaDao.create(crearMarcas7);
 		
-		Proceso crearMarcas8 = new Proceso();
+		Marca crearMarcas8 = new Marca();
 		crearMarcas8.setNombre("ariel");
 		crearMarcas8.setLogo("ariel.jpg");
 		crearMarcas8.setEstado(1);
-		procesoDao.create(crearMarcas8);
+		MarcaDao.create(crearMarcas8);
 		
-		Proceso crearMarcas9 = new Proceso();
+		Marca crearMarcas9 = new Marca();
 		crearMarcas9.setNombre("vick");
 		crearMarcas9.setLogo("vick.jpg");
 		crearMarcas9.setEstado(1);
-		procesoDao.create(crearMarcas9);
+		MarcaDao.create(crearMarcas9);
 		
-		Proceso crearMarcas10= new Proceso();
+		Marca crearMarcas10= new Marca();
 		crearMarcas10.setNombre("pampers");
 		crearMarcas10.setLogo("pampers.jpg");
 		crearMarcas10.setEstado(1);
-		procesoDao.create(crearMarcas10);
+		MarcaDao.create(crearMarcas10);
+		
 
 		// Proceso pedidos
 		Proceso procesoPedidos = new Proceso();
