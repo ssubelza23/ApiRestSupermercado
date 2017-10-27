@@ -39,12 +39,6 @@ public class MarcasControlador {
 		model.addAttribute("fragmento", "marcas");
 		model.addAttribute("plantilla", "marcas");
 		
-		@SuppressWarnings("unchecked")
-		List<Dato> datos=(List<Dato>) httpSession.getAttribute("userLog");
-		if(datos!=null) {
-			model.addAttribute("usulog",datos);
-			model.addAttribute("dato",1);
-		}
 		model.addAttribute("rolList",rolDao.getAll());
 	
 		return "Principal";

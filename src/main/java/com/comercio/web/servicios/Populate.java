@@ -162,8 +162,8 @@ public class Populate {
 		MarcaDao.create(crearMarcas8);
 		
 		Marca crearMarcas9 = new Marca();
-		crearMarcas9.setNombre("vick");
-		crearMarcas9.setLogo("vick.jpg");
+		crearMarcas9.setNombre("vicks");
+		crearMarcas9.setLogo("vicks.jpg");
 		crearMarcas9.setEstado(1);
 		MarcaDao.create(crearMarcas9);
 		
