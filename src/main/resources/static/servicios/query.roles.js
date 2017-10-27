@@ -1,32 +1,54 @@
 $(document).ready(function() {
 	cargarTablaRoles();
 	eliminarRol();
+
+	 var aProcesos=[];
+	$('.procesos').click(function(event) {
+	    console.log($(this).attr('value'))
+	    console.log(aProcesos.length);
+	    if(aProcesos.includes($(this).attr('value'))){
+	    	var i=aProcesos.indexOf($(this).attr('value'));
+	 console.log(i);
+	    	
+	    	aProcesos.splice(i,1);
+	    	  console.log("Si se encuentra");
+	    	  $(this).removeClass("green-text");
+	 		 $(this).prop( "style","background-color: #fff;" ); 
+	 }else{
+	
+		$(this).addClass("green-text");
+		 $(this).prop( "style","background-color: #F5F5F5;" ); 
+		 console.log("No Se encuentra ");
+ 		aProcesos.push($(this).attr('value'));
+	 }
+	    	  
+	console.log(aProcesos);
+	  })
 	$("#rolesFrag #errores").hide();
 	$("#btn_submit_roles").click(function(event) {
 		event.preventDefault();
-		actualizarRoles();
+		actualizarRoles(aProcesos);
 	})
-
 	$("#formularioRoles #cancelar").click(function(event) {
 		limpiarFormularioRoles();
 		$("#rolesFrag #errores").fadeOut(300);
 	})
-
 });
-function actualizarRoles() {
+function actualizarRoles(aProcesos) {
+	console.log(aProcesos)
 	var formData = {
-			id : $("#formularioRoles #id").val(),
-			nombre : $("#formularioRoles #nombre").val(),
-			descripcion : $("#formularioRoles #descripcion").val(),
-			}
-			console.log(formData);
+			id:$("#formularioRoles #id").val(),
+			nombre:$("#formularioRoles #nombre").val(),
+			descripcion:$("#formularioRoles #descripcion").val(),
+			procesos:aProcesos
+	}
+			console.log(formData+"*************");
 			$.ajax({
 				type : "POST",
 				url : "/roles",
 				data : JSON.stringify(formData),
 				contentType : "application/json",
 				success:function(data){
-			
 					var errores = data.lista_errores;
 					var lista = "";
 					if (errores.length != 0) {
@@ -79,7 +101,7 @@ var cargarTablaRoles = function() {
 									"mData" : "descripcion"
 								},
 								{
-									"defaultContent" : "<a  href='#' class='editar grey-text'><i class='material-icons'>edit</i></button>"
+									"defaultContent" : "<a  href='#' class='editarRoles grey-text blue-text'><i class='material-icons'>edit</i></a>"
 								},
 								{
 									"defaultContent" : "<a  href='#modal1' id='eliminar' class='eliminar grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"
@@ -89,7 +111,7 @@ var cargarTablaRoles = function() {
 						"language" : idioma_español,
 
 					});
-	obtenerDatosModificar("#tablaRoles tbody", table);
+	obtenerDatosModificarRoles("#tablaRoles tbody", table);
 	obtener_datos_eliminar("#tablaRoles tbody", table);
 };
 
@@ -116,15 +138,22 @@ var limpiarFormularioRoles = function() {
 		   $("#formularioRoles")[0].reset();
 }
 
-var obtenerDatosModificar = function(tbody, table) {
-	$(tbody).on("click","a.editar",
+var obtenerDatosModificarRoles = function(tbody, table) {
+	$(tbody).on("click","a.editarRoles",
 			function() {
 				event.preventDefault();
 					var data = table.row($(this).parents("tr")).data();
 					var id = $("#formularioRoles #id").val(data.id), 
 					nombre = $("#formularioRoles #nombre").val(data.nombre),
 					descripcion = $("#formularioRoles #descripcion").val(data.descripcion)
-
+					$("#formularioRoles #descripcion").focus();
+					$("#formularioRoles #nombre").focus();
+					var procesosAsignados=data.procesos;
+					var procesosAll=$("#formularioRoles #listaProcesos").attr('value');
+				
+					if(procesosAll.includes(){
+					
+					
 					})
 }
 var obtener_datos_eliminar = function(tbody, table) {

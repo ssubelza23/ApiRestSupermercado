@@ -27,8 +27,8 @@
           		<div class="divider"></div>
           	</li>
           	<th:block data-th-if="${dato}==1">
-           	<li   class="bold" data-th-each="p:${usulog.roles[0].procesos}">
-           	<a   data-th-href="@{'/'+${p.enlace}}" class="links waves-effect waves-teal" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
+           	<li   data-th-each="p:${usulog.roles[0].procesos}" role="menuitem">
+           	<a   data-th-href="@{'/'+${p.enlace}}" class="mdc-list-item" id="enlace_proceso"><i class="material-icons"><span data-th-text="${p.logo}"></span></i><span data-th-text="${p.nombre}" ></span></a>
            	</li>
            	</th:block>    
 		</ul>

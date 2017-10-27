@@ -1,5 +1,5 @@
 <div data-th-fragment="roles" id="rolesFrag">
-    <p class="caption" data-th-text="${descripcion}"></p>
+    <p class="caption" data-th-text="${descripcion}"></p> 
         <div id="errores">
             <div id="card-alert" class="card red lighten-5">
                 <div class="card-content red-text" id="error"></div>
@@ -33,31 +33,31 @@
                 
           </div>
           <div id="asignarProcesos" class="col s12">
-                <input type="hidden" name="id" id="id"/>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">playlist_add_check</i>
-                    <input  id="nombre" type="text" name="nombre"/>
-                    <label >Nombre</label>
-                </div>
-                
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">short_text</i>
-                    <input id="detalle" type="text" name="detalle"/>
-                    <label>Detalle</label>
-                </div>
-                
-                <div class="input-field col s6">
-                     <i class="material-icons prefix">insert_photo</i>
-                    <input id="logo" type="text"/>
-                    <label for="icon_telephone">Logo</label>
-                </div>  
-                 <div class="input-field col s6">
-                     <i class="large material-icons"><span id="logo_editar">edit</span></i>
-                 </div>             
+            <div class="col s12 m12 l12" id="listaProcesos"  data-th-value="${listaProcesos}">
+           <ul   id="procesos" class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo" >
+          <li class="procesos mdc-list-item mdc-ripple-surface demo-surface mdc-elevation--z1" data-th-each="rol:${listaProcesos}"  data-th-value="${rol.id}" data-th-id="${rol.id}">
+            <div class="col s3 center">
+            <span class="mdc-list-item__start-detail grey-bg" role="presentation">
+              <i class="material-icons" aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
+            </span>
+            </div>
+             <div class="col s9">
+            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
+            
+            </span>
+           </div>
+          </li>
+                 
+            </ul>
+               
+        
+            </div> 
+     
+        
           </div>
           
           <div class="collapsible-header active">
-                <a class="modal-action modal-close waves-effect waves-red btn-flat " data-th-href="@{/usuarios}" id="cancelar_editar_roles">Cancelar</a>
+                <a class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelarEditarRoles">Cancelar</a>
                 <a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_roles"/></a>
           </div> 
           

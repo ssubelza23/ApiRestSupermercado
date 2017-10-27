@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name = "roles")
@@ -25,7 +28,7 @@ public class Rol implements Serializable {
 	private String descripcion;
 	private int estado;
 
-	@OneToMany
+	@ManyToMany
 	private List<Proceso> procesos = new ArrayList<>();
 
 	public void setProcesos(List<Proceso> procesos) {

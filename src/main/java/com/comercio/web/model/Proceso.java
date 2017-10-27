@@ -11,10 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 @Entity
 @Table(name = "procesos")
+
 public class Proceso implements Serializable{
 	private static final long serialVersionUID = 1L;
 

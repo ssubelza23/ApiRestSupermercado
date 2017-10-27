@@ -78,7 +78,7 @@ var listar_marcas=function(){
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
 				  { "mData": "logo","render":function(mData,type,row){
-		        	  return "<img class='z-depth-2 responsive-img activator' width='70' height='60' src='/assets/images/usuarios/"+mData+"'/>"
+		        	  return "<img class='z-depth-2 responsive-img activator' width='70' height='60' src='/assets/images/marcas/"+mData+"'/>"
 		        	  }
 				  },
 			      { "mData": "nombre"},

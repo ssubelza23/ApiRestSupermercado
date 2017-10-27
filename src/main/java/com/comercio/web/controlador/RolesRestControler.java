@@ -1,5 +1,6 @@
 package com.comercio.web.controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.comercio.web.dao.ProcesoDao;
 import com.comercio.web.dao.RolesDao;
 
 import com.comercio.web.model.FeedBack;
+import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
 import com.comercio.web.model.bean.RolBean;
 import com.comercio.web.model.bean.UsuarioBean;
@@ -30,12 +33,17 @@ import com.comercio.web.model.bean.UsuarioBean;
 public class RolesRestControler {
 	@Autowired
 	RolesDao rolesDao;
+	
+	@Autowired
+	ProcesoDao procesoDao;
 	@GetMapping(value = "/listaRoles")
 	public List<Rol> listaRoles() {
 		return rolesDao.getAll();
 	}
+	
 	@PostMapping(value = "/roles")
 	public FeedBack editarRoles(@Valid @RequestBody RolBean r, BindingResult result) {
+		System.out.println(r.getProcesos()+"123654");
 		FeedBack feedBack = new FeedBack();
 		if (result.hasErrors()) {
 			feedBack.setLista_errores(result.getAllErrors());
@@ -44,10 +52,19 @@ public class RolesRestControler {
 		}
 
 		try {
+			
+			List<Proceso> procesos=new ArrayList<>();
+			for(int i=0;i<r.getProcesos().size();i++) {
+				procesos.add(procesoDao.getById(r.getProcesos().get(i)));
+				System.out.println(r.getProcesos().get(i));
+			}
+			System.out.println(procesos);
 			Rol rol = new Rol();
 			rol.setNombre(r.getNombre());
 			rol.setDescripcion(r.getDescripcion());
 			rol.setEstado(1);
+			rol.setProcesos(procesos);
+			
 			if (r.getId()!=0) {
 				rol.setId(r.getId());
 				rolesDao.update(rol);
@@ -70,4 +87,6 @@ public class RolesRestControler {
 		rolesDao.delete(id);
 		return "Bien!. Rol Eliminado correctamente.";
 	}
+	////=============procesos=========================================================
+
 }

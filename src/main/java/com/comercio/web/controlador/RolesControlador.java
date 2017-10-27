@@ -38,8 +38,8 @@ public class RolesControlador {
 	public String ShowForm(Model model) {
 		List<Rol> listRoles = rolesDao.getAll();
 		model.addAttribute("listRoles", listRoles);
-		List<Proceso> listProcesos = procesosDao.getAll();
-		model.addAttribute("listProcesos", listProcesos);
+		List<Proceso> listaProcesos = procesosDao.getAll();
+		model.addAttribute("listaProcesos", listaProcesos);
 		model.addAttribute("newRol", new RolBean());
 		
 		Usuario usuario =  (Usuario) httpSession.getAttribute("userLog");

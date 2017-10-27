@@ -91,7 +91,7 @@ var cargarTablaUsuarios = function() {
 									"mData" : "roles[0].nombre"
 								},
 								{
-									"defaultContent" : "<a  href='#' class='editar grey-text'><i class='material-icons'>edit</i></button>"
+									"defaultContent" : "<a  href='#' class='editarUsuarios grey-text blue-text'><i class='material-icons'>edit</i></a>"
 								},
 								{
 									"defaultContent" : "<a  href='#modal1' id='eliminar' class='eliminar grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"
@@ -101,7 +101,7 @@ var cargarTablaUsuarios = function() {
 						"language" : idioma_español,
 
 					});
-	obtenerDatosModificar("#tablaUsuarios tbody", table);
+	obtenerDatosModificarUsuarios("#tablaUsuarios tbody", table);
 	obtener_datos_eliminar("#tablaUsuarios tbody", table);
 };
 
@@ -128,9 +128,10 @@ var limpiarFormularioUsuarios = function() {
 		   $("#formularioUsuarios")[0].reset();
 }
 
-var obtenerDatosModificar = function(tbody, table) {
-	$(tbody).on("click","a.editar",
+var obtenerDatosModificarUsuarios = function(tbody, table) {
+	$(tbody).on("click","a.editarUsuarios",
 			function() {
+		console.log("click");
 				event.preventDefault();
 					var data = table.row($(this).parents("tr")).data();
 					var id = $("#formularioUsuarios #id").val(data.id), 

@@ -77,7 +77,7 @@ var listar_proveedores=function(){
 				  { "mData": "contacto.nombre" },
 				  { "mData": "marcas.nombre" },
 		          { "mData": "detalles"},
-		          { "defaultContent": "<a  href='#' class='editar_proveedores grey-text'><i class='material-icons'>edit</i></button>"},
+		          { "defaultContent": "<a  href='#' class='editar_proveedores grey-text'><i class='material-icons'>edit</i></a>"},
 				  { "defaultContent": "<a  href='#modaleliminarproveedores' id='eliminar_proveedores' class='eliminar_proveedores grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  
 			],

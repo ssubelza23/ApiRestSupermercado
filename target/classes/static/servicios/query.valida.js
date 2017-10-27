@@ -22,7 +22,7 @@ $( document ).ready(function() {
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "http://localhost:8080/validacion",
+			url : "/validacion",
 			data : JSON.stringify(formData),
 			dataType : 'json',
 			success : function(result) {
@@ -38,7 +38,7 @@ $( document ).ready(function() {
 				}else{
 					console.log("llego usuario autneticado"+result.usuario.id);
 					console.log(result);
-					window.location.replace("http://localhost:8080/index/"+result.usuario.id);
+					window.location.replace("/index/"+result.usuario.id);
 				}
 					
 			},

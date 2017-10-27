@@ -89,7 +89,7 @@ public class Populate {
 		procesoProductos.setNombre("Productos");
 		procesoProductos.setEnlace("productos");
 		procesoProductos.setDescripcion("Gestion de Productos, ...............");
-		procesoProductos.setLogo("shoping");
+		procesoProductos.setLogo("shopping_basket");
 		procesoProductos.setEstado(1);
 		procesoDao.create(procesoProductos);
 
