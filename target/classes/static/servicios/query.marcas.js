@@ -83,7 +83,7 @@ var listar_marcas=function(){
 				  },
 			      { "mData": "nombre"},
 				  { "mData": "detalle" },
-		          
+		  
 		          { "defaultContent": "<a  href='#' class='editar_marcas grey-text'><i class='material-icons'>edit</i></button>"},
 				  { "defaultContent": "<a  href='#modaleliminarmarcas' id='eliminar_marcas' class='eliminar_marcas grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  
