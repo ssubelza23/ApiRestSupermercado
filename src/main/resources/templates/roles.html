@@ -1,111 +1,199 @@
 <div data-th-fragment="roles" id="rolesFrag">
-    <p class="caption" data-th-text="${descripcion}"></p> 
-        <div id="errores">
-            <div id="card-alert" class="card red lighten-5">
-                <div class="card-content red-text" id="error"></div>
-            </div>
-        </div>
-        <form id="formularioRoles" class="card">
-            <div class="col s12 ">
-                <ul class="tabs">
-                    <li class="tab col s3">
-                        <a class="active" href="#nuevo"><span id="opcion">Nuevo</span></a>
-                    </li>
-                     <li class="tab col s3">
-                        <a class="active" href="#asignarProcesos"><span id="opcion">Asignar Procesos</span></a>
-                    </li>
-                </ul><br>
-            </div>
-            
-            <div id="nuevo" class="col s12">
-                <input type="hidden" name="id" id="id"/>
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">playlist_add_check</i>
-                    <input  id="nombre" type="text" name="nombre"/>
-                    <label >Nombre</label>
-                </div>
-                
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">short_text</i>
-                    <input id="descripcion" type="text" name="descripcion"/>
-                    <label>Descripcion</label>
-                </div>
-                
-          </div>
-          <div id="asignarProcesos" class="col s12">
-            <div class="col s12 m12 l12" id="listaProcesos"  data-th-value="${listaProcesos}">
-           <ul   id="procesos" class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo" >
-          <li class="procesos mdc-list-item mdc-ripple-surface demo-surface mdc-elevation--z1" data-th-each="rol:${listaProcesos}"  data-th-value="${rol.id}" data-th-id="${rol.id}">
-            <div class="col s3 center">
-            <span class="mdc-list-item__start-detail grey-bg" role="presentation">
-              <i class="material-icons" aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
-            </span>
-            </div>
-             <div class="col s9">
-            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
-            
-            </span>
-           </div>
-          </li>
-                 
-            </ul>
-               
-        
-            </div> 
-     
-        
-          </div>
-          
-          <div class="collapsible-header active">
-                <a class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelarEditarRoles">Cancelar</a>
-                <a class="modal-action modal-close waves-effect waves-red btn-flat"><input name="4" value="Guardar"  type="submit" id="btn_submit_roles"/></a>
-          </div> 
-          
-        </form>
-    <div id="modal1" class="modal modal-fixed-footer">
-        <form id="eliminarRol">
-            <div class="modal-content center">
-                <h4>Seguro que desea eliminar al ROl</h4>
-                <input type="hidden" name="id" id="id" />
-                <div class="input-field col s6 offset-s4 center">
-                    <label for="first_name">Usuario:</label> <input
-                        placeholder="Placeholder" disabled id="usuario_eliminar"
-                        type="text" class="validate" name="usuario_eliminar" />
-                </div>
-                <div class="input-field col s6 offset-s4 center">
-                    <label for="first_name">DNI:</label> <input
-                        placeholder="Placeholder" disabled id="dni_eliminar" type="text"
-                        class="validate center-aling" name="dni_eliminar" />
-                </div>
-                <div class="input-field col s6 offset-s4 center">
-                    <label for="first_name">Rol:</label> <input
-                        placeholder="Placeholder" disabled id="rol_eliminar" type="text"
-                        class="validate center-aling" name="rol_eliminar" />
-                </div>
+	<br/>
+	<div id="errores">
+		<div id="card-alert" class="card red lighten-5">
+			<div class="card-content red-text" id="error"></div>
+		</div>
+	</div>
 
-            </div>
-            <div class="modal-footer">
-                <a href="#!"
-                    class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelar">Cancelar</a>
-                <a href="#" id="btn_eliminar_rol"
-                    class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-            </div>
-        </form>
-    </div>
+	<form id="formularioRoles" class="card">
+		<div class="col s12 ">
+			<ul class="tabs">
+				<li class="tab col s3"><a class="active" href="#nuevo"><span
+						id="opcion">Nuevo</span></a></li>
+				<li class="tab col s3"><a class="active"
+					href="#asignarProcesos"><span id="opcion">Asignar
+							Procesos</span></a></li>
+			</ul>
+			<br>
+		</div>
+
+		<div id="nuevo" class="col s12">
+			<input type="hidden" name="id" id="id" />
+			<div class="input-field col s12">
+				<i class="material-icons prefix">playlist_add_check</i> <input
+					id="nombre" type="text" name="nombre" /> <label>Nombre</label>
+			</div>
+
+			<div class="input-field col s12">
+				<i class="material-icons prefix">short_text</i> <input
+					id="descripcion" type="text" name="descripcion" /> <label>Descripcion</label>
+			</div>
+
+		</div>
+		<div id="asignarProcesos" class="col s12">
+			<div class="col s12 m12 l12">
+				<h2 class="mdc-typography--title">Seleciones un Rol</h2>
+				<div class="input-field col s12">
+					<select onchange="location.href ='/roles/asignarProcesos/'+this.value">
+						<option value="" disabled selected>seleciona tu opcion</option>
+						<option value="1" data-th-each="rol:${listaRoles}" data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="collapsible-header active">
+			<a class="modal-action modal-close waves-effect waves-red btn-flat "
+				id="cancelarEditarRoles">Cancelar</a> <a
+				class="modal-action modal-close waves-effect waves-red btn-flat"><input
+				name="4" value="Guardar" type="submit" id="btn_submit_roles" /></a>
+		</div>
+
+	</form>
+	<div id="modal1" class="modal modal-fixed-footer">
+		<form id="eliminarRol">
+			<div class="modal-content center">
+				<h4>Seguro que desea eliminar al ROl</h4>
+				<input type="hidden" name="id" id="id" />
+				<div class="input-field col s6 offset-s4 center">
+					<label for="first_name">Usuario:</label> <input
+						placeholder="Placeholder" disabled id="usuario_eliminar"
+						type="text" class="validate" name="usuario_eliminar" />
+				</div>
+				<div class="input-field col s6 offset-s4 center">
+					<label for="first_name">DNI:</label> <input
+						placeholder="Placeholder" disabled id="dni_eliminar" type="text"
+						class="validate center-aling" name="dni_eliminar" />
+				</div>
+				<div class="input-field col s6 offset-s4 center">
+					<label for="first_name">Rol:</label> <input
+						placeholder="Placeholder" disabled id="rol_eliminar" type="text"
+						class="validate center-aling" name="rol_eliminar" />
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<a href="#!"
+					class="modal-action modal-close waves-effect waves-red btn-flat "
+					id="cancelar">Cancelar</a> <a href="#" id="btn_eliminar_rol"
+					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
+			</div>
+		</form>
+	</div>
 
 
-   
-   <table id="tablaRoles" class="display highlight card" cellspacing="0" width="100%"  >  
-       <thead>
-            <tr>
-                <th>nombre</th>
-                <th>detalle</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
+
+	<table id="tablaRoles" class="display highlight card" cellspacing="0"
+		width="100%">
+		<thead>
+			<tr>
+				<th>nombre</th>
+				<th>detalle</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+	</table>
 
 </div>
+<div data-th-fragment="asignarProcesos">
+  <p class="caption">Asignacion de Procesos(Tareas)</p>
+   <input type="text" name="idRolModificar" id="idRolModificar" data-th-value="${idRolModificar}" />
+        
+    <div class="row">
+            <div class="row card ">
+    
+    
+        <div class="col s12 card-title">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active"
+                    href="#asignarProcesos"><span
+                            data-th-text="'Asignar procesos a --> '+${rol_ref.nombre}"></span></a></li>
+            </ul>
+            <br>
+        </div>
+
+        <div id="asignarProcesos" class="col s12">
+            <div class="col s12 m12 l12">
+                <h2 class="mdc-typography--title">Seleciones un Rol</h2>
+                <div class="input-field col s12">
+                    <select onchange="location.href ='/roles/asignarProcesos/'+this.value">
+                        <option value="" disabled selected>seleciona tu opcion</option>
+                        <option value="1" data-th-each="rol:${listaRoles}" data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col s12 m12 l12" id="listaProcesos"
+                data-th-value="${listaProcesos}">
+                
+                <ul id="procesos row"
+                    class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo">
+                    <li
+                        class="procesosAsignados mdc-list-item  mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6"
+                        data-th-each="rol:${asignados}" data-th-value="${rol.id}"
+                        data-th-id="${rol.id}">
+                        <div class="col s3 center gren-text">
+                            <span class="mdc-list-item__start-detail grey-bg"
+                                role="presentation"> <i class="material-icons circle"
+                                aria-hidden="true"><span  data-th-text="${rol.logo}"></span></i>
+                            </span>
+                        
+                        </div>
+                        <div class="col s9">
+                            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
+                            <span class="mdc-list-item__text__secondary" data-th-text="${rol.descripcion}">hola</span>
+                            </span>
+                       
+                        </div>
+                      
+                        <a href="#!" class="secondary-content"><i class="material-icons">check_circle</i></a>
+                       
+                         
+                    </li>
+                   <li
+                        class="procesosNoAsignados mdc-list-item mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6 avatar"
+                        data-th-each="rol:${noasignados}" data-th-value="${rol.id}"
+                        data-th-id="${rol.id}">
+                        <div class="col s3 center">
+                            <span class="mdc-list-item__start-detail grey-bg"
+                                role="presentation"> <i class="material-icons"
+                                aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
+                            </span>
+                        </div>
+                         <div class="col s9">
+                            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
+                            </span>
+                           </div>
+                          <a href="#!" class="secondary-content" id="btnF"><i class="material-icons">check_circle</i></a>
+                    </li>
+
+                </ul>
+
+
+<span class="grey-text">Click para agregar o quitar procesos</span>
+                           
+                           
+            </div>
+        </div>
+  
+    <div class="collapsible-header active col s12 m6 l12 card-action ">
+                    <a
+                        class="modal-action modal-close waves-effect waves-red btn-flat black-text"
+                        id="cancelar_editar_productos">Cancelar</a>
+                    <a
+                        class="modal-action modal-close waves-effect waves-red btn-flat black-text">
+                        <input name="4" value="Guardar" 
+                        id="btnAddProRol" />
+                    </a>
+    </div>
+     </div> 
+        </div>  
+  
+     </div>  
+   
+  
+
+
 
 

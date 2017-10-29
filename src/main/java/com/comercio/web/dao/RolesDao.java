@@ -33,7 +33,14 @@ public class RolesDao {
 	@SuppressWarnings("unchecked")
 	public List<Proceso> getProcesosAsignados(long id) {
 		return entityManager
-				.createQuery("select r.procesos from Rol r where exists ( select p from Proceso p) and r.id=:id ")
+				.createQuery("select r.procesos from Rol r where r.id=:id ")
+				.setParameter("id", id).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Proceso> getProcesosNoAsignados(long id) {
+		return entityManager
+				.createQuery("select p from Proceso p,Rol r where not exists(select rp from r.procesos rp where p=rp) and  r.id=:id ")
 				.setParameter("id", id).getResultList();
 	}
 

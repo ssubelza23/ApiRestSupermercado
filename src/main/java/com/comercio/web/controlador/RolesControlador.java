@@ -37,7 +37,7 @@ public class RolesControlador {
 	@GetMapping(value = "")
 	public String ShowForm(Model model) {
 		List<Rol> listRoles = rolesDao.getAll();
-		model.addAttribute("listRoles", listRoles);
+		model.addAttribute("listaRoles", listRoles);
 		List<Proceso> listaProcesos = procesosDao.getAll();
 		model.addAttribute("listaProcesos", listaProcesos);
 		model.addAttribute("newRol", new RolBean());
@@ -82,27 +82,47 @@ public class RolesControlador {
 
 	@GetMapping(value = "/asignarProcesos/{id}")
 	public String asignarProcesos(@PathVariable("id") long id, Model model) {
-		List<Proceso> p = rolesDao.getProcesosAsignados(id);
-		List<Proceso> pa = procesosDao.getAll();
-		for (int i = 0; i < pa.size(); i++) {
-			for (int j = 0; j < p.size(); j++) {
-				if (pa.get(i).equals(p.get(j))) {
-					pa.remove(i);
-				}
-			}
+		System.out.println(id+"******************idRolModificar");
+		Usuario usuario =  (Usuario) httpSession.getAttribute("userLog");
+		if (usuario != null) {
+			
+			model.addAttribute("usulog", usuario);
+			model.addAttribute("dato", 1);
+			List<Rol> listRoles = rolesDao.getAll();
+			model.addAttribute("listaRoles", listRoles);
+			List<Proceso> listaProcesos = procesosDao.getAll();
+			model.addAttribute("listaProcesos", listaProcesos);
+			
+			
+			List<Proceso> p = rolesDao.getProcesosAsignados(id);
+
+			List<Proceso> pa = rolesDao.getProcesosNoAsignados(id);
+		
+	
+			Rol rol_ref = new Rol();
+			rol_ref = rolesDao.getById(id);
+			model.addAttribute("proceso", "Asinar procesos");
+			model.addAttribute("descripcion", "asignar");
+			model.addAttribute("asignados", p);
+			model.addAttribute("noasignados", pa);
+			model.addAttribute("rol_ref", rol_ref);
+
+			model.addAttribute("fragmento", "asignarProcesos");
+			model.addAttribute("plantilla", "roles");
+			model.addAttribute("idRolModificar", id);
+			
+			return "Principal";
+		}else {
+			model.addAttribute("proceso", "Acceso al sistema");
+			model.addAttribute("descripcion", "Indroduzca sus datos de acceso.");
+
+			model.addAttribute("fragmento", "login");
+			model.addAttribute("plantilla", "formulario");
+			return "Principal";
+			
 		}
-		Rol rol_ref = new Rol();
-		rol_ref = rolesDao.getById(id);
-		model.addAttribute("proceso", "Asinar procesos");
-		model.addAttribute("descripcion", "asignar");
-		model.addAttribute("asignados", p);
-		model.addAttribute("noasignados", pa);
-		model.addAttribute("rol_ref", rol_ref);
-
-		model.addAttribute("fragmento", "asignarProcesos");
-		model.addAttribute("plantilla", "roles");
-
-		return "Principal";
+		
+		
 	}
 
 	@GetMapping(value = "/addrolpro/{rol_id}/{procesos_id}/{bandera}")

@@ -22841,3 +22841,33 @@ function applyPassive() {
 /******/ ]);
 });
 //# sourceMappingURL=material-components-web.js.map
+(function() {
+    var formField = new mdc.formField.MDCFormField(document.querySelector('.mdc-form-field'));
+    var cb = mdc.checkbox.MDCCheckbox.attachTo(document.querySelector('.mdc-checkbox'));
+    formField.input = cb;
+    var demoWrapper = document.getElementById('demo-wrapper');
+    var hero = document.querySelector('.hero');
+    document.getElementById('toggle-rtl').addEventListener('change', function() {
+      if (this.checked) {
+        demoWrapper.setAttribute('dir', 'rtl');
+        hero.setAttribute('dir', 'rtl');
+      } else {
+        demoWrapper.removeAttribute('dir');
+        hero.removeAttribute('dir');
+      }
+    });
+    // Delay initialization within development until styles have loaded
+    setTimeout(initInteractiveLists, 250);
+    function initInteractiveLists() {
+      var interactiveListItems = document.querySelectorAll(
+        '[data-demo-interactive-list] .mdc-list-item, .hero .mdc-list-item'
+      );
+      for (var i = 0, li; li = interactiveListItems[i]; i++) {
+        mdc.ripple.MDCRipple.attachTo(li);
+        // Prevent link clicks from jumping demo to the top of the page
+        li.addEventListener('click', function(evt) {
+          evt.preventDefault();
+        });
+      }
+    }
+  })();

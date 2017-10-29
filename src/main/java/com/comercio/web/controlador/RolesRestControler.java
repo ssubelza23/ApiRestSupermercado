@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +23,7 @@ import com.comercio.web.model.FeedBack;
 import com.comercio.web.model.Proceso;
 import com.comercio.web.model.Rol;
 import com.comercio.web.model.bean.RolBean;
-import com.comercio.web.model.bean.UsuarioBean;
-
-
+import com.comercio.web.model.bean.Rol_Procesos;
 
 
 @RestController
@@ -43,7 +40,6 @@ public class RolesRestControler {
 	
 	@PostMapping(value = "/roles")
 	public FeedBack editarRoles(@Valid @RequestBody RolBean r, BindingResult result) {
-		System.out.println(r.getProcesos()+"123654");
 		FeedBack feedBack = new FeedBack();
 		if (result.hasErrors()) {
 			feedBack.setLista_errores(result.getAllErrors());
@@ -53,17 +49,10 @@ public class RolesRestControler {
 
 		try {
 			
-			List<Proceso> procesos=new ArrayList<>();
-			for(int i=0;i<r.getProcesos().size();i++) {
-				procesos.add(procesoDao.getById(r.getProcesos().get(i)));
-				System.out.println(r.getProcesos().get(i));
-			}
-			System.out.println(procesos);
 			Rol rol = new Rol();
 			rol.setNombre(r.getNombre());
 			rol.setDescripcion(r.getDescripcion());
 			rol.setEstado(1);
-			rol.setProcesos(procesos);
 			
 			if (r.getId()!=0) {
 				rol.setId(r.getId());
@@ -86,6 +75,23 @@ public class RolesRestControler {
 	public String eliminarProveedor(@PathVariable long id) {
 		rolesDao.delete(id);
 		return "Bien!. Rol Eliminado correctamente.";
+	}
+	@PostMapping(value = "/addProRol")
+	public String addProRol(@RequestBody Rol_Procesos rp) {
+		System.out.println(rp.getAñadir()+"**"+rp.getIdRolModificar());
+		
+		System.out.println(rp.getEliminar()+"**"+rp.getIdRolModificar());
+
+		Rol rol = rolesDao.getById(rp.getIdRolModificar());
+		System.out.println(rol);
+		for(int i=0;i<rp.getAñadir().size();i++) {
+			rol.addProceso(procesoDao.getById(rp.getAñadir().get(i)));
+		}
+		for(int i=0;i<rp.getEliminar().size();i++) {
+			rol.removeProceso(procesoDao.getById(rp.getEliminar().get(i)));
+		}
+		rolesDao.update(rol);
+		return "Bien!. Datos modificados correctamente.";
 	}
 	////=============procesos=========================================================
 

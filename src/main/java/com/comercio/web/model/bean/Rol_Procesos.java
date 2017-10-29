@@ -1,20 +1,29 @@
 package com.comercio.web.model.bean;
 
-public class Rol_Procesos {
-private long rol_id;
-private long procesos_id;
-public long getRol_id() {
-	return rol_id;
-}
-public void setRol_id(long rol_id) {
-	this.rol_id = rol_id;
-}
-public long getProcesos_id() {
-	return procesos_id;
-}
-public void setProcesos_id(long procesos_id) {
-	this.procesos_id = procesos_id;
-}
+import java.util.ArrayList;
+import java.util.List;
 
+public class Rol_Procesos {
+	private long idRolModificar;
+ private List<Long> eliminar=new ArrayList<>();
+ private List<Long> añadir=new ArrayList<>();
+public List<Long> getEliminar() {
+	return eliminar;
+}
+public void setEliminar(List<Long> eliminar) {
+	this.eliminar = eliminar;
+}
+public List<Long> getAñadir() {
+	return añadir;
+}
+public void setAñadir(List<Long> añadir) {
+	this.añadir = añadir;
+}
+public long getIdRolModificar() {
+	return idRolModificar;
+}
+public void setIdRolModificar(long idRolModificar) {
+	this.idRolModificar = idRolModificar;
+}
 	
 }

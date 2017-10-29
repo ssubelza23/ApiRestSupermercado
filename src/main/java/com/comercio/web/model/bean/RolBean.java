@@ -2,14 +2,11 @@ package com.comercio.web.model.bean;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.comercio.web.model.Proceso;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 
 public class RolBean {
@@ -22,14 +19,8 @@ public class RolBean {
 	@Size(min = 3, max = 50, message = "Introduzca nombre válido")
 	private String descripcion;
 	
-	private List<Long> procesos=new ArrayList<>();
-public List<Long> getProcesos() {
-		return procesos;
-	}
 
-	public void setProcesos(List<Long> procesos) {
-		this.procesos = procesos;
-	}
+
 
 public long getId() {
 		return id;

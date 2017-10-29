@@ -1,29 +1,58 @@
 $(document).ready(function() {
 	cargarTablaRoles();
 	eliminarRol();
-
-	 var aProcesos=[];
-	$('.procesos').click(function(event) {
+	
+	  $("#btnAddProRol").click(function(event) {
+		  addProrol(delProcesos,aProcesos);
+	  });
+	  $("#btnF").hide();
+	 var delProcesos=[];
+	 var cont=0;
+	$('.procesosAsignados').click(function(event) {
+		
+	    console.log($(this).attr('value'))
+	    console.log(delProcesos.length);
+	    if(delProcesos.includes($(this).attr('value'))){
+	    	var i=delProcesos.indexOf($(this).attr('value'));
+	    	console.log(i);
+	    	delProcesos.splice(i,1);
+	    	  console.log("Si se encuentra");
+	    	  $('a',this).show(100);
+	    	  
+	 		 
+	 }else{
+		 		$('a',this).hide(100);
+			 $(this).removeClass("green-text");
+ 		delProcesos.push($(this).attr('value'));
+	 }
+	    	  
+	console.log(delProcesos);
+	  })
+var aProcesos=[];
+	$('.procesosNoAsignados  a',this).hide(100);
+	$('.procesosNoAsignados').click(function(event) {
 	    console.log($(this).attr('value'))
 	    console.log(aProcesos.length);
 	    if(aProcesos.includes($(this).attr('value'))){
 	    	var i=aProcesos.indexOf($(this).attr('value'));
-	 console.log(i);
-	    	
+	    	console.log(i);
 	    	aProcesos.splice(i,1);
 	    	  console.log("Si se encuentra");
-	    	  $(this).removeClass("green-text");
-	 		 $(this).prop( "style","background-color: #fff;" ); 
+	    		$('a',this).hide(100);
+	    	 
 	 }else{
-	
-		$(this).addClass("green-text");
-		 $(this).prop( "style","background-color: #F5F5F5;" ); 
+		
+		  $('a',this).show(100);
 		 console.log("No Se encuentra ");
  		aProcesos.push($(this).attr('value'));
 	 }
+	    
+
 	    	  
 	console.log(aProcesos);
-	  })
+	  });
+
+	
 	$("#rolesFrag #errores").hide();
 	$("#btn_submit_roles").click(function(event) {
 		event.preventDefault();
@@ -34,14 +63,37 @@ $(document).ready(function() {
 		$("#rolesFrag #errores").fadeOut(300);
 	})
 });
+function addProrol(delProcesos, aProcesos){
+	
+	var idMod=$("#idRolModificar").val();
+	var formData={
+			eliminar:delProcesos,
+			añadir:aProcesos,
+			idRolModificar:idMod
+	}
+	$.ajax({
+		type : "POST",
+		url : "/addProRol",
+		data : JSON.stringify(formData),
+		contentType : "application/json",
+		success:function(data){
+			Materialize.toast(data, 4000);
+
+		},
+		error : function(e) {
+			console.log("ERROR:", e);
+		}
+	})
+}
 function actualizarRoles(aProcesos) {
 	console.log(aProcesos)
 	var formData = {
 			id:$("#formularioRoles #id").val(),
 			nombre:$("#formularioRoles #nombre").val(),
 			descripcion:$("#formularioRoles #descripcion").val(),
-			procesos:aProcesos
+			
 	}
+	
 			console.log(formData+"*************");
 			$.ajax({
 				type : "POST",
@@ -83,6 +135,21 @@ function actualizarRoles(aProcesos) {
 					console.log("ERROR:", e);
 				}
 			})
+}
+
+function asignarProcesos(idRol){
+	$.ajax({
+		type : "GET",
+		url : "/asignarProcesos/" + idRol,
+		success : function(mensaje) {
+			
+		},
+		error : function(e) {
+			alert("Error!")
+			console.log("ERROR: ", e);
+		}
+
+	});
 }
 
 var cargarTablaRoles = function() {
@@ -151,10 +218,8 @@ var obtenerDatosModificarRoles = function(tbody, table) {
 					var procesosAsignados=data.procesos;
 					var procesosAll=$("#formularioRoles #listaProcesos").attr('value');
 				
-					if(procesosAll.includes(){
-					
-					
-					})
+				
+})
 }
 var obtener_datos_eliminar = function(tbody, table) {
 	$(tbody).on(
