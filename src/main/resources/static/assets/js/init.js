@@ -152,3 +152,13 @@
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+(function(global) {
+    if (!mdc.ripple.util.supportsCssVariables(global)) {
+      document.documentElement.classList.add('unsupported');
+    }
+
+    [].forEach.call(document.querySelectorAll('.mdc-ripple-surface:not([data-demo-no-js])'), function(surface) {
+      mdc.ripple.MDCRipple.attachTo(surface);
+    });
+  })(this);
+

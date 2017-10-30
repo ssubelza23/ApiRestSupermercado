@@ -1,5 +1,5 @@
 <div data-th-fragment="roles" id="rolesFrag">
-	<br/>
+	<br />
 	<div id="errores">
 		<div id="card-alert" class="card red lighten-5">
 			<div class="card-content red-text" id="error"></div>
@@ -35,9 +35,11 @@
 			<div class="col s12 m12 l12">
 				<h2 class="mdc-typography--title">Seleciones un Rol</h2>
 				<div class="input-field col s12">
-					<select onchange="location.href ='/roles/asignarProcesos/'+this.value">
+					<select
+						onchange="location.href ='/roles/asignarProcesos/'+this.value">
 						<option value="" disabled selected>seleciona tu opcion</option>
-						<option value="1" data-th-each="rol:${listaRoles}" data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
+						<option value="1" data-th-each="rol:${listaRoles}"
+							data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
 					</select>
 				</div>
 			</div>
@@ -98,101 +100,101 @@
 
 </div>
 <div data-th-fragment="asignarProcesos">
-  <p class="caption">Asignacion de Procesos(Tareas)</p>
-   <input type="text" name="idRolModificar" id="idRolModificar" data-th-value="${idRolModificar}" />
-        
-    <div class="row">
-            <div class="row card ">
-    
-    
-        <div class="col s12 card-title">
-            <ul class="tabs">
-                <li class="tab col s3"><a class="active"
-                    href="#asignarProcesos"><span
-                            data-th-text="'Asignar procesos a --> '+${rol_ref.nombre}"></span></a></li>
-            </ul>
-            <br>
-        </div>
+	<p class="caption">Asignacion de Procesos(Tareas)</p>
+	<input type="hidden" name="idRolModificar" id="idRolModificar"
+		data-th-value="${idRolModificar}" />
 
-        <div id="asignarProcesos" class="col s12">
-            <div class="col s12 m12 l12">
-                <h2 class="mdc-typography--title">Seleciones un Rol</h2>
-                <div class="input-field col s12">
-                    <select onchange="location.href ='/roles/asignarProcesos/'+this.value">
-                        <option value="" disabled selected>seleciona tu opcion</option>
-                        <option value="1" data-th-each="rol:${listaRoles}" data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col s12 m12 l12" id="listaProcesos"
-                data-th-value="${listaProcesos}">
-                
-                <ul id="procesos row"
-                    class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo">
-                    <li
-                        class="procesosAsignados mdc-list-item  mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6"
-                        data-th-each="rol:${asignados}" data-th-value="${rol.id}"
-                        data-th-id="${rol.id}">
-                        <div class="col s3 center gren-text">
-                            <span class="mdc-list-item__start-detail grey-bg"
-                                role="presentation"> <i class="material-icons circle"
-                                aria-hidden="true"><span  data-th-text="${rol.logo}"></span></i>
-                            </span>
-                        
-                        </div>
-                        <div class="col s9">
-                            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
-                            <span class="mdc-list-item__text__secondary" data-th-text="${rol.descripcion}">hola</span>
-                            </span>
-                       
-                        </div>
-                      
-                        <a href="#!" class="secondary-content"><i class="material-icons">check_circle</i></a>
-                       
-                         
-                    </li>
-                   <li
-                        class="procesosNoAsignados mdc-list-item mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6 avatar"
-                        data-th-each="rol:${noasignados}" data-th-value="${rol.id}"
-                        data-th-id="${rol.id}">
-                        <div class="col s3 center">
-                            <span class="mdc-list-item__start-detail grey-bg"
-                                role="presentation"> <i class="material-icons"
-                                aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
-                            </span>
-                        </div>
-                         <div class="col s9">
-                            <span class="mdc-list-item__text" data-th-text="${rol.nombre}">
-                            </span>
-                           </div>
-                          <a href="#!" class="secondary-content" id="btnF"><i class="material-icons">check_circle</i></a>
-                    </li>
-
-                </ul>
+	<div class="row">
+		<div class="row card ">
 
 
-<span class="grey-text">Click para agregar o quitar procesos</span>
-                           
-                           
-            </div>
-        </div>
-  
-    <div class="collapsible-header active col s12 m6 l12 card-action ">
-                    <a
-                        class="modal-action modal-close waves-effect waves-red btn-flat black-text"
-                        id="cancelar_editar_productos">Cancelar</a>
-                    <a
-                        class="modal-action modal-close waves-effect waves-red btn-flat black-text">
-                        <input name="4" value="Guardar" 
-                        id="btnAddProRol" />
-                    </a>
-    </div>
-     </div> 
-        </div>  
-  
-     </div>  
-   
-  
+			<div class="col s12 card-title">
+				<ul class="tabs">
+					<li class="tab col s3"><a class="active"
+						href="#asignarProcesos"><span
+							data-th-text="'Asignar procesos a --> '+${rol_ref.nombre}"></span></a></li>
+				</ul>
+				<br>
+			</div>
+
+			<div id="asignarProcesos" class="col s12">
+				<div class="col s12 m12 l12">
+					<h2 class="mdc-typography--title">Seleciones un Rol</h2>
+					<div class="input-field col s12">
+						<select
+							onchange="location.href ='/roles/asignarProcesos/'+this.value">
+							<option value="" disabled selected>seleciona tu opcion</option>
+							<option value="1" data-th-each="rol:${listaRoles}"
+								data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col s12 m12 l12" id="listaProcesos"
+					data-th-value="${listaProcesos}">
+
+					<ul id="procesos row"
+						class="mdc-list mdc-list--two-line mdc-list--avatar-list two-line-avatar-text-icon-demo">
+						<li
+							class="procesosAsignados mdc-list-item  mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6"
+							data-th-each="rol:${asignados}" data-th-value="${rol.id}"
+							data-th-id="${rol.id}">
+							<div class="col s3 center gren-text">
+								<span class="mdc-list-item__start-detail grey-bg"
+									role="presentation"> <i class="material-icons circle"
+									aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
+								</span>
+
+							</div>
+							<div class="col s9">
+								<span class="mdc-list-item__text" data-th-text="${rol.nombre}">
+									<span class="mdc-list-item__text__secondary"
+									data-th-text="${rol.descripcion}">hola</span>
+								</span>
+
+							</div> <a href="#!" class="secondary-content"><i
+								class="material-icons">check_circle</i></a>
+
+
+						</li>
+						<li
+							class="procesosNoAsignados mdc-list-item mdc-ripple-surface demo-surface mdc-elevation--z2 col s12 m12 l6 avatar"
+							data-th-each="rol:${noasignados}" data-th-value="${rol.id}"
+							data-th-id="${rol.id}">
+							<div class="col s3 center">
+								<span class="mdc-list-item__start-detail grey-bg"
+									role="presentation"> <i class="material-icons"
+									aria-hidden="true"><span data-th-text="${rol.logo}"></span></i>
+								</span>
+							</div>
+							<div class="col s9">
+								<span class="mdc-list-item__text" data-th-text="${rol.nombre}">
+								</span>
+							</div> <a href="#!" class="secondary-content" id="btnF"><i
+								class="material-icons">check_circle</i></a>
+						</li>
+
+					</ul>
+
+
+					<span class="grey-text">Click para agregar o quitar procesos</span>
+
+
+				</div>
+			</div>
+
+			<div class="collapsible-header active col s12 m6 l12 card-action ">
+				<a
+					class="modal-action modal-close waves-effect waves-red btn-flat black-text">Cancelar</a>
+				<a
+					class="modal-action modal-close waves-effect waves-red btn-flat black-text"
+					id="btnAddProRol">Guardar Cambios</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
 
 
 

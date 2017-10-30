@@ -1,8 +1,13 @@
 package com.comercio.web.model.bean;
-public class ProcesoBean {
 
+import javax.validation.constraints.Size;
+
+public class ProcesoBean {
+	@Size(min = 3, max = 50, message = "Introduzca nombre válido")
 	private String nombre;
+	@Size(min = 3, max = 50, message = "Se requiere una descripcion")
 	private String descripcion;
+	@Size(min = 3, max = 50, message = "Introduzca un enlace valido")
 	private String enlace;
 	private String logo;
 	private long id;

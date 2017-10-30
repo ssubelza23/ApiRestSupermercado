@@ -9,9 +9,6 @@ $(document).ready(function() {
 	 var delProcesos=[];
 	 var cont=0;
 	$('.procesosAsignados').click(function(event) {
-		
-	    console.log($(this).attr('value'))
-	    console.log(delProcesos.length);
 	    if(delProcesos.includes($(this).attr('value'))){
 	    	var i=delProcesos.indexOf($(this).attr('value'));
 	    	console.log(i);
@@ -25,8 +22,6 @@ $(document).ready(function() {
 			 $(this).removeClass("green-text");
  		delProcesos.push($(this).attr('value'));
 	 }
-	    	  
-	console.log(delProcesos);
 	  })
 var aProcesos=[];
 	$('.procesosNoAsignados  a',this).hide(100);
@@ -35,15 +30,15 @@ var aProcesos=[];
 	    console.log(aProcesos.length);
 	    if(aProcesos.includes($(this).attr('value'))){
 	    	var i=aProcesos.indexOf($(this).attr('value'));
-	    	console.log(i);
+	    	
 	    	aProcesos.splice(i,1);
-	    	  console.log("Si se encuentra");
+	    	 
 	    		$('a',this).hide(100);
 	    	 
 	 }else{
 		
 		  $('a',this).show(100);
-		 console.log("No Se encuentra ");
+		
  		aProcesos.push($(this).attr('value'));
 	 }
 	    
