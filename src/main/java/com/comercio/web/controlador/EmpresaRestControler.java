@@ -2,9 +2,12 @@ package com.comercio.web.controlador;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,7 @@ import com.comercio.web.dao.ProveedorDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.model.Empresa;
+import com.comercio.web.model.FeedBack;
 import com.comercio.web.model.bean.EmpresaBean;
 
 @RestController
@@ -35,15 +39,20 @@ public class EmpresaRestControler {
 	@Autowired
 	ProveedorDao proveedorDao;
 
-	@GetMapping(value = "/empresas")
+	@GetMapping(value = "/listaempresas")
 	public List<Empresa> tablas_categoria(Model model) {
-		System.out.println(empresaDao.getAll() + "///////////");
 		return empresaDao.getAll();
 	}
 
 	@PostMapping(value = "/empresas")
-	public String editarusuario(@RequestBody EmpresaBean e) {
-		String mensaje = "";
+	public FeedBack editarusuario(@Valid @RequestBody EmpresaBean e,BindingResult result) {
+		FeedBack feedBack = new FeedBack();
+		if (result.hasErrors()) {
+			feedBack.setLista_errores(result.getAllErrors());
+
+			return feedBack;
+		}
+		try {
 		Empresa empresa = new Empresa();
 		empresa.setNombre(e.getNombre());
 		empresa.setDireccioncomercial(e.getDireccioncomercial());
@@ -55,21 +64,25 @@ public class EmpresaRestControler {
 		empresa.setEspecialidades(e.getEspecialidades());
 		empresa.setSector(e.getSector());
 		empresa.setSede(e.getSede());
+		empresa.setEstado(1);
 		if (e.getId() != 0) {
 			empresa.setId(e.getId());
 			empresaDao.update(empresa);
-			mensaje = "Bien! datos modificados correctamente";
+			feedBack.setMensaje("Bien! datos modificados correctamente");
 		} else {
 			empresaDao.create(empresa);
-			mensaje = "Bien! datos creados correctamente";
+			feedBack.setMensaje("Bien! datos creados correctamente");
 		}
-		return mensaje;
-	}
+		} catch (Exception error) {
+			error.printStackTrace();
+			feedBack.setMensaje("existe");
+		}
+		return feedBack;
+}
 
 	@DeleteMapping(value = "/empresas/{id}")
 	public String eliminarempresa(@PathVariable long id) {
-		System.out.println(id);
 		empresaDao.delete(empresaDao.getById(id));
-		return "Bien!. Proveedor eliminado correctamente.";
+		return "Bien!. Datos eliminados correctmente.";
 	}
 }

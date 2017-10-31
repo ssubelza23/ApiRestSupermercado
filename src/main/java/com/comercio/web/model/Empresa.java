@@ -5,6 +5,7 @@ package com.comercio.web.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Empresa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
+	@Column(unique=true)
 	private String nombre;
 	private String direccioncomercial;
 	private int telefono;

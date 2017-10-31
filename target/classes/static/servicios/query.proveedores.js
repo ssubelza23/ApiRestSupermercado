@@ -1,4 +1,4 @@
-$(document).ready( function () {
+$(document).ready( function () {		        
 	listar_proveedores();
 	eliminar_proveedores();
 	limpiarformulario_proveedores();

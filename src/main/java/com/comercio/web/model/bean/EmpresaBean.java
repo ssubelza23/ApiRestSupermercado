@@ -1,9 +1,10 @@
 package com.comercio.web.model.bean;
 
-
+import javax.validation.constraints.Size;
 
 public class EmpresaBean {
 	private long id;
+	@Size(min = 3, max = 50, message = "Introduzca nombre válido")
 	private String nombre;
 	private String direccioncomercial;
 	private String corre;
@@ -11,7 +12,9 @@ public class EmpresaBean {
 	private int telefono;
 	private String fax;
 	private String detalles;
+	@Size(min = 3, max = 50, message = "Introduzca la especialidad de la empresa")
 	private String especialidades;
+	@Size(min = 3, max = 50, message = "Se reuiqere el sector de la empresa")
 	private String sector;
 	private String sede;
 	public long getId() {

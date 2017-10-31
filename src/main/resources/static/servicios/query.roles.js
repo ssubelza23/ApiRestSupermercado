@@ -89,7 +89,6 @@ function actualizarRoles(aProcesos) {
 			
 	}
 	
-			console.log(formData+"*************");
 			$.ajax({
 				type : "POST",
 				url : "/roles",
@@ -122,6 +121,7 @@ function actualizarRoles(aProcesos) {
 						cargarTablaRoles();
 						Materialize.toast(data.mensaje, 4000);
 						limpiarFormularioRoles();
+						cargarTablaRoles();
 						}
 					}
 

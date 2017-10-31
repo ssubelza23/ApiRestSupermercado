@@ -83,6 +83,8 @@ public class Populate {
 		procesoProveedores.setLogo("local_shipping");
 		procesoProveedores.setEstado(1);
 		procesoDao.create(procesoProveedores);
+		
+		
 
 		// Proceso Productos
 		Proceso procesoProductos = new Proceso();
@@ -101,6 +103,16 @@ public class Populate {
 		procesoVentas.setLogo("trending_up");
 		procesoVentas.setEstado(1);
 		procesoDao.create(procesoVentas);
+		
+		//empresas
+		// Proceso Proveedores
+		Proceso procesoEmpresas = new Proceso();
+		 procesoEmpresas.setNombre("Empresas");
+		 procesoEmpresas.setEnlace("empresas");
+		 procesoEmpresas.setDescripcion("Gestion empresas");
+		 procesoEmpresas.setLogo("domain");
+		 procesoEmpresas.setEstado(1);
+		 procesoDao.create( procesoEmpresas);
 		
 		// Proceso Marcas
 		Proceso procesoMarcas = new Proceso();

@@ -1,35 +1,37 @@
 <div data-th-fragment="proveedores">
-
+    <div class="col-sm-offset-2 col-sm-8">
+            <p class="mensaje"></p>
+        </div>
 	<div class="row">
-		<div class="col-sm-offset-2 col-sm-8">
-			<p class="mensaje"></p>
-		</div>
-		<div class="col s12">
+
+		<div class="col s12 m12 l12 white mdc-elevation--z5">
 			<ul class="tabs">
 				<li class="tab col s3"><a class="active" href="#test1"><span
 						id="opcion_proveedores">proveedores</span></a></li>
-				<li class="tab col s3"><a href="#test2"><span id="opcion">Empresas</span></a></li>
+				<li class="tab col s3"><a href="/empresas"><span id="opcion">Empresas</span></a></li>
 				<li class="tab col s3"><a href="#test4"><span id="opcion">Marcas</span></a></li>
 				<li class="tab col s3"><a href="#test3"><span id="opcion">Contactos</span></a></li>
 			</ul>
-		</div>
-
-
-
-
+		
 		<div id="test1" class="col s12">
 			<form id="formulario_proveedores">
 				<input type="hidden" name="id" id="id" />
 
-				<div class="input-field col s12 m6 l4 grey-text">
-					<i class="material-icons prefix">account_balance</i> <select
+				<div class="input-field col s12 m6 l3 grey-text">
+				<div class="col s12 m10">
+					 <select
 						id="idempresa" name="idempresa">
 						<option value="">Selecionar Empresa</option>
 						<option data-th-each="e:${empresas}" data-th-value="${e.id}"
 							data-th-text="${e.nombre}"></option>
 					</select>
+					
+					
 				</div>
-
+				<div class="col s12 m2">
+				<a href="empresas" class="grey-text "><i class="material-icons prefix right">create</i></a>
+				</div>
+                </div>
 				<div class="input-field col s12 m4 l4 grey-text">
 					<i class="material-icons prefix">branding_watermark</i> <select
 						id="idmarca" name="idmarca">
@@ -53,7 +55,7 @@
 						id="detalles" type="text" class="validate" name="detalles" /> <label>Detalles</label>
 				</div>
 
-				<div class="collapsible-header active col s12 m6 l12">
+				<div >
 					<a
 						class="modal-action modal-close waves-effect waves-red btn-flat "
 						data-th-href="@{/usuarios}" id="cancelar_editar_proveedores">Cancelar</a>
@@ -62,21 +64,9 @@
 				</div>
 			</form>
 
-			<table id="proveedores_tabla"
-				class="responsive-table display dataTable cell-border"
-				cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>nombre empresa</th>
-						<th>contacto</th>
-						<th>detalles</th>
-						<th>detalles</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-			</table>
+
 		</div>
+		
 		<div id="test2" class="col s12">
 			<form id="formulario_empresas">
 				<input type="hidden" name="id" id="id" />
@@ -126,7 +116,7 @@
 					<i class="material-icons prefix">text_format</i> <input
 						id="detalle" type="text" class="validate" name="detalle" /> <label>Detalles</label>
 				</div>
-				<div class="collapsible-header active col s12 m6 l12">
+				<div >
 					<a
 						class="modal-action modal-close waves-effect waves-red btn-flat "
 						data-th-href="@{/usuarios}" id="cancelar_editar_empresas">Cancelar</a>
@@ -134,6 +124,7 @@
 						name="4" value="Guardar" type="submit" id="btn_submit_empresas" /></a>
 				</div>
 			</form>
+			<div id="marcas" class="marcas">
 			<table id="empresas_tabla" class="responsive-table display dataTable"
 				cellspacing="0" width="100%">
 				<thead>
@@ -146,6 +137,7 @@
 					</tr>
 				</thead>
 			</table>
+			</div>
 		</div>
 
 		<div id="test3" class="col s12">
@@ -188,7 +180,7 @@
 					<i class="material-icons prefix">mail</i> <input id="correo"
 						type="text" class="validate" name="correo" /> <label>Correo</label>
 				</div>
-				<div class="collapsible-header active col s12 m6 l12">
+				<div >
 					<a
 						class="modal-action modal-close waves-effect waves-red btn-flat "
 						data-th-href="@{/usuarios}" id="cancelar_editar_contactos">Cancelar</a>
@@ -214,6 +206,7 @@
 		</div>
 
 		<div id="test4" class="col s12">
+		
 			<form id="formulario_marcas">
 				<input type="hidden" name="id" id="id" />
 				<div class="input-field col s12 m6 l12 grey-text">
@@ -236,7 +229,7 @@
 					<img alt="" data-th-src="@{/assets/images/usuarios/cocacola.jpg}"
 						id="logomarcas" width="10%" height="10%" />
 				</div>
-				<div class="collapsible-header active col s12 m12s l12">
+				<div>
 					<a
 						class="modal-action modal-close waves-effect waves-red btn-flat "
 						data-th-href="@{/usuarios}" id="cancelar_editar_marcas">Cancelar</a>
@@ -244,25 +237,26 @@
 						name="4" value="Guardar" type="submit" id="btn_submit_marcas" /></a>
 				</div>
 			</form>
-			<table id="marcas_tabla" class="responsive-table display dataTable"
+			
+			
+			<table id="marcas_tabla" class="display highlight"
 				cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>logo</th>
 						<th>nombre</th>
-						<th>detalle</th>
-
 						<th></th>
 						<th></th>
 					</tr>
 				</thead>
 			</table>
+			
 		</div>
 
 
 
-	</div>
-
+</div>
+</div>
 
 
 	<div id="modaleliminarempresas" class="modal modal-fixed-footer">
@@ -356,6 +350,25 @@
 			</div>
 		</form>
 	</div>
+	
+<div class="row">
+	       <div class="col s12 m12 l12 white mdc-elevation--z5">
+               <table id="proveedores_tabla"
+                class="display dataTable cell-border"
+                cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>nombre empresa</th>
+                        <th>contacto</th>
+                        <th>detalles</th>
+                        <th>detalles</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+    </div>
+    </div>
 </div>
 
 

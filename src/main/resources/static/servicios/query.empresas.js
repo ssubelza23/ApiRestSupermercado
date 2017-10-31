@@ -1,35 +1,35 @@
 $(document).ready( function () {
-	listar_empresas();
-	eliminar_empresas();
-	limpiarformulario_empresas();
-	$("#btn_submit_empresas").click(function(event){
+	cargarTablaEmpresas();
+	eliminarEmpresas();
+	limpiarformularioEmpresas();
+	$("#btnSubmitEmpresa").click(function(event){
 		event.preventDefault();
-		fire_ajax_submit_empresas();
+		actualizarEmpresa();
 		
 	})
-		$("#cancelar_editar_empresas").click(function(event){
+		$("#cancelarEmpresa").click(function(event){
 		event.preventDefault();
-		$("#btn_submit_empresas").val("Nuevo");
-		limpiarformulario_empresas();
+		$("#btnSubmitEmpresa").val("Nuevo");
+		limpiarformularioEmpresas();
 		
 	})
+		$("#empresasFrag #erroresEmpresas").hide();
+
 });
 
 
-var eliminar_empresas = function(){
-	
-	$("#btn_eliminar_empresas").on("click", function(){
-	
-		 var id=$("#eliminar_empresas #id").val();
+var eliminarEmpresas = function(){
+	$("#modalEliminarEmpresa #eliminarEmpresa").on("click", function(){
+		 var id=$("#modalEliminarEmpresa #id").val();
 		console.log(id);
 		$.ajax({
 			type:"DELETE",
 			url: "/empresas/"+id,
 				success : function(result) {
-					console.log(result);
-						listar_empresas();
-						mostrar_mensaje_empresas(result);
-						limpiarformulario_empresas();
+					cargarTablaEmpresas();
+					limpiarformularioEmpresas
+					Materialize.toast(data, 4000);
+						
 				},
 			error : function(e) {
 					alert("Error!")
@@ -39,7 +39,7 @@ var eliminar_empresas = function(){
 	});
 })
 }
-function fire_ajax_submit_empresas(){
+function actualizarEmpresa(){
 	var formData = {
     			id : $("#formulario_empresas #id").val(),
     		nombre : $("#formulario_empresas #nombre").val(),
@@ -62,41 +62,63 @@ direccioncomercial : $("#formulario_empresas #direccioncomercial").val(),
 		data : JSON.stringify(formData),
 		contentType : "application/json",
 		success:function(data){
-			mostrar_mensaje_empresas(data);
-			console.log(data);
-			$("#btn_submit_empresas").prop("disabled",false);
-			listar_empresas();
-			limpiarformulario_empresas();
+			var errores = data.lista_errores;
+			var lista = "";
+			if (errores.length != 0) {
+				for (let i = 0; i < errores.length; i++) {
+						lista = lista + "<p>ERROR : campo :"
+								+ errores[i].field.bold().toUpperCase()+ " : --> "
+								+ errores[i].defaultMessage + "</p>"
+					
+				}
+				$("#empresasFrag #error").html(lista);
+				$("#empresasFrag #erroresEmpresas").fadeIn(300);
+				limpiarformularioEmpresas();
+			} else {
+				if(data.mensaje=="existe"){
+					var lista = "";
+					$("#empresasFrag #error").html(lista);
+					lista ="<p>ERROR --> Ya existe Empresa con el mismo nombre</p>";
+					$("#empresasFrag #error").html(lista);
+					$("#empresasFrag #erroresEmpresas").fadeIn(300);
+				}else{
+					
+				
+				$("#empresasFrag #erroresEmpresas").fadeOut(300);
+				cargarTablaEmpresas();
+				limpiarformularioEmpresas();
+				Materialize.toast(data.mensaje, 4000);
+				
+				}
+			}
+
 		},
 		error: function(e){
 			console.log("ERROR:", e);
 		}
 	})
 }
-var listar_empresas=function(){
-	 var table = $('#empresas_tabla').DataTable({
+var cargarTablaEmpresas=function(){
+	 var table = $('#tablaEmpresas').DataTable({
 		 "responsive": true,
 		 "destroy": true,
-			"sAjaxSource": "empresas",
+			"sAjaxSource": "listaempresas",
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
 			      { "mData": "nombre"},
-				  { "mData": "sector" },
 		          { "mData": "especialidades"},
+		          { "mData": "sector" },
 		          { "defaultContent": "<a  href='#' class='editar_empresas grey-text'><i class='material-icons'>edit</i></button>"},
-				  { "defaultContent": "<a  href='#modaleliminarempresas' id='eliminar_empresas' class='eliminar_empresas grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
+				  { "defaultContent": "<a  href='#modalEliminarEmpresa' class='eliminarEmpresa grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  
 			],
 				
 			"language": idioma_español,
 			
 	 });
-	/* $("select").val('10');
-	  $('select').addClass("browser-default");
-	  $('select').material_select();*/
-	obtener_data_editar_empresas("#empresas_tabla tbody",table);
-	 obtener_data_eliminar_empresas("#empresas_tabla tbody",table);
+	obtener_data_editar_empresas("#tablaEmpresas tbody",table);
+	 obtenerDatosEliminarEmpresa("#tablaEmpresas tbody",table);
 	};
 	var obtener_data_editar_empresas=function(tbody,table){
 		$(tbody).on("click","a.editar_empresas",function(){
@@ -129,19 +151,15 @@ direccioncomercial = $("#formulario_empresas #direccioncomercial").val(data.dire
 			 
 		})
 	}
-	var obtener_data_eliminar_empresas=function(tbody,table){
-		$(tbody).on("click","a.eliminar_empresas",function(){
+	var obtenerDatosEliminarEmpresa=function(tbody,table){
+		$(tbody).on("click","a.eliminarEmpresa",function(){
 			var data=table.row($(this).parents("tr")).data();
-			var id=$("#eliminar_empresas #id").val(data.id);
-			var nombre=$("#eliminar_empresas #nombre").val(data.nombre);
-			var nombre=$("#eliminar_empresas #sector").val(data.sector);
-			var nombre=$("#eliminar_empresas #especialidades").val(data.especialidades);
-			
+			var id=$("#modalEliminarEmpresa #id").val(data.id);
 		})
 		
 	}
 
-	var limpiarformulario_empresas = function(){
+	var limpiarformularioEmpresas = function(){
 		$("#formulario_empresas #id").val("");
 		$("#formulario_empresas #nombre").val("");
 		$("#formulario_empresas #direccion").val("");
