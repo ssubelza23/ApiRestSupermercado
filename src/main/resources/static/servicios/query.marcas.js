@@ -1,38 +1,35 @@
 $(document).ready( function () {
-	listar_marcas();
-	eliminar_marcas();
-	$("#formulario_marcas #logomarcas").hide();
-	limpiarformulario_marcas();
-	$("#btn_submit_marcas").click(function(event){
+	cargarTablaMarcas();
+	eliminarMarca();
+	limpiarformularioMarcas();
+	$("#btnSubmitMarcas").click(function(event){
 		event.preventDefault();
-		fire_ajax_submit_marcas();
+		actualizarMarcas();
 		
 	})
 		$("#cancelar_editar_marcas").click(function(event){
 		event.preventDefault();
-		$("#btn_submit_marcas").val("Nuevo");
-		limpiarformulario_marcas();
+		$("#btnSubmitMarcas").val("Nuevo");
+		limpiarformularioMarcas();
 		 var src="";
- 		$("#formulario_marcas #logomarcas").hide();
+ 		$("#formularioMarcas #logomarcas").hide();
 		
 	})
+	
+	$("#marcasFrag #erroresMarcas").hide();
 });
 
 
-var eliminar_marcas = function(){
-	
-	$("#btn_eliminar_marcas").on("click", function(){
-	
-		 var id=$("#eliminar_marcas #id").val();
+var eliminarMarca = function(){
+	$("#btnEliminarMarca").on("click", function(){
+		 var id=$("#modalEliminarMarcas #id").val();
 		console.log(id);
 		$.ajax({
 			type:"DELETE",
 			url: "/marcas/"+id,
-				success : function(result) {
-					console.log(result);
-						listar_marcas();
-						mostrar_mensaje_marcas(result);
-						limpiarformulario_marcas();
+			success : function(data) {
+				cargarTablaMarcas();
+				Materialize.toast(data, 4000);
 				},
 			error : function(e) {
 					alert("Error!")
@@ -42,11 +39,9 @@ var eliminar_marcas = function(){
 	});
 })
 }
-function fire_ajax_submit_marcas(){
-	var form=$("#formulario_marcas")[0];
+function actualizarMarcas(){
+	var form=$("#formularioMarcas")[0];
 	var data=new FormData(form);
-	$("#btn_submit_marcas").prop("disabled",true);
-	console.log(data);
 	$.ajax({
 		type : "POST",
 		enctype:"multipart/form-data",
@@ -58,19 +53,44 @@ function fire_ajax_submit_marcas(){
 		cache: false,
 		timeout: 600000,
 		success:function(data){
-			mostrar_mensaje_marcas(data);
-			console.log(data);
-			$("#btn_submit_marcas").prop("disabled",false);
-			listar_marcas();
-			limpiarformulario_marcas();
+			
+			var errores = data.lista_errores;
+			var lista = "";
+			if (errores.length != 0) {
+				for (let i = 0; i < errores.length; i++) {
+						lista = lista + "<p>ERROR : campo :"
+								+ errores[i].field.bold().toUpperCase()+ " : --> "
+								+ errores[i].defaultMessage + "</p>"
+					
+				}
+				$("#marcasFrag #error").html(lista);
+				$("#marcasFrag #erroresMarcas").fadeIn(300);
+				limpiarformularioE();
+			} else {
+				if(data.mensaje=="existe"){
+					var lista = "";
+					$("#marcasFrag #error").html(lista);
+					lista ="<p>ERROR --> Ya existe Empresa con el mismo nombre</p>";
+					$("#marcasFrag #error").html(lista);
+					$("#marcasFrag #erroresMarcas").fadeIn(300);
+				}else{
+					
+				
+				$("#marcasFrag #erroresMarcas").fadeOut(300);
+				cargarTablaMarcas();
+				limpiarformularioEmpresas();
+				Materialize.toast(data.mensaje, 4000);
+				
+				}
+			}
 		},
 		error: function(e){
 			console.log("ERROR:", e);
 		}
 	})
 }
-var listar_marcas=function(){
-	 var table = $('#marcas_tabla').DataTable({
+var cargarTablaMarcas=function(){
+	 var table = $('#tablaMarcas').DataTable({
 		 "destroy": true,
 			"sAjaxSource": "listamarcas",
 			"sAjaxDataProp": "",
@@ -83,7 +103,7 @@ var listar_marcas=function(){
 				  },
 			      { "mData": "nombre"},
 		          { "defaultContent": "<a  href='#' class='editar_marcas grey-text'><i class='material-icons'>edit</i></button>"},
-				  { "defaultContent": "<a  href='#modaleliminarmarcas' id='eliminar_marcas' class='eliminar_marcas grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
+				  { "defaultContent": "<a  href='#modalEliminarMarcas'  class='eliminarMarcas grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  
 			],
 				
@@ -93,47 +113,41 @@ var listar_marcas=function(){
 	 $(".marcas").hover(function() {
 	        $(this).find("select").val('5');
 	    });	
-	 $(".marcas select").val('5');
-	  $(".marcas select").addClass("browser-default");
-	  $(".marcas select").material_select();
-	obtener_data_editar_marcas("#marcas_tabla tbody",table);
-	 obtener_data_eliminar_marcas("#marcas_tabla tbody",table);
+	obtener_data_editar_marcas("#tablaMarcas tbody",table);
+	 obtenerDatosEliminarMarcas("#tablaMarcas tbody",table);
 	};
 	var obtener_data_editar_marcas=function(tbody,table){
 		$(tbody).on("click","a.editar_marcas",function(){
 			 event.preventDefault();
 				$("#opcion_marcas").text("Modificar");
 			  var data=table.row($(this).parents("tr")).data();
-			  console.log(data);
-			  var id=$("#formulario_marcas #id").val(data.id),
-			  nombre=$("#formulario_marcas #nombre").val(data.nombre),
+			  var id=$("#formularioMarcas #id").val(data.id);
+			  nombre=$("#formularioMarcas #nombre").val(data.nombre);
+			
+			   $("#imagenEditar").attr("src","assets/images/marcas/"+data.logo);
+			   
+    		  $("#formularioMarcas #nombre").focus();
+			  $("#formularioMarcas #logo").focus();
 			  
-    	   detalle = $("#formulario_marcas #detalle").val(data.detalle)
-    		
-    	   var src="/assets/images/usuarios/"+data.logo;
-			  $("#formulario_marcas #logomarcas").prop("src",src);
-			  $("#formulario_marcas #logomarcas").show();
-    		  $("#formulario_marcas #nombre").focus();
-			  $("#formulario_marcas #logo").focus();
-			  $("#formulario_marcas #detalle").focus();
+			  
 			 
 		})
 	}
-	var obtener_data_eliminar_marcas=function(tbody,table){
-		$(tbody).on("click","a.eliminar_marcas",function(){
+	var obtenerDatosEliminarMarcas=function(tbody,table){
+		$(tbody).on("click","a.eliminarMarcas",function(){
 			var data=table.row($(this).parents("tr")).data();
-			var id=$("#eliminar_marcas #id").val(data.id);
-			var nombre=$("#eliminar_marcas #nombre").val(data.nombre);
+			var id=$("#modalEliminarMarcas #id").val(data.id);
+			
 			
 		})
 		
 	}
 
-	var limpiarformulario_marcas = function(){
-		$("#formulario_marcas #id").val("");
-		$("#formulario_marcas #nombre").val("");
-		$("#formulario_marcas #logo").val("");
-		$("#formulario_marcas #detalles").val("");
+	var limpiarformularioMarcas = function(){
+		$("#formularioMarcas #id").val("");
+		$("#formularioMarcas #nombre").val("");
+		$("#formularioMarcas #logo").val("");
+		
 	}
 	
 	
@@ -161,16 +175,3 @@ var listar_marcas=function(){
 		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		    }
 		};
-	var mostrar_mensaje_marcas = function(mensaje){
-		
-		
-		texto = "<strong>"+mensaje+"</strong>";
-		color = "#379911";
-
-
-$(".mensaje").html( texto ).css({"color": color });
-$(".mensaje").fadeOut(5000, function(){
-		$(this).html("");
-		$(this).fadeIn(3000);
-});			
-}

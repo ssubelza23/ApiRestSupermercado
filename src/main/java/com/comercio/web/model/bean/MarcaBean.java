@@ -1,17 +1,19 @@
 package com.comercio.web.model.bean;
 
+
+import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MarcaBean {
-	private long id;
+	private String id;
+	@Size(min = 3, max = 50, message = "Introduzca nombre válido")
 	private String nombre;
 	private MultipartFile logo;
-	private String detalles;
 	private int estado;
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -25,12 +27,6 @@ public class MarcaBean {
 	}
 	public void setLogo(MultipartFile logo) {
 		this.logo = logo;
-	}
-	public String getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
 	}
 	public int getEstado() {
 		return estado;

@@ -27,7 +27,7 @@ var eliminarEmpresas = function(){
 			url: "/empresas/"+id,
 				success : function(result) {
 					cargarTablaEmpresas();
-					limpiarformularioEmpresas
+					limpiarformularioEmpresas();
 					Materialize.toast(data, 4000);
 						
 				},
