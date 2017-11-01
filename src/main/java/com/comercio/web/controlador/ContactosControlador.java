@@ -1,6 +1,6 @@
 package com.comercio.web.controlador;
 
-import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -10,21 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.comercio.web.dao.MarcaDao;
-import com.comercio.web.dao.RolesDao;
-import com.comercio.web.model.Dato;
-import com.comercio.web.model.Marca;
+
+
 import com.comercio.web.model.Usuario;
 
 @Controller
-@RequestMapping(value="marcas")
-public class MarcasControlador {
+@RequestMapping(value="contactos")
+public class ContactosControlador {
 	
-	@Autowired
-	private MarcaDao marcaDao;
-	
-	@Autowired
-	private RolesDao rolDao;
+
 	
 	@Autowired
 	private HttpSession httpSession;
@@ -36,11 +30,11 @@ public class MarcasControlador {
 			model.addAttribute("usulog", usuario);
 			model.addAttribute("dato", 1);
 			
-			model.addAttribute("proceso", "Marcas");
-			model.addAttribute("descripcion", "Gestion Marcas");
+			model.addAttribute("proceso", "Contactos");
+			model.addAttribute("descripcion", "Personal de los proveedores");
 
-			model.addAttribute("fragmento", "marcas");
-			model.addAttribute("plantilla", "marcas");
+			model.addAttribute("fragmento", "contactos");
+			model.addAttribute("plantilla", "contactos");
 			
 			return "Principal";
 		}else {

@@ -2,11 +2,16 @@ package com.comercio.web.controlador;
 
 import java.util.List;
 
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +23,9 @@ import com.comercio.web.dao.MarcaDao;
 import com.comercio.web.dao.ProveedorDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
+import com.comercio.web.model.FeedBack;
 import com.comercio.web.model.Proveedor;
+import com.comercio.web.model.bean.ProcesoBean;
 import com.comercio.web.model.bean.ProveedoresBean;
 
 @RestController
@@ -43,24 +50,38 @@ public class ProveedorRestControler {
 	}
 
 	@PostMapping(value = "/proveedores")
-	public String editarusuario(@RequestBody ProveedoresBean p) {
-		Proveedor proveedor = new Proveedor();
-		proveedor.setDetalles(p.getDetalles());
-		proveedor.setEstado(1);
-		proveedor.setEmpresa(empresaDao.getById(p.getIdempresa()));
-		String mensaje = "Bien!, Datos mofificados correctamente";
-		proveedor.setContactos(userDao.getById(p.getIdcontacto()));
-		proveedor.setMarcas(marcaDao.getById(p.getIdmarca()));
+	public FeedBack editarusuario(@Valid @RequestBody ProveedoresBean p, BindingResult result) {
 		
-		if (p.getId() > 0) {
-			proveedor.setId(p.getId());
+	System.out.println(p.getIdcontacto());
+	System.out.println(p.getIdempresa());
+	System.out.println(p.getIdmarca());
+	FeedBack feedBack = new FeedBack();
+	if (result.hasErrors()) {
+		feedBack.setLista_errores(result.getAllErrors());
+		return feedBack;
+	}
+		try {
+		
+		Proveedor proveedor = new Proveedor();
+		proveedor.setEstado(1);
+		proveedor.setEmpresa(empresaDao.getById(Long.parseLong(p.getIdempresa())));
+		proveedor.setContactos(userDao.getById(Long.parseLong(p.getIdcontacto())));
+		proveedor.setMarcas(marcaDao.getById(Long.parseLong(p.getIdmarca())));
+		
+		if (Long.parseLong(p.getId()) > 0) {
+			proveedor.setId(Long.parseLong(p.getId()));
 			proveedorDao.update(proveedor);
-			mensaje = "Bien!, datos modificados correctamente";
+			feedBack.setMensaje("Bien!, datos modificados correctamente");
 		} else {
-			mensaje = "Bien!, datos creados correctamente";
+			feedBack.setMensaje("Bien!, datos creados correctamente");
 			proveedorDao.create(proveedor);
 		}
-		return mensaje;
+		}catch (Exception error) {
+			error.printStackTrace();
+			feedBack.setMensaje("existe");
+		}
+		return feedBack;
+		
 	}
 
 	@DeleteMapping(value = "/proveedores/{id}")

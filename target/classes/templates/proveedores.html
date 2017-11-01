@@ -1,25 +1,27 @@
-<div data-th-fragment="proveedores">
-	<div class="col-sm-offset-2 col-sm-8">
-		<p class="mensaje"></p>
-	</div>
-	<div class="row">
+<div data-th-fragment="proveedores" id="proveedoresFrag">
+    <br />
+    <div id="erroresProveedores">
+        <div id="card-alert" class="card red lighten-5">
+            <div class="card-content red-text" id="error"></div>
+        </div>
+    </div>
+
+	<div class="row" id="nuevoProveedor">
 
 		<div class="col s12 m12 l12 white mdc-elevation--z5">
 			<ul class="tabs">
 				<li class="tab col s3"><a class="active" href="#test1"><span
 						id="opcion_proveedores">proveedores</span></a></li>
-				<li class="tab col s3"><a href="#test4"><span id="opcion">Marcas</span></a></li>
-				<li class="tab col s3"><a href="#test3"><span id="opcion">Contactos</span></a></li>
 			</ul>
 
 			<div id="test1" class="col s12">
 				<form id="formulario_proveedores">
 					<input type="hidden" name="id" id="id" />
 
-					<div class="input-field col s12 m12 l12 grey-text">
+					<div class="input-field col s12 m6 l6 grey-text">
 						<div class="col s12 m10">
 							<select id="idempresa" name="idempresa">
-								<option value="">Selecionar Empresa</option>
+								<option  disabled selected>Selecionar Empresa</option>
 								<option data-th-each="e:${empresas}" data-th-value="${e.id}"
 									data-th-text="${e.nombre}"></option>
 							</select>
@@ -29,11 +31,11 @@
 								class="material-icons prefix right">create</i></a>
 						</div>
 					</div>
-					<div class="input-field col s12 m12 l12 grey-text">
+					<div class="input-field col s12 m6 l6 grey-text">
 						<div class="col s12 m10">
 							<i class="material-icons prefix">branding_watermark</i> <select
 								id="idmarca" name="idmarca">
-								<option value="" disabled selected>selecionar marca.</option>
+								<option  disabled selected>selecionar marca.</option>
 								<option data-th-each="m:${marcas}" data-th-value="${m.id}"
 									data-th-text="${m.nombre}"></option>
 							</select>
@@ -48,7 +50,7 @@
 						<div class="col s12 m10">
 							<i class="material-icons prefix">people</i> <select
 								id="idcontacto" name="idcontacto">
-								<option value="" disabled selected>selecionar contactos.</option>
+								<option  disabled selected>selecionar contactos.</option>
 								<option data-th-each="c:${contactos}" data-th-value="${c.id}"
 									data-th-text="${c.nombre}+' '+${c.ap}"></option>
 							</select>
@@ -58,12 +60,7 @@
 								class="material-icons prefix right">create</i></a>
 						</div>
 					</div>
-					<div class="input-field col s12 m6 l12 grey-text">
-						<i class="material-icons prefix">text_format</i> <input
-							id="detalles" type="text" class="validate" name="detalles" /> <label>Detalles</label>
-					</div>
-
-					<div>
+					<div class="collapsible-header active">
 						<a
 							class="modal-action modal-close waves-effect waves-red btn-flat "
 							data-th-href="@{/usuarios}" id="cancelar_editar_proveedores">Cancelar</a>
@@ -76,171 +73,23 @@
 
 
 			</div>
-			<div id="test3" class="col s12">
-				<form id="formulario_contactos">
-					<input type="hidden" name="id" id="id" />
-
-					<div class="input-field col s12 m6 l6 grey-text">
-						<i class="material-icons prefix">credit_card</i> <input id="dni"
-							type="text" class="validate" name="dni" /> <label>DNI</label>
-					</div>
-					<div class="input-field col s12 m6 l6 grey-text">
-						<i class="material-icons prefix">credit_card</i> <input
-							id="puestoTrabajo" type="text" class="validate"
-							name="puestoTrabajo" /> <label>Puesto de Trabajo</label>
-					</div>
-
-					<div class="input-field col s12 m6 l3 grey-text">
-						<i class="material-icons prefix">person</i> <input id="nombre"
-							type="text" class="validate" name="nombre" /> <label>Nombre</label>
-					</div>
-
-					<div class="input-field col s12 m6 l3 grey-text">
-						<input id="ap" type="text" class="validate" name="ap" /> <label>Ap</label>
-					</div>
-					<div class="input-field col s12 m4 l3 grey-text">
-						<input id="am" type="text" class="validate" name="am" /> <label>Am</label>
-					</div>
-					<div class="input-field col s12 m6 l3">
-						<select id="sexo" name="sexo">
-							<option value="M">Masculino</option>
-							<option value="F">Femenino</option>
-						</select> <label for="icon_prefix">Sexo:</label>
-					</div>
-
-					<div class="input-field col s12 m6 l6 grey-text">
-						<i class="material-icons prefix">phone_iphone</i> <input
-							id="movil" type="text" class="validate" name="movil" /> <label>Movil</label>
-					</div>
-					<div class="input-field col s12 m6 l6 grey-text">
-						<i class="material-icons prefix">mail</i> <input id="correo"
-							type="text" class="validate" name="correo" /> <label>Correo</label>
-					</div>
-					<div>
-						<a
-							class="modal-action modal-close waves-effect waves-red btn-flat "
-							data-th-href="@{/usuarios}" id="cancelar_editar_contactos">Cancelar</a>
-						<a
-							class="modal-action modal-close waves-effect waves-red btn-flat"><input
-							name="4" value="Guardar" type="submit" id="btn_submit_contactos" /></a>
-					</div>
-				</form>
-				<table id="contactos_tabla" class="display dataTable"
-					cellspacing="0" width="100%">
-					<thead>
-						<tr>
-							<th>dni</th>
-							<th>nombre</th>
-							<th>ap</th>
-							<th>movil</th>
-							<th>puestoTrabajo</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-
-
 
 
 		</div>
 	</div>
+      <div id="modalEliminarProveedores" class="modal">
+          <div class="modal-content">
+          <input type="hidden" name="id" id="id" />
+            <h4>¿ Seguro que desea eliminar ?</h4>
+          </div>
+          <div class="modal-footer">
+           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " id="btnEliminarProveedor">Eliminar</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+           
+          </div>
+        </div>
 
-
-	<div id="modaleliminarempresas" class="modal modal-fixed-footer">
-		<form id="eliminar_empresas">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar Empresa</h4>
-				<input type="hidden" name="id" id="id" />
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Empresa:</label> <input
-						placeholder="Placeholder" disabled id="nombre" type="text"
-						class="validate" name="nombre" />
-				</div>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">sector:</label> <input
-						placeholder="Placeholder" disabled id="sector" type="text"
-						class="validate center-aling" name="sector" />
-				</div>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Especialidades:</label> <input
-						placeholder="Placeholder" disabled id="especialidades" type="text"
-						class="validate center-aling" name="especialidades" />
-				</div>
-
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-				<a href="#" id="btn_eliminar_empresas"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
-	<div id="modaleliminarmarcas" class="modal modal-fixed-footer">
-		<form id="eliminar_marcas">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar Empresa</h4>
-				<input type="hidden" name="id" id="id" /> <img alt="" id="logo"></img>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Nombre:</label> <input
-						placeholder="Placeholder" disabled id="nombre" type="text"
-						class="validate" name="nombre" />
-				</div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-				<a href="#" id="btn_eliminar_marcas"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
-	<div id="modaleliminarcontactos" class="modal modal-fixed-footer">
-		<form id="eliminar_contactos">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar Contactos</h4>
-				<input type="hidden" name="id" id="id" />
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Nombre:</label> <input
-						placeholder="Placeholder" disabled id="nombre" type="text"
-						class="validate" name="nombre" /> <input
-						placeholder="Placeholder" disabled id="ap" type="text"
-						class="validate" name="ap" />
-				</div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-				<a href="#" id="btn_eliminar_contactos"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
-	<div id="modaleliminarproveedores" class="modal modal-fixed-footer">
-		<form id="eliminar_proveedores">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar Contactos</h4>
-				<input type="hidden" name="id" id="id" />
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Nombre:</label> <input
-						placeholder="Placeholder" disabled id="nombre" type="text"
-						class="validate" name="nombre" /> <input
-						placeholder="Placeholder" disabled id="ap" type="text"
-						class="validate" name="ap" />
-				</div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-				<a href="#" id="btn_eliminar_proveedores"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
-
-	<div class="row">
+	<div class="row" id="contenedorProveedores">
 		<div class="col s12 m12 l12 white mdc-elevation--z5">
 			<table id="proveedores_tabla" class="display dataTable cell-border"
 				cellspacing="0" width="100%">
@@ -250,7 +99,6 @@
 						<th>contacto</th>
 						<th>detalles</th>
 						<th>detalles</th>
-						<th></th>
 						<th></th>
 					</tr>
 				</thead>

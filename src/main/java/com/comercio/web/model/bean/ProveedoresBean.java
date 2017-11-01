@@ -1,43 +1,51 @@
 package com.comercio.web.model.bean;
 
 
+
+import javax.validation.constraints.NotNull;
+
 public class ProveedoresBean {
 
-private long id;
-private long idempresa;
-private long idmarca;
-private long idcontacto;
-private String detalles;
-public long getId() {
+private String id;
+@NotNull(message="selecione una empresa")
+private String idempresa;
+@NotNull(message="selecione una marca")
+private String idmarca;
+@NotNull(message="selecione un contacto")
+private String idcontacto;
+
+public String getId() {
 	return id;
 }
-public long getIdempresa() {
-	return idempresa;
-}
-public void setIdempresa(long idempresa) {
-	this.idempresa = idempresa;
-}
-public long getIdmarca() {
-	return idmarca;
-}
-public void setIdmarca(long idmarca) {
-	this.idmarca = idmarca;
-}
-public long getIdcontacto() {
-	return idcontacto;
-}
-public void setIdcontacto(long idcontacto) {
-	this.idcontacto = idcontacto;
-}
-public String getDetalles() {
-	return detalles;
-}
-public void setDetalles(String detalles) {
-	this.detalles = detalles;
-}
-public void setId(long id) {
+
+public void setId(String id) {
 	this.id = id;
 }
+
+public String getIdempresa() {
+	return idempresa;
+}
+
+public void setIdempresa(String idempresa) {
+	this.idempresa = idempresa;
+}
+
+public String getIdmarca() {
+	return idmarca;
+}
+
+public void setIdmarca(String idmarca) {
+	this.idmarca = idmarca;
+}
+
+public String getIdcontacto() {
+	return idcontacto;
+}
+
+public void setIdcontacto(String idcontacto) {
+	this.idcontacto = idcontacto;
+}
+
 
 
 }

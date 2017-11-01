@@ -41,7 +41,6 @@ public class MarcaRestControler {
 			BindingResult result,
 			HttpServletRequest request ){
 		FeedBack feedBack = new FeedBack();
-		System.out.println(m.getNombre()+"8888888888");
 		if (result.hasErrors()) {
 			feedBack.setLista_errores(result.getAllErrors());
 			return feedBack;

@@ -84,13 +84,11 @@ public class UsuarioDao {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getRol(long id) {
-		return  entityManager.createQuery("select d from Usuario d join  d.roles r where r.id=:id")
+		return  entityManager.createQuery("select d from Usuario d join  d.roles r where r.id=:id and d.Estado=1")
 				.setParameter("id", id)
 				.getResultList();
 	}
 	public void Update(long id,String nombre,String descripcion,String enlace,String logo){
-	System.out.println(id+nombre+descripcion+enlace+logo+"*********************");
-	
 			entityManager.createNativeQuery("Update procesos  Set nombre=:nombre, descripcion=:descripcion, enlace=:enlace, logo=:logo Where id=:id")
 			.setParameter("nombre", nombre).setParameter("descripcion", descripcion)
 			.setParameter("enlace", enlace).setParameter("logo", logo).setParameter("id", id)

@@ -50,7 +50,6 @@ public class ProductoRestControler {
 	@PostMapping(value = "/productos")
 	public String editarusuario(@ModelAttribute @Valid ProductoBean p, Errors errors) {
 		String mensaje = "llego";
-		System.out.println(p.getId()+"nomrbes productos/////");
 		return mensaje;
 	}
 	@DeleteMapping(value = "/productos/{id}")

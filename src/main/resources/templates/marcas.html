@@ -21,16 +21,17 @@
                     <i class="material-icons prefix">short_text</i> <input
                         id="nombre" type="text" class="validate" name="nombre" /> <label>Nombre</label>
                 </div>
-                <div class="input-field col s12 m6 l12 grey-text">
-                 <img id="imagenEditar" class='z-depth-2 responsive-img activator' width='70' height='60' >
+                <div class="input-field col s12 m4 l4 grey-text center-align" >
+                                  <input type="file" id="logo" class="dropify center-aling z-depth-2 responsive-img activator" data-max-file-size="2M" name="logo" data-width='10%' data-height='20%'/>
+           
+                 <label>Logo</label>
                  </div>
-            <div class="input-field col s12 m12 center-aling">
-                  <input type="file" id="logo" class="dropify center-aling" data-max-file-size="2M" name="logo"/>
-           <p>Logo</p>
-    
+            <div class="input-field col s12 m6 l6 center-aling">
+
+             <img id="imagenEditar" class='z-depth-2 responsive-img activator' width='30%' height='20%' >
         
            </div>
-                <div class="collapsible-header active">
+               <div class="collapsible-header active col s12 m12 l12">
                     <a
                         class="modal-action modal-close waves-effect waves-red btn-flat "
                         href="#" id="cancelarMarcas">Cancelar</a>
@@ -58,6 +59,10 @@
 
 <div class="row">
            <div class="col s12 m12 l12 white mdc-elevation--z5">
+      <!--           <button class="mdc-button" data-demo-no-js>
+              <i class="material-icons mdc-button__icon">add</i>
+              Agregar Marca
+            </button> -->
           <table id="tablaMarcas" class="display highlight"
                 cellspacing="0" width="100%">
                 <thead>

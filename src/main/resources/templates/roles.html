@@ -105,7 +105,6 @@
 	<p class="caption">Asignacion de Procesos(Tareas)</p>
 	<input type="hidden" name="idRolModificar" id="idRolModificar"
 		data-th-value="${idRolModificar}" />
-
 	<div class="row">
 		<div class="row card ">
 
@@ -121,11 +120,10 @@
 
 			<div id="asignarProcesos" class="col s12">
 				<div class="col s12 m12 l12">
-					<h2 class="mdc-typography--title">Seleciones un Rol</h2>
 					<div class="input-field col s12">
 						<select
 							onchange="location.href ='/roles/asignarProcesos/'+this.value">
-							<option value="" disabled selected>seleciona tu opcion</option>
+							<option value="" disabled selected>Seleciones un Rol</option>
 							<option value="1" data-th-each="rol:${listaRoles}"
 								data-th-value="${rol.id}" data-th-text="${rol.nombre}"></option>
 						</select>

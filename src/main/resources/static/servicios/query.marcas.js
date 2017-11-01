@@ -7,15 +7,15 @@ $(document).ready( function () {
 		actualizarMarcas();
 		
 	})
-		$("#cancelar_editar_marcas").click(function(event){
+		$("#cancelarMarcas").click(function(event){
+			$("#marcasFrag #erroresMarcas").fadeOut(300);
 		event.preventDefault();
 		$("#btnSubmitMarcas").val("Nuevo");
 		limpiarformularioMarcas();
-		 var src="";
- 		$("#formularioMarcas #logomarcas").hide();
+ 		$("#formularioMarcas #imagenEditar").fadeOut(300);
 		
 	})
-	
+
 	$("#marcasFrag #erroresMarcas").hide();
 });
 
@@ -125,7 +125,7 @@ var cargarTablaMarcas=function(){
 			  nombre=$("#formularioMarcas #nombre").val(data.nombre);
 			
 			   $("#imagenEditar").attr("src","assets/images/marcas/"+data.logo);
-			   
+			   $("#formularioMarcas #imagenEditar").fadeIn(300);
     		  $("#formularioMarcas #nombre").focus();
 			  $("#formularioMarcas #logo").focus();
 			  
