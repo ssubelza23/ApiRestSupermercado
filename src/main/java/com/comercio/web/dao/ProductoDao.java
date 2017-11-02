@@ -27,16 +27,13 @@ public class ProductoDao {
 		.executeUpdate();
 		
 	}
-
 	public void update(Producto p) {
 		entityManager.merge(p);
 		
 	}
-
 	public Producto getById(long id) {
 		return entityManager.find(Producto.class, id);
 	}
-
 	@SuppressWarnings("unchecked")
 	public List<Producto> getAll() {
 		return entityManager.createQuery("select u from Producto u where estado=1").getResultList();

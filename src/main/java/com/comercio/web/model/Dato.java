@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 
 
 @Entity
@@ -26,9 +28,10 @@ public class Dato implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+	@ColumnTransformer(write=" MD5(?) ")
 	private String login;
 	
-	
+	@ColumnTransformer(write=" MD5(?) ")
 	private String clave;
 
 

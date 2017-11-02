@@ -48,8 +48,7 @@ public class ProcesoDao {
 	// Update procesos Set nombre='José',descripcion='des',enlace='usurios',
 	// logo='logo' Where id=1
 	public void Update(long id, String nombre, String descripcion, String enlace, String logo) {
-		System.out.println(id + nombre + descripcion + enlace + logo + "*********************");
-
+		
 		entityManager.createNativeQuery(
 				"Update procesos  Set nombre=:nombre, descripcion=:descripcion, enlace=:enlace, logo=:logo Where id=:id")
 				.setParameter("nombre", nombre).setParameter("descripcion", descripcion).setParameter("enlace", enlace)

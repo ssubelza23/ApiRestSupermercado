@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.comercio.web.model.Empresa;
 
+
 @Repository
 @Transactional
 public class EmpresaDao {
@@ -18,9 +19,10 @@ public class EmpresaDao {
 	
 
 	
-	public void create(Empresa  p) {
+	public long create(Empresa  p) {
 		entityManager.persist(p);
-		
+		entityManager.flush();
+		return p.getId();
 	}
 	public void delete(Empresa p) {
 		if (entityManager.contains(p))

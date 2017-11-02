@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "proveedores")
 public class Proveedor implements Serializable {
@@ -26,12 +28,8 @@ public class Proveedor implements Serializable {
 	private String detalles;
 	private int estado;
 
+	
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Producto> productos = new ArrayList<>();
-	public List<Producto> getProductos() {
-		return productos;
-	}
 
 	public Usuario getContacto() {
 		return contacto;
@@ -39,30 +37,15 @@ public class Proveedor implements Serializable {
 	public void setContacto(Usuario contacto) {
 		this.contacto = contacto;
 	}
-	public Marca getMarca() {
-		return marca;
-	}
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
+
+
 
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Usuario contacto;
 	public void setContactos(Usuario contactos) {
 		this.contacto = contactos;
 	}
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	private Marca marca;
 
-	public Marca getMarcas() {
-		return marca;
-	}
-	public void setMarcas(Marca marcas) {
-		this.marca = marcas;
-	}
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;

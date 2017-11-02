@@ -18,7 +18,7 @@
 				<form id="formulario_proveedores">
 					<input type="hidden" name="id" id="id" />
 
-					<div class="input-field col s12 m6 l6 grey-text">
+					<div class="input-field col s12 m12 l12 grey-text">
 						<div class="col s12 m10">
 							<select id="idempresa" name="idempresa">
 								<option  disabled selected>Selecionar Empresa</option>
@@ -30,21 +30,6 @@
 							<a href="empresas" class="grey-text "><i
 								class="material-icons prefix right">create</i></a>
 						</div>
-					</div>
-					<div class="input-field col s12 m6 l6 grey-text">
-						<div class="col s12 m10">
-							<i class="material-icons prefix">branding_watermark</i> <select
-								id="idmarca" name="idmarca">
-								<option  disabled selected>selecionar marca.</option>
-								<option data-th-each="m:${marcas}" data-th-value="${m.id}"
-									data-th-text="${m.nombre}"></option>
-							</select>
-						</div>
-						<div class="col s12 m2">
-							<a href="marcas" class="grey-text "><i
-								class="material-icons prefix right">create</i></a>
-						</div>
-
 					</div>
 					<div class="input-field col s12 m12 l12 grey-text">
 						<div class="col s12 m10">
@@ -96,9 +81,9 @@
 				<thead>
 					<tr>
 						<th>nombre empresa</th>
-						<th>contacto</th>
-						<th>detalles</th>
-						<th>detalles</th>
+						<th>Nombre del contacto</th>
+						<th>Apellido  Cntacto</th>
+						<th>Movil contacto</th>
 						<th></th>
 					</tr>
 				</thead>

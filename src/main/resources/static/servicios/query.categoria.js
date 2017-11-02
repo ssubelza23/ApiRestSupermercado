@@ -72,7 +72,7 @@ var listar_categorias=function(){
 	 var table = $('#categoria_tablas').DataTable({
 		 "responsive": true,
 		 "destroy": true,
-			"sAjaxSource": "Lista_Categorias",
+			"sAjaxSource": "listaCategorias",
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [

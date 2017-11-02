@@ -133,40 +133,17 @@
 		</div>
 	</form>
 	
-	<div id="modal1" class="modal modal-fixed-footer">
-		<form id="eliminarUsuario">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar al usuario</h4>
-
-				<div class="input-field col s12" id="foto_usuario">
-					<img class="circle" width="20%" height="20%" id="img" />
-				</div>
-				<input type="hidden" name="id" id="id" />
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Usuario:</label> <input
-						placeholder="Placeholder" disabled id="usuario_eliminar"
-						type="text" class="validate" name="usuario_eliminar" />
-				</div>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">DNI:</label> <input
-						placeholder="Placeholder" disabled id="dni_eliminar" type="text"
-						class="validate center-aling" name="dni_eliminar" />
-				</div>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Rol:</label> <input
-						placeholder="Placeholder" disabled id="rol_eliminar" type="text"
-						class="validate center-aling" name="rol_eliminar" />
-				</div>
-
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat " id="cancelar">Cancelar</a>
-				<a href="#" id="btn_eliminar_usuario"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
+        <div id="modalEliminarUsuarios" class="modal">
+          <div class="modal-content">
+          <input type="text" name="id" id="id" />
+            <h4>¿ Seguro que desea eliminar ?</h4>
+          </div>
+          <div class="modal-footer">
+           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat " id="btnEliminarUsuarios">Eliminar</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+           
+          </div>
+        </div>
 
 
 	<div class="col-sm-offset-2 col-sm-8">

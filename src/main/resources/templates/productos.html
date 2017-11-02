@@ -1,9 +1,13 @@
-<div data-th-fragment="productos">
+<div data-th-fragment="productos" id="productosFrag">
 	<br />
-
+	<div id="erroresProductos">
+		<div id="card-alert" class="card red lighten-5">
+			<div class="card-content red-text" id="error"></div>
+		</div>
+	</div>
 	<div class="row">
-			<div class="row card ">
-			<form id="formulario_productos" enctype="multipart/form-data">
+		<div class="row card ">
+			<form id="formularioProductos" enctype="multipart/form-data">
 				<div class="col s12 card-title">
 					<ul class="tabs">
 						<li class="tab col s3"><a class="active" href="#test1"><span
@@ -13,89 +17,106 @@
 					</ul>
 				</div>
 				<div id="test1" class="col s12">
-				
+
 					<input type="hidden" name="id" id="id" />
+					<div class="input-field col s12 m6 l6 grey-text">
+						<input id="codigoBarras" type="text" class="validate"
+							name="codigoBarras" /> <label>Codigo de Barras</label>
+					</div>
 					<div class="input-field col s12 m6 l6 grey-text">
 						<input id="nombre" type="text" class="validate" name="nombre" />
 						<label>Nombre</label>
 					</div>
-			
+
 					<div class="input-field col s12 m6 l4 grey-text">
-						<input id="contenidoNeto" type="text" class="validate" />
-						<label for="icon_telephone">Contenido Neto</label>
+						<input id="contenidoNeto" name="contenidoNeto" type="text"
+							class="validate" /> <label for="icon_telephone">Contenido
+							Neto</label>
 					</div>
-                    <div class="input-field col s12 m6 l1 grey-text">
-                        <select id="medida">
-                            <option value="" disabled selected>Kg</option>
-                            <option value="1">L</option>
-                            <option value="2">ml</option>
-                            <option value="3">Kg</option>
-                            <option value="3">gr</option>
-                        </select> <label>medida</label>
-                    </div>
 					<div class="input-field col s12 m6 l4 grey-text">
-						<input id="detalle" type="text" class="validate" name="detalle"
+						<input id="detalles" type="text" class="validate" name="detalles"
 							placeholder="sabor,color.." /> <label for="icon_telephone">Detalles</label>
 					</div>
 					<div class="input-field col s12 m6 l4 grey-text">
-						<input id="presentacio" type="text" class="validate"
+						<input id="presentacion" type="text" class="validate"
 							name="presentacion" placeholder="botella,sachet,bolsa,caja....." />
 						<label for="icon_telephone">Presentacion</label>
 					</div>
-					   <div class="file-field input-field col s12 m6 l4 grey-text center">
-                    <div class="btn grey center-alingh">
-                        <span>Imagen</span> <input type="file" id="imagen" name="imagen">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
-                    </div>
-                </div>
-					   <div class="input-field col s12 m6 l6">
-                    <input
-                        placeholder="dni" id="codigoBarras" type="number" class="validate"
-                        name="codigoBarras"  /> <label for="icon_prefix">DNI:</label>
-                </div>
-					<div class="input-field col s12 m6 l6 grey-text">
-						<input id="industria" type="text" class="validate"
-							name="industria" /> <label for="icon_telephone">Industria</label>
+					<div class="input-field col s12 m6 l4 center-aling" id="imgProducto">
+						<img id="imagenEditarProducto" class='z-depth-2 responsive-img activator'
+							width='30%' height='20%'>
+						<a class="cambiarImagen btn-floating btn-large waves-effect waves-light green"><i class="material-icons">camera_alt</i></a>
 					</div>
-					<div class="input-field col s12 m4 l3 grey-text">
-						<select id="idProveedor">
-							<option value="" disabled selected>Proveedor</option>
-							<option data-th-each="p:${proveedores}" data-th-value="${p.id}"
-								data-th-text="${p.contactos.nombre}+ '- '+${p.marcas.nombre} "></option>
-						</select>
+
+					<div class="file-field input-field col s12 m6 l4 grey-text center" id="imgInputProductos">
+
+						<span>Imagen</span> <input type="file" id="imagen"
+							class="dropify center-aling" data-max-file-size="2M"
+							name="imagen" />
+
 					</div>
 					<div class="input-field col s12 m6 l3 grey-text">
-						<select id="idCategoria">
-							<option value="0">Categoria</option>
-							<option data-th-each="c:${categorias}" data-th-value="${c.id}"
-								data-th-text="${c.nombre}"></option>
-						</select>
+						<div class="col s12 m10">
+							<select class="browser-default" id="idCategoria" name="idCategoria">
+								<option disabled selected>Selecione una categoria</option>
+								<option data-th-each="c:${categorias}" data-th-value="${c.id}"
+									data-th-text="${c.nombre}"></option>
+							</select>
+						</div>
+						<div class="col s12 m2">
+							<a href="categorias" class="grey-text "><i
+								class="material-icons prefix right">create</i></a>
+						</div>
 					</div>
 					<div class="input-field col s12 m4 l3 grey-text">
-						<select multiple id="idSector">
-							<option value="" disabled selected>sector</option>
-							<option data-th-each="s:${sectores}" data-th-value="${s.id}"
-								data-th-text="${s.nombre}+' '+${c.ap}"></option>
-						</select>
+						<div class="col s12 m10">
+							 <select class="browser-default" id="idSector" name="idSector">
+                                <option disabled selected>Selecione un sector</option>
+                                <option data-th-each="c:${sectores}" data-th-value="${c.id}"
+                                    data-th-text="${c.nombre}"></option>
+                            </select>
+						</div>
+						<div class="col s12 m2">
+							<a href="sectores" class=" grey-text lighten-5"><i
+								class="material-icons prefix right tiny">create</i></a>
+						</div>
+					</div>
+					<div class="input-field col s12 m6 l3 grey-text">
+						<div class="col s12 m10">
+							<select id="idMarca" name="idMarca" class="browser-default">
+								<option disabled selected>Selecione una marca</option>
+								<option data-th-each="c:${marcas}" data-th-value="${c.id}"
+									data-th-text="${c.nombre}"></option>
+							</select>
+						</div>
+						<div class="col s12 m2">
+							<a href="marcas" class="grey-text "><i
+								class="material-icons prefix right">create</i></a>
+						</div>
+					</div>
+					<div class="input-field col s12 m4 l3 grey-text">
+						<div class="col s12 m10">
+							<select id="idProveedor" name="idProveedor" class="browser-default">
+								<option  disabled selected>Selecione proveedor</option>
+								<option data-th-each="p:${proveedores}" data-th-value="${p.id}"
+									data-th-text="${p.contactos.nombre}+ '- '+${p.empresa.nombre} "></option>
+							</select>
+						</div>
+						<div class="col s12 m2">
+							<a href="proveedores" class="grey-text "><i
+								class="material-icons prefix right">create</i></a>
+						</div>
 					</div>
 				</div>
 				<div id="test2" class="col s12">
 					<div class="input-field col s12 m6 l12 grey-text">
-						<input id="porcentajeGanancia" type="text" class="validate"/> 
-						<label>Porcentaje de ganancia. %</label>
+						<input id="porcentajeGanancia" type="text" class="validate" /> <label>Porcentaje
+							de ganancia. %</label>
 					</div>
 					<div class="input-field col s12 m6 l12 grey-text">
-                        <input id="costo" type="text" class="validate"
-                             /> <label>Costo $.</label>
-                    </div>
-				<div class="input-field col s12 m6 l12 grey-text">
-                        <input id="precioDeVenta" type="text" class="validate"
-                            /> <label>precio de venta $.</label>
-                </div>
-			
-
+						<input id="costo" type="text" class="validate" />
+						<label>Costo $.</label>
+					</div>
 				</div>
 				<div id="test3" class="col s12">
 					<div class="input-field col s12 m6 l12 grey-text">
@@ -103,62 +124,54 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s12 m6 l10 grey-text">
-							<input id="cantidadMinima" type="text" class="validate"/>
-							<label>cantidad minima</label>
+							<input id="cantidadMinima" type="text" class="validate" /> <label>cantidad
+								minima</label>
 						</div>
-						<div class="input-field col s12 m6 l2 grey-text">
-							<select id="medidaMinima">
-								<option value="Kg" disabled selected>Kg</option>
-								<option value="Unidades">Unidades</option>
-							</select> <label>medida</label>
-						</div>
-				
-					
 						<div class="input-field col s12 m6 l12 grey-text">
 							<p>Una caja contiene:</p>
 						</div>
-						
-							<div class="input-field col s12 m6 l10 grey-text">
-								<input id="contenidoxcaja" type="text" class="validate"
-									/> <label>cantidad</label>
-							</div>
-							<div class="input-field col s12 m6 l2 grey-text">
-								<select id="medidaconetnidoxcaja">
-									<option value="Kg" disabled selected>Kg</option>
-									<option value="unidades">Unidades</option>
-								</select> <label>medida</label>
-							</div>
-					
 
+						<div class="input-field col s12 m6 l10 grey-text">
+							<input id="contenidoxcaja" type="text" class="validate" />
+							<label>cantidad</label>
+						</div>
 					</div>
 				</div>
-                </form>
-				<div class="collapsible-header active col s12 m6 l12 card-action ">
-					<a
-						class="modal-action modal-close waves-effect waves-red btn-flat black-text"
-						data-th-href="@{/usuarios}" id="cancelar_editar_productos">Cancelar</a>
-					<a
-						class="modal-action modal-close waves-effect waves-red btn-flat black-text">
-						<input name="4" value="Guardar" type="submit"
-						id="btn_submit_productos" />
-					</a>
-				</div>
+			</form>
+			<div
+				class="collapsible-header active col s12 m12 l12 card-action center">
+				<button class="modal-action waves-effect waves-red btn-flat center"
+					id="cancelarProductos">Cancelar</button>
+				<button class="modal-action waves-effect waves-red btn-flat center"
+					id="btnSubmitProductos">Guardar</button>
 			</div>
-		
-
-		<div class="col-sm-offset-2 col-sm-8">
-			<p class="mensaje"></p>
 		</div>
-		<div class="row card">
-			<table id="productos_tabla"
-				class="responsive-table display dataTable cell-border"
-				cellspacing="0" width="100%">
+	</div>
+
+
+	<div id="modalEliminarProductos" class="modal">
+		<div class="modal-content">
+			<input type="text" name="id" id="id" />
+			<h4>¿ Seguro que desea eliminar ?</h4>
+		</div>
+    <div class="modal-footer">
+           <a class="modal-action modal-close waves-effect waves-green btn-flat " id="btnEliminarProducto" href="#" >Eliminar</a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+           
+          </div>
+	</div>
+	<div class="tp row">
+		<div class="col s12 m12 l12 white mdc-elevation--z5">
+			<table id="tablaProductos" class="display highlight" cellspacing="0"
+				width="100%">
 				<thead>
 					<tr>
-						<th>nombre empresa</th>
-						<th>contacto</th>
-						<th>detalles</th>
-						<th>detalles</th>
+						<th>Imagen</th>
+						<th>codigo de barras</th>
+						<th>nombre</th>
+						<th>contenido Neto</th>
+						<th>presentacion</th>
+						<th>Detalles</th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -166,43 +179,4 @@
 			</table>
 		</div>
 	</div>
-	<div id="modaleliminarmarcas" class="modal modal-fixed-footer">
-		<form id="eliminar_marcas">
-			<div class="modal-content center">
-				<h4>Seguro que desea eliminar Empresa</h4>
-				<input type="hidden" name="id" id="id" /> <img alt="" id="logo"></img>
-				<div class="input-field col s6 offset-s4 center">
-					<label for="first_name">Nombre:</label> <input
-						placeholder="Placeholder" disabled id="nombre" type="text"
-						class="validate" name="nombre" />
-				</div>
-			</div>
-			<div class="modal-footer">
-				<a href="#!"
-					class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-				<a href="#" id="btn_eliminar_marcas"
-					class="modal-action modal-close waves-effect waves-green btn-flat ">Eliminar</a>
-			</div>
-		</form>
-	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

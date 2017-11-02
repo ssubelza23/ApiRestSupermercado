@@ -78,12 +78,9 @@ public class RolesRestControler {
 	}
 	@PostMapping(value = "/addProRol")
 	public String addProRol(@RequestBody Rol_Procesos rp) {
-		System.out.println(rp.getAñadir()+"**"+rp.getIdRolModificar());
 		
-		System.out.println(rp.getEliminar()+"**"+rp.getIdRolModificar());
-
 		Rol rol = rolesDao.getById(rp.getIdRolModificar());
-		System.out.println(rol);
+		
 		for(int i=0;i<rp.getAñadir().size();i++) {
 			rol.addProceso(procesoDao.getById(rp.getAñadir().get(i)));
 		}

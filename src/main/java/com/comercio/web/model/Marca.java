@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "marcas")
@@ -30,9 +32,7 @@ public class Marca  implements Serializable{
 	private int estado;
 	
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Producto> productos= new ArrayList<>();
-		
+	
 	public Marca() {
 	}
 	public Marca(String nombre,String detalles,String logo,int estado) {

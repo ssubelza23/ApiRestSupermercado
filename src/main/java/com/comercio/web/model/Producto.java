@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -25,6 +25,7 @@ public class Producto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column(unique=true)
 	private long codigoBarra;
 	private String nombre;
 	private int cantidad;
@@ -39,6 +40,52 @@ public class Producto implements Serializable{
 	private Date fechaAlta;
 	
 	
+	@ManyToOne
+	private Proveedor proveedor;
+	
+	@ManyToOne
+	private Categoria categoria;
+	
+	@ManyToOne
+	private Sector sector;
+	
+	
+	
+	public Sector getSector() {
+		return sector;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setSector(Sector sector) {
+		this.sector = sector;
+	}
+
+	@ManyToOne
+	private Marca marca;
+	
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
 	public Producto() {
 	}
 
@@ -124,7 +171,7 @@ public class Producto implements Serializable{
 		return codigoBarra;
 	}
 
-	public void setCodigoBarra(int codigoBarra) {
+	public void setCodigoBarra(long codigoBarra) {
 		this.codigoBarra = codigoBarra;
 	}
 

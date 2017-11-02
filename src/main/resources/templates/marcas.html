@@ -6,8 +6,8 @@
         </div>
     </div>
     <div class="row">
-<div class="col s12 m12 l12 white mdc-elevation--z5">
-    <form id="formularioMarcas" class="card" enctype="multipart/form-data">
+<div class="col s12 m12 l12 white mdc-elevation--z5 card">
+    <form id="formularioMarcas"  enctype="multipart/form-data">
         <div class="col s12 ">
             <ul class="tabs">
                 <li class="tab col s3"><a class="active" href="#nuevoMarcas"><span
@@ -31,13 +31,14 @@
              <img id="imagenEditar" class='z-depth-2 responsive-img activator' width='30%' height='20%' >
         
            </div>
-               <div class="collapsible-header active col s12 m12 l12">
-                    <a
-                        class="modal-action modal-close waves-effect waves-red btn-flat "
-                        href="#" id="cancelarMarcas">Cancelar</a>
-                    <a class="modal-action modal-close waves-effect waves-red btn-flat"><input
-                        name="4" value="Guardar" type="submit" id="btnSubmitMarcas" /></a>
-                </div>
+      
+                
+            <div class="collapsible-header active col s12 m12 l12 card-action center">
+            <button class="modal-action waves-effect waves-red btn-flat center" id="cancelarMarcas">Cancelar</button>
+             <button class="modal-action waves-effect waves-red btn-flat center" id="btnSubmitMarcas">Guardar</button>
+            </div>
+                
+                
                 </div>
             </form>
             

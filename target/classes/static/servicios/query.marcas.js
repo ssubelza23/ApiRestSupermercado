@@ -91,7 +91,8 @@ function actualizarMarcas(){
 }
 var cargarTablaMarcas=function(){
 	 var table = $('#tablaMarcas').DataTable({
-		 "destroy": true,
+		 	"destroy": true,
+		 	"cache": false,
 			"sAjaxSource": "listamarcas",
 			"sAjaxDataProp": "",
 			"order": [[ 0, "asc" ]],

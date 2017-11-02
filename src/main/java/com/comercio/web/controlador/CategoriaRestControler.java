@@ -26,7 +26,7 @@ public class CategoriaRestControler {
 	@Autowired
 	CategoriaDao categoriaDao;
 
-	@GetMapping(value = "/Lista_Categorias")
+	@GetMapping(value = "/listaCategorias")
 	public List<Categoria> tablas_categoria(Model model) {
 		return categoriaDao.getAll();
 	}

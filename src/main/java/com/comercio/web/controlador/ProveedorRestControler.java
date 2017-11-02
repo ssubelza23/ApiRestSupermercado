@@ -52,9 +52,6 @@ public class ProveedorRestControler {
 	@PostMapping(value = "/proveedores")
 	public FeedBack editarusuario(@Valid @RequestBody ProveedoresBean p, BindingResult result) {
 		
-	System.out.println(p.getIdcontacto());
-	System.out.println(p.getIdempresa());
-	System.out.println(p.getIdmarca());
 	FeedBack feedBack = new FeedBack();
 	if (result.hasErrors()) {
 		feedBack.setLista_errores(result.getAllErrors());
@@ -66,19 +63,12 @@ public class ProveedorRestControler {
 		proveedor.setEstado(1);
 		proveedor.setEmpresa(empresaDao.getById(Long.parseLong(p.getIdempresa())));
 		proveedor.setContactos(userDao.getById(Long.parseLong(p.getIdcontacto())));
-		proveedor.setMarcas(marcaDao.getById(Long.parseLong(p.getIdmarca())));
-		
-		if (Long.parseLong(p.getId()) > 0) {
-			proveedor.setId(Long.parseLong(p.getId()));
-			proveedorDao.update(proveedor);
-			feedBack.setMensaje("Bien!, datos modificados correctamente");
-		} else {
-			feedBack.setMensaje("Bien!, datos creados correctamente");
-			proveedorDao.create(proveedor);
-		}
+		proveedorDao.create(proveedor);
+
+		feedBack.setMensaje("Bien!, datos creados correctamente");
 		}catch (Exception error) {
 			error.printStackTrace();
-			feedBack.setMensaje("existe");
+			feedBack.setMensaje(" !ups¡ Problemas al realizar la transacion");
 		}
 		return feedBack;
 		

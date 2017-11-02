@@ -88,13 +88,13 @@ var cargarTablaUsuarios = function() {
 									"mData" : "am"
 								},
 								{
-									"mData" : "roles[0].nombre"
+									"mData" : "roles[-].nombre"
 								},
 								{
 									"defaultContent" : "<a  href='#' class='editarUsuarios grey-text blue-text'><i class='material-icons'>edit</i></a>"
 								},
 								{
-									"defaultContent" : "<a  href='#modal1' id='eliminar' class='eliminar grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"
+									"defaultContent" : "<a  href='#modalEliminarUsuarios' class='eliminarUsuarios grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"
 								}
 
 						],
@@ -102,12 +102,12 @@ var cargarTablaUsuarios = function() {
 
 					});
 	obtenerDatosModificarUsuarios("#tablaUsuarios tbody", table);
-	obtener_datos_eliminar("#tablaUsuarios tbody", table);
+	obtenerDatosEliminarUsuarios("#tablaUsuarios tbody", table);
 };
 
 var eliminarUsuario = function() {
-	$("#btn_eliminar_usuario").on("click", function() {
-		var id = $("#eliminarUsuario #id").val();
+	$("#btnEliminarUsuarios").on("click", function() {
+		var id = $("#modalEliminarUsuarios #id").val();
 		$.ajax({
 			type : "DELETE",
 			url : "/usuarios/" + id,
@@ -161,25 +161,16 @@ var obtenerDatosModificarUsuarios = function(tbody, table) {
 
 					})
 }
-var obtener_datos_eliminar = function(tbody, table) {
-	$(tbody).on(
-			"click",
-			"a.eliminar",
-			function() {
 
-				var data = table.row($(this).parents("tr")).data();
-				var id = $("#eliminarUsuario #id").val(data.id);
-				var usuario = $("#eliminarUsuario #usuario_eliminar").val(
-						data.nombre + " " + data.ap + " " + data.am);
-				var dni = $("#eliminarUsuario #dni_eliminar").val(data.dni);
-				var rol = $("#eliminarUsuario #rol_eliminar").val(
-						data.roles[0].nombre);
-				var dni = data.dni;
-				var src = "/assets/images/usuarios/" + dni + ".jpg";
-				$("#eliminar_usuario #img").attr("src", src);
-			})
-
-}
+	var obtenerDatosEliminarUsuarios=function(tbody,table){
+		$(tbody).on("click","a.eliminarUsuarios",function(){
+			var data=table.row($(this).parents("tr")).data();
+			var id=$("#modalEliminarUsuarios #id").val(data.id);
+			
+			
+		})
+		
+	}
 var idioma_español = {
 	"sProcessing" : "Procesando...",
 	"sLengthMenu" : "Mostrar _MENU_ registros",

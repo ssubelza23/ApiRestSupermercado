@@ -9,9 +9,7 @@ public class ProveedoresBean {
 private String id;
 @NotNull(message="selecione una empresa")
 private String idempresa;
-@NotNull(message="selecione una marca")
 private String idmarca;
-@NotNull(message="selecione un contacto")
 private String idcontacto;
 
 public String getId() {

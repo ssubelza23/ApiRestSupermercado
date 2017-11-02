@@ -1,20 +1,18 @@
 package com.comercio.web.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "sectores")
@@ -35,19 +33,8 @@ public class Sector {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-
-
 	private int estado;
 
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Producto> productos = new ArrayList<>();
-	public List<Producto> getProductos() {
-		return productos;
-	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
 	public Sector() {
 	}
 	public Sector(String nombre,String detalle,String logo,int estado) {

@@ -95,8 +95,8 @@ var listar_proveedores=function(){
 			"aoColumns": [
 			      { "mData": "empresa.nombre"},
 				  { "mData": "contacto.nombre" },
-				  { "mData": "marcas.nombre" },
-		          { "mData": "detalles"},
+				  { "mData": "contacto.ap" },
+		          { "mData": "contacto.movil"},
 				  { "defaultContent": "<a  href='#modalEliminarProveedores' class='eliminarProveedores grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  
 			],

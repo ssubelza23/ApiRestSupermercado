@@ -9,13 +9,17 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.comercio.web.dao.DatoDao;
+import com.comercio.web.dao.EmpresaDao;
 import com.comercio.web.dao.ProcesoDao;
+import com.comercio.web.dao.ProveedorDao;
 import com.comercio.web.dao.RolesDao;
 import com.comercio.web.dao.UsuarioDao;
 import com.comercio.web.dao.MarcaDao;
 import com.comercio.web.model.Dato;
+import com.comercio.web.model.Empresa;
 import com.comercio.web.model.Marca;
 import com.comercio.web.model.Proceso;
+import com.comercio.web.model.Proveedor;
 import com.comercio.web.model.Rol;
 import com.comercio.web.model.Usuario;
 
@@ -37,6 +41,12 @@ public class Populate {
 	
 	@Autowired
 	private MarcaDao MarcaDao;
+
+	@Autowired
+	private EmpresaDao empresaDao;
+	
+	@Autowired
+	private ProveedorDao proveedorDao;
 
 	@PostConstruct
 	public void createUsers() {
@@ -246,6 +256,8 @@ public class Populate {
 		List<Rol> roles = new ArrayList<>();
 		roles.add(rolDao.getByNombre("Administrador"));
 		roles.add(rolDao.getByNombre("Cajero"));
+		roles.add(rolDao.getByNombre("Proveedor"));
+
 
 		// datos de acceso para el usuario
 		Dato d = new Dato();
@@ -266,6 +278,36 @@ public class Populate {
 		usuario.setDatos(datosDao.getByLoginClave("admin", "123456"));
 		usuario.setRoles(roles);
 		userDao.create(usuario);
+		
+		// Roles para usuario2
+				List<Rol> roles1 = new ArrayList<>();
+				roles.add(rolDao.getByNombre("Cajero"));
+				// datos de acceso para el usuario
+				Dato d1 = new Dato();
+				d1.setLogin("cliente");
+				d1.setClave("123456");
+				datosDao.create(d1);
+
+				Usuario usuario1 = new Usuario();
+				usuario1.setNombre("Maria");
+				usuario1.setAp("Angeles");
+				usuario1.setAm("Castrillo");
+				usuario1.setDNI(112233445);
+				usuario1.setSexo('F');
+				usuario1.setDireccion("direccion");
+				usuario1.setTelefono(123456789);
+				usuario1.setCorreo("prueba@gmsil.com");
+				usuario1.setEstado(1);
+				usuario1.setDatos(datosDao.getByLoginClave("cliente", "123456"));
+				usuario1.setRoles(roles1);
+				userDao.create(usuario1);
+				
+		
+				
+				
+		
+				
+				
 
 	}
 }

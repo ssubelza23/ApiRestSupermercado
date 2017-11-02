@@ -35,8 +35,8 @@ public class SectorDao {
 		
 	}
 
-	public Marca getById(long id) {
-		return entityManager.find(Marca.class, id);
+	public Sector getById(long id) {
+		return entityManager.find(Sector.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
