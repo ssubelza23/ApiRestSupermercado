@@ -80,21 +80,18 @@ function actualizarProductos(){
 					$("#productosFrag #error").html(lista);
 					$("#productosFrag #erroresProductos").fadeIn(300);
 				}else{
-					
-				
 				$("#productosFrag #erroresProductos").fadeOut(300);
 				cargarTablaProductos();
-				limpiarformularioEmpresas();
 				Materialize.toast(data.mensaje, 4000);
-				
 				}
 			}
-			limpiarformularioProductos();
+			
 		},
 		error: function(e){
 			console.log("ERROR:", e);
 		}
 	})
+	
 }
 var cargarTablaProductos=function(){
 	 var table = $('#tablaProductos').DataTable({
@@ -105,15 +102,12 @@ var cargarTablaProductos=function(){
 			"order": [[ 0, "asc" ]],
 			"lengthMenu": [[5, 10, 20, 25, 50, -1], [5, 10, 20, 25, 50, "Todos"]],
 			"aoColumns": [
-				  { "mData": "imagen","render":function(mData,type,row){
-		        	  return "<img class='z-depth-2 responsive-img activator' width='70' height='60' src='/assets/images/productos/"+mData+"'/>"
-		        	  }
-				  },
 			      { "mData": "codigoBarra"},
 			      { "mData": "nombre"},
 			      { "mData": "contenidoneto"},
 			      { "mData": "presentacion"},
 			      { "mData": "detalles"},
+			      { "mData": "sector.nombre"},
 		          { "defaultContent": "<a  href='#' class='editarProductos grey-text'><i class='material-icons'>edit</i></button>"},
 				  { "defaultContent": "<a  href='#modalEliminarProductos'  class='eliminarProductos grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
 				  

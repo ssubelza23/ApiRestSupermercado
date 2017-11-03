@@ -20,7 +20,7 @@ $(document).ready( function () {
 
 var eliminar_proveedores = function(){
 	$("#btnEliminarProveedor").on("click", function(){
-		 var id=$("#eliminar_proveedores #id").val();
+		 var id=$("#modalEliminarProveedores #id").val();
 		console.log(id);
 		$.ajax({
 			type:"DELETE",

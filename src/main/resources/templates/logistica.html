@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="description"
+	content="Anioranzaz Comercial al servicio de sus clientes. " />
+<title>Comercial A&ntildeoranzas</title>
+<!-- Favicons-->
+<meta name="msapplication-TileColor" content="#FFFFFF" />
+<!--  Android 5 Chrome Color-->
+<meta name="theme-color" content="#EE6E73" />
+<!-- CSS-->
+
+<link th:href="@{/assets/css/materialize.min.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/prism.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/ghpages-materialize.css}" type="text/css"
+	rel="stylesheet" media="screen,projection" />
+<link href="https://fonts.googleapis.com/css?family=Inconsolata"
+	rel="stylesheet" type="text/css" />
+
+<!--dropify-->
+<link th:href="@{/assets/js/plugins/dropify/css/dropify.min.css}"
+	type="text/css" rel="stylesheet" media="screen,projection">
+
+
+<link rel="stylesheet"
+	href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+
+
+<!-- Data Tables -->
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css"
+	type="text/css">
+<script
+	src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<link th:href="@{/assets/css/perfect-scrollbar.css}" type="text/css"
+	rel="stylesheet" media="screen,projection">
+<link th:href="@{/assets/css/chartist.min.css}" type="text/css"
+	rel="stylesheet" media="screen,projection">
+<link th:href="@{/assets/js/nestable.css}" type="text/css"
+	rel="stylesheet" media="screen,projection">
+</head>
+<body>
+	<div th:replace="~{header :: he}"></div>
+	<main>
+	<div class="container">
+	<div class="row">
+	<div class="col s12 m2 l2" data-th-each="c:${listaProductos}">
+		<div class="card" >
+			<div class="card-image waves-effect waves-block waves-light">
+				<img class="activator" data-th-src="@{'/assets/images/productos/'+${c.foto}}" width="10%" height="10%">
+			</div>
+			<div class="card-content">
+				<span class="card-title activator grey-text text-darken-4" data-th-text="${c.nombre}">
+				<i class="material-icons right">more_vert</i>
+				</span>
+				<p>
+					<a href="#">This is a link</a>
+				</p>
+			</div>
+			<div class="card-reveal">
+				<span class="card-title grey-text text-darken-4">Card Title<i
+					class="material-icons right">close</i></span>
+				<p>Here is some more information about this product that is only
+					revealed once clicked on.</p>
+			</div>
+		</div>
+		</div> 
+		</div> 
+		
+	</div>
+	<!-- End Container --> </main>
+	<div th:replace="~{footer :: fo}"></div>
+
+	<!--  Scripts-->
+	<script th:src="@{/assets/js/jquery.timeago.min.js}"></script>
+	<script th:src="@{/assets/js/prism.js}"></script>
+	<script th:src="@{/assets/jade/lunr.min.js}"></script>
+	<script th:src="@{/assets/jade/search.js}"></script>
+
+	<script th:src="@{/assets/js/materialize.min.js}"></script>
+
+	<script th:src="@{/assets/js/mdc/material-components-web.js}"></script>
+
+
+	<script type="text/javascript" th:src="@{/assets/js/chartist.min.js}"></script>
+	<script th:src="@{/assets/js/init.js}"></script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -74,7 +74,12 @@ public class ProductoRestControler {
 	}
 	try {
 	Producto producto = new Producto();
-	producto.setCodigoBarra(p.getCodigoBarras());
+	
+	if(!p.getCodigoBarras().equals("") && p.getCodigoBarras()!=null) {
+		producto.setCodigoBarra(Long.parseLong(p.getCodigoBarras()));
+		System.out.println(p.getCodigoBarras()+"---------");
+	}
+	
 	producto.setNombre(p.getNombre());
 	producto.setContenidoneto(p.getContenidoNeto());
 	producto.setDetalle(p.getDetalles());
@@ -92,8 +97,8 @@ public class ProductoRestControler {
 	
 	String dni1 = "";
 	if (!p.getImagen().getOriginalFilename().equals("")) {
-		FileUploadProductos.uploadFile(request, p.getImagen(), dni1 + p.getNombre());
-		producto.setImagen(p.getNombre() + ".jpg");
+		FileUploadProductos.uploadFile(request, p.getImagen(), dni1 + p.getCodigoBarras()+p.getContenidoNeto()+p.getNombre());
+		producto.setImagen(p.getCodigoBarras()+p.getContenidoNeto()+p.getNombre() + ".jpg");
 	}
 	if (!p.getId().equals("")) {
 		producto.setId(Long.parseLong(p.getId()));

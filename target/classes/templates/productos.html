@@ -12,15 +12,17 @@
 					<ul class="tabs">
 						<li class="tab col s3"><a class="active" href="#test1"><span
 								id="opcion_productos">Productos</span></a></li>
-						<li class="tab col s3"><a href="#test2"><span id="opcion">Ventas</span></a></li>
-						<li class="tab col s3"><a href="#test3"><span id="opcion">Logistica</span></a></li>
+								
+								<li class="tab col s3"><a href="#test2"><span
+                                id="opcion_productos">Inventario</span></a></li>
+						
 					</ul>
 				</div>
 				<div id="test1" class="col s12">
 
 					<input type="hidden" name="id" id="id" />
 					<div class="input-field col s12 m6 l6 grey-text">
-						<input id="codigoBarras" type="text" class="validate"
+						<input id="codigoBarras" type="text"
 							name="codigoBarras" /> <label>Codigo de Barras</label>
 					</div>
 					<div class="input-field col s12 m6 l6 grey-text">
@@ -45,7 +47,7 @@
 					<div class="input-field col s12 m6 l4 center-aling" id="imgProducto">
 						<img id="imagenEditarProducto" class='z-depth-2 responsive-img activator'
 							width='30%' height='20%'>
-						<a class="cambiarImagen btn-floating btn-large waves-effect waves-light green"><i class="material-icons">camera_alt</i></a>
+						<a class="cambiarImagen btn-floating btn-large waves-effect waves-light black tiny"><i class="material-icons">camera_alt</i></a>
 					</div>
 
 					<div class="file-field input-field col s12 m6 l4 grey-text center" id="imgInputProductos">
@@ -108,35 +110,40 @@
 						</div>
 					</div>
 				</div>
-				<div id="test2" class="col s12">
-					<div class="input-field col s12 m6 l12 grey-text">
-						<input id="porcentajeGanancia" type="text" class="validate" /> <label>Porcentaje
-							de ganancia. %</label>
-					</div>
-					<div class="input-field col s12 m6 l12 grey-text">
-						<input id="costo" type="text" class="validate" />
-						<label>Costo $.</label>
-					</div>
-				</div>
-				<div id="test3" class="col s12">
-					<div class="input-field col s12 m6 l12 grey-text">
-						<p>Reglas de aprovicionamiento</p>
-					</div>
-					<div class="row">
-						<div class="input-field col s12 m6 l10 grey-text">
-							<input id="cantidadMinima" type="text" class="validate" /> <label>cantidad
-								minima</label>
-						</div>
-						<div class="input-field col s12 m6 l12 grey-text">
-							<p>Una caja contiene:</p>
-						</div>
+	               <div id="test2" class="col s12">
 
-						<div class="input-field col s12 m6 l10 grey-text">
-							<input id="contenidoxcaja" type="text" class="validate" />
-							<label>cantidad</label>
-						</div>
-					</div>
-				</div>
+                    <div class="input-field col s12 m6 l6 grey-text">
+                        <input id="costo" type="text" class="validate"
+                            name="costo" /> <label>Costo</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6 grey-text">
+                    <div class="col s12 m10">
+                        <input id="porcentajeGanancia" type="number" class="validate" name="porcentajeGanancia" />
+                        <label>porcentaje de ganancia</label>
+                    </div>
+                    
+                        <div class="col s12 m2">
+                            %
+                        </div>
+                    </div>
+                    <div class="input-field col s12 m6 l4 grey-text">
+                        <input id="PrecioVenta" name="precioVenta" type="text"
+                            class="validate" disabled placeholder="Precio de venta"/> 
+                            <label>Precio de venta</label>
+                    </div>
+                    <div class="input-field col s12 m6 l4 grey-text">
+                    
+                        <input id="fechaVencimieno" type="text" name="fechaVencimiento"
+                            placeholder="dd/mm/aaaa" /> <label for="icon_telephone">Fecha de vencimiento</label>
+                    </div>
+                    <div class="input-field col s12 m6 l4 grey-text">
+                        <input id="stock" type="text" class="validate"
+                            name="stock" />
+                        <label for="icon_telephone">Stock</label>
+                    </div>
+                      
+                </div>
+	
 			</form>
 			<div
 				class="collapsible-header active col s12 m12 l12 card-action center">
@@ -161,17 +168,19 @@
           </div>
 	</div>
 	<div class="tp row">
-		<div class="col s12 m12 l12 white mdc-elevation--z5">
+		<div class="col s12 m12 l12 white mdc-elevation--z5 center ">
+		<a class="btn-flat center" href="logistica">Button</a>
 			<table id="tablaProductos" class="display highlight" cellspacing="0"
 				width="100%">
 				<thead>
 					<tr>
-						<th>Imagen</th>
+						
 						<th>codigo de barras</th>
 						<th>nombre</th>
 						<th>contenido Neto</th>
 						<th>presentacion</th>
 						<th>Detalles</th>
+						<th>sector</th>
 						<th></th>
 						<th></th>
 					</tr>

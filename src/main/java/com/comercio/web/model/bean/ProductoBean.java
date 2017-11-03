@@ -17,8 +17,8 @@ public class ProductoBean {
 	@Size(min = 3, max = 50,message="Introduzca presentacion del producto")
 	private String presentacion;
 	private MultipartFile imagen;
-	@NotNull(message="Codigo de barra, no puede estar vacio")
-	private long codigoBarras;
+	
+	private String codigoBarras;
 	private String industria;
 	@NotNull(message="selecione un Proveedor")
 	private String idProveedor;
@@ -26,6 +26,13 @@ public class ProductoBean {
 	private String idCategoria;
 	@NotNull(message="selecione un Sector")
 	private String idSector;
+	
+	
+	
+	
+	
+	
+	
 	public String getIdMarca() {
 		return idMarca;
 	}
@@ -34,13 +41,17 @@ public class ProductoBean {
 	}
 	@NotNull(message="selecione una marca")
 	private String idMarca;
+	@Size(min = 1, max = 50,message="defina el porcentaje de ganacia")
 	private String porcentajeGanancia;
+	@Size(min = 1, max = 50,message="defina el costo del producto")
 	private String costo;
-	private String precioDeVenta;
-	private int cantidadMinima;
-	private String medidaMinima;
-	private String contenidoxcaja;
-	private String medidacontenidoxcaja;
+	@Size(min = 1, max = 50,message="Se requiere el precio de venta")
+	private String precioVenta;
+	
+	private String fechaVencimiento;
+
+	private String stock;
+
 	public String getId() {
 		return id;
 	}
@@ -83,10 +94,10 @@ public class ProductoBean {
 	public void setImagen(MultipartFile imagen) {
 		this.imagen = imagen;
 	}
-	public long getCodigoBarras() {
+	public String getCodigoBarras() {
 		return codigoBarras;
 	}
-	public void setCodigoBarras(long codigoBarras) {
+	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 	public String getIndustria() {
@@ -126,35 +137,30 @@ public class ProductoBean {
 		this.costo = costo;
 	}
 	public String getPrecioDeVenta() {
-		return precioDeVenta;
+		return precioVenta;
 	}
 	public void setPrecioDeVenta(String precioDeVenta) {
-		this.precioDeVenta = precioDeVenta;
+		this.precioVenta = precioDeVenta;
 	}
-	public int getCantidadMinima() {
-		return cantidadMinima;
+	public String getPrecioVenta() {
+		return precioVenta;
 	}
-	public void setCantidadMinima(int cantidadMinima) {
-		this.cantidadMinima = cantidadMinima;
+	public void setPrecioVenta(String precioVenta) {
+		this.precioVenta = precioVenta;
 	}
-	public String getMedidaMinima() {
-		return medidaMinima;
+	public String getFechaVencimiento() {
+		return fechaVencimiento;
 	}
-	public void setMedidaMinima(String medidaMinima) {
-		this.medidaMinima = medidaMinima;
+	public void setFechaVencimiento(String fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
 	}
-	public String getContenidoxcaja() {
-		return contenidoxcaja;
+	public String getStock() {
+		return stock;
 	}
-	public void setContenidoxcaja(String contenidoxcaja) {
-		this.contenidoxcaja = contenidoxcaja;
+	public void setStock(String stock) {
+		this.stock = stock;
 	}
-	public String getMedidacontenidoxcaja() {
-		return medidacontenidoxcaja;
-	}
-	public void setMedidacontenidoxcaja(String medidacontenidoxcaja) {
-		this.medidacontenidoxcaja = medidacontenidoxcaja;
-	}
-	
+
+
 	
 }

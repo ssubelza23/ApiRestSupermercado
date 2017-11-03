@@ -45,7 +45,7 @@ public class EmpresaDao {
 		return entityManager.createQuery("select e from Empresa e where not exists (select p.empresa from Proveedor p where e=p.empresa)").getResultList();
 	}
 	public void limpiarEmpresa(long id) {
-		entityManager.createQuery("update Empresa SET proveedor_id=null where proveedor_id=:id")
+		entityManager.createQuery("update Proveedor  SET empresa=null where id=:id")
 		.setParameter("id", id)
 		.executeUpdate();
 		

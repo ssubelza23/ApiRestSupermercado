@@ -1,14 +1,16 @@
 package com.comercio.web.model;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,7 +41,53 @@ public class Producto implements Serializable{
 	@CreationTimestamp
 	private Date fechaAlta;
 	
+	//logistica
+	private ArrayList<Float> costos = new ArrayList<Float>();
+	private ArrayList<Float> porcentajeGanancia= new ArrayList<Float>();
+	private ArrayList<Float> precioVenta= new ArrayList<Float>();
+	private ArrayList<Integer> stock=new ArrayList<Integer>();
+	private ArrayList<Date> fechaVencimiento=new ArrayList<Date>();
 	
+	
+	public void addCostos(float costo) {
+		this.costos.add(costo);
+	}
+	public void addPorcentajeGanancia(float porcentajeGanancia) {
+		this.porcentajeGanancia.add(porcentajeGanancia);
+		
+	}
+	public void addPrecioVenta(float precioVenta) {
+		this.precioVenta.add(precioVenta);
+		
+	}
+	public void addFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento.add(fechaVencimiento);
+		
+	}
+	
+	public void addStock(int stock) {
+		this.stock.add(stock);
+		
+	}
+	
+
+	public List<Float> getCostos() {
+		return costos;
+	}
+	public List<Float> getPorcentajeGanancia() {
+		return porcentajeGanancia;
+	}
+	public List<Float> getPrecioVenta() {
+		return precioVenta;
+	}
+	public List<Integer> getStock() {
+		return stock;
+	}
+	public List<Date> getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+
 	@ManyToOne
 	private Proveedor proveedor;
 	
