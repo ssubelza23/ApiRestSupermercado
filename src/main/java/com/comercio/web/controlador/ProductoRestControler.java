@@ -1,5 +1,6 @@
 package com.comercio.web.controlador;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -32,6 +34,7 @@ import com.comercio.web.model.Marca;
 import com.comercio.web.model.Producto;
 import com.comercio.web.model.Proveedor;
 import com.comercio.web.model.Sector;
+import com.comercio.web.model.bean.ProdcutoVentasBean;
 import com.comercio.web.model.bean.ProductoBean;
 
 
@@ -86,15 +89,12 @@ public class ProductoRestControler {
 	producto.setPresentacion(p.getPresentacion());
 	producto.setEstado(1);
 	producto.setImagen(p.getNombre()+".jpg");
+	producto.addCostos(Float.parseFloat(p.getCosto()));
+	producto.addPorcentajeGanancia(Float.parseFloat(p.getPorcentajeGanancia()));
 	producto.setMarca(marcaDao.getById(Long.parseLong(p.getIdMarca())));
 	producto.setCategoria(categoriaDao.getById(Long.parseLong(p.getIdCategoria())));
 	producto.setSector(sectorDao.getById(Long.parseLong(p.getIdSector())));
-	producto.setProveedor(proveedorDao.getById(Long.parseLong(p.getIdProveedor())));
-	
-	
-	
-	
-	
+	producto.setProveedor(proveedorDao.getById(Long.parseLong(p.getIdProveedor())));	
 	String dni1 = "";
 	if (!p.getImagen().getOriginalFilename().equals("")) {
 		FileUploadProductos.uploadFile(request, p.getImagen(), dni1 + p.getCodigoBarras()+p.getContenidoNeto()+p.getNombre());
@@ -103,11 +103,12 @@ public class ProductoRestControler {
 	if (!p.getId().equals("")) {
 		producto.setId(Long.parseLong(p.getId()));
 		productoDao.update(producto);
+
 		feedBack.setMensaje("Bien! datos modificados correctamente");
 	
 		
 	} else {
-		long id=productoDao.create(producto);
+		productoDao.create(producto);
 		feedBack.setMensaje("Bien! datos creados correctamente");
 	
 		
@@ -124,5 +125,31 @@ public class ProductoRestControler {
 	public String eliminarProveedor(@PathVariable long id) {
 		productoDao.delete(id);
 		return "Bien!. Proveedor eliminado correctamente.";
+	}
+	@PostMapping(value = "/productoVentas")
+	public String productoVentas(@RequestBody  ProdcutoVentasBean p) {
+		System.out.println(p.getId());
+		Producto prod=new Producto();
+		prod=productoDao.getById(p.getId());
+		if(p.getAddStock().equals("") && p.getCostoMod().equals("") && p.getFechaVencimientoMod().equals("") && p.getGananciaMod().equals("")){
+		
+			return "info!. no hay cambios que realizar.";
+		}
+		if(!p.getAddStock().equals("")) {
+			prod.setStock(Integer.parseInt(p.getAddStock()));
+		}
+		if(!p.getCostoMod().equals("")) {
+			prod.addCostos(Float.parseFloat(p.getCostoMod()));
+		}
+		if(!p.getFechaVencimientoMod().equals("")) {
+			//prod.addFechaVencimiento(Date.parse(p.getFechaVencimientoMod()));
+		}
+		
+		if(!p.getGananciaMod().equals("")) {
+			prod.addPorcentajeGanancia(Float.parseFloat(p.getGananciaMod()));
+		}
+		 productoDao.update(prod);
+		
+		return "Bien!. Datos modificados correctamente.";
 	}
 }

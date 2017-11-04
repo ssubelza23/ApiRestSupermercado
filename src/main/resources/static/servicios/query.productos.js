@@ -18,13 +18,43 @@ $(document).ready( function () {
 			$("a.cambiarImagen").click(function(event){
 				$("#imgInputProductos").fadeIn(400);
 		
+	});
+	
+	$("#btnActualizarDatosProducto").click(function(event){
+		event.preventDefault();
+		actualizarProductosVentas();
 	})
+	
+	
+	
 
 	$("#productosFrag #erroresProductos").hide();
 	$("#imgProducto").hide();
 });
 
-
+function actualizarProductosVentas(){
+	var formData = {
+    			id : $("#modalProductosVentas #id").val(),
+    		addStock : $("#modalProductosVentas #addStock").val(),
+    		fechaVencimientoMod : $("#modalProductosVentas #fechaVencimientoMod").val(),
+    		costoMod : $("#modalProductosVentas #costoMod").val(),
+    		gananciaMod : $("#modalProductosVentas #gananciaMod").val()
+    	}
+	console.log(formData);
+	$.ajax({
+		type : "POST",
+		url : "/productoVentas",
+		data : JSON.stringify(formData),
+		contentType : "application/json",
+		success:function(data){
+			cargarTablaProductos();
+			Materialize.toast(data, 4000);
+		},
+		error: function(e){
+			console.log("ERROR:", e);
+		}
+	})
+}
 var eliminarProducto = function(){
 	$("#btnEliminarProducto").on("click", function(){
 		var id=$("#modalEliminarProductos #id").val();
@@ -107,9 +137,24 @@ var cargarTablaProductos=function(){
 			      { "mData": "contenidoneto"},
 			      { "mData": "presentacion"},
 			      { "mData": "detalles"},
+			      { "mData": "categoria.nombre"},
+			      { "mData": "marca.nombre"},
 			      { "mData": "sector.nombre"},
+			      { "mData": "costos[]"},
+			      { "mData": "porcentajeGanancia[]"},
+		/*	      { "mData": "costos","render":function(mData,type,row){
+		        	  return "<span>"+mData.pop();+"'</span>"
+		        	  }
+				  },
+				  
+				  { "mData": "porcentajeGanancia","render":function(mData,type,row){
+		        	  return "<span>"+mData.pop();+"'</span>"
+		        	  }
+				  },*/
+				  { "mData": "stock"},
 		          { "defaultContent": "<a  href='#' class='editarProductos grey-text'><i class='material-icons'>edit</i></button>"},
-				  { "defaultContent": "<a  href='#modalEliminarProductos'  class='eliminarProductos grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"}	 
+				  { "defaultContent": "<a  href='#modalEliminarProductos'  class='eliminarProductos grey-text modal-trigger'><i class='material-icons dp48'>delete</i></a>"},
+				  { "defaultContent": "<a  href='#modalProductosVentas'  class='ventasProducto grey-text modal-trigger'><i class='material-icons dp48'>settings</i></a>"}	 
 				  
 			],
 				
@@ -122,7 +167,9 @@ var cargarTablaProductos=function(){
 	
 	obtenerDatosEditarProductos("#tablaProductos tbody",table);
 	 obtenerDatosEliminarProductos("#tablaProductos tbody",table);
+	 ventasProducto("#tablaProductos tbody",table);
 	};
+
 	var obtenerDatosEditarProductos=function(tbody,table){
 		$(tbody).on("click","a.editarProductos",function(){
 			 event.preventDefault();
@@ -134,6 +181,15 @@ var cargarTablaProductos=function(){
 			  var pesoneto=$("#formularioProductos #contenidoNeto").val(data.contenidoneto);
 			  var detalles=$("#formularioProductos #detalles").val(data.detalles);
 			  var presentacion=$("#formularioProductos #presentacion").val(data.presentacion);
+			  
+			  var presentacion=$("#formularioProductos #costo").val(data.costo);
+			  var presentacion=$("#formularioProductos #porcentajeGanancia").val(data.pocentajeGanancia);
+			  
+			 /* var presentacion=$("#formularioProductos #costo").val(data.costo);
+			  var presentacion=$("#formularioProductos #porcentajeGanancia").val(data.pocentajeGanancia);
+			  var presentacion=$("#formularioProductos #precioVenta").val(data.precioVenta);
+			  var presentacion=$("#formularioProductos #stock").val(data.stock);
+			  var presentacion=$("#formularioProductos #fechaVencimiento").val(data.stock);*/
 			 
 			  $("#idCategoria").val(data.categoria.id);
 			  $("#idSector").val(data.sector.id);
@@ -146,8 +202,15 @@ var cargarTablaProductos=function(){
 			  $("#formularioProductos #contenidoNeto").focus();
 			  $("#formularioProductos #detalles").focus();
 			  $("#formularioProductos #presentacion").focus();
+			  $("#formularioProductos #costo").focus();
+			  $("#formularioProductos #porcentajeGanancia").focus();
+	/*		  $("#formularioProductos #costo").focus();
+			  $("#formularioProductos #porcentajeGanancia").focus();
+			  $("#formularioProductos #precioVenta").focus();
+			  $("#formularioProductos #stock").focus();
+			  $("#formularioProductos #fechaVencimineto").focus();*/
 			  
-			 $("#imgInputProductos").fadeOut(400);
+			  $("#imgInputProductos").fadeOut(400);
 			  $("#imagenEditarProducto").attr("src","assets/images/productos/"+data.foto);
 			  $("#imgProducto").fadeIn(3000);
 			  
@@ -156,16 +219,37 @@ var cargarTablaProductos=function(){
 			  
 		})
 	}
+	
+	var ventasProducto=function(tbody,table){
+		$(tbody).on("click","a.ventasProducto",function(){
+			 event.preventDefault();
+			  var data=table.row($(this).parents("tr")).data();
+			  var id=$("#modalProductosVentas #id").val(data.id);
+			  $("#imgVentasProducto").attr("src","assets/images/productos/"+data.foto);
+			  var nombre=$("#modalProductosVentas #nombre").text(data.nombre);
+			  var detalles=$("#modalProductosVentas #detalle").text(data.detalles);
+			  var contenidoNeto=$("#modalProductosVentas #contenidoNeto").text(data.contenidoneto);
+			  var stock=$("#modalProductosVentas #stockActual").val(data.stock);
+			  var fechaVencimiento=$("#modalProductosVentas #fechaVencimiento").val(data.fechaVencimiento.pop());
+			  var costos=$("#modalProductosVentas #costoActual").val(data.costos.pop());
+			  var porcentajeGanancia=$("#modalProductosVentas #gananciaActual").val(data.porcentajeGanancia.pop());
+			  var costos=$("#modalProductosVentas #p").val(data.proveedor.id);
+			  
+			  
+			  $("#modalProductosVentas #stockActual").focus();
+			  $("#modalProductosVentas #fechaVencimiento").focus();
+			  $("#modalProductosVentas #costoActual").focus();
+			  $("#modalProductosVentas #gananciaActual").focus();
+			 
+		})
+	}
 	var obtenerDatosEliminarProductos=function(tbody,table){
 		$(tbody).on("click","a.eliminarProductos",function(){
 			var data=table.row($(this).parents("tr")).data();
-			var id=$("#modalEliminarProductos #id").val(data.id);
-			
-			
+			var id=$("#modalEliminarProductos #id").val(data.id);		
 		})
 		
 	}
-
 	var limpiarformularioProductos = function(){
 			$("#formularioProductos #codigoBarras").val("");
 		  $("#formularioProductos #nombre").val("");
@@ -173,6 +257,13 @@ var cargarTablaProductos=function(){
 		  $("#formularioProductos #contenidoNeto").val("");
 		  $("#formularioProductos #detalles").val("");
 		  $("#formularioProductos #presentacion").val("");
+		  $("#formularioProductos #costo").val("");
+		  $("#formularioProductos #porcentajeGanancia").val("");
+/*		  $("#formularioProductos #costo").val("");
+		  $("#formularioProductos #porcentajeGanancia").val("");
+		  $("#formularioProductos #precioVenta").val("");
+		  $("#formularioProductos #stock").val("");
+		  $("#formularioProductos #fechaVencimiento").val("");*/
 		
 	}
 	

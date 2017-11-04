@@ -4,54 +4,47 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
-@Table(name = "roles")
+@Table(name = "marcas")
 @Audited
-public class Rol implements Serializable {
+public class ReglasAprovicionamiento  implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(unique=true)
 	private String nombre;
-	private String descripcion;
+	private String detalle;
+	private String logo;
 	private int estado;
+	
 
-	@ManyToMany
-	private List<Proceso> procesos = new ArrayList<>();
-
-	public void setProcesos(List<Proceso> procesos) {
-		this.procesos = procesos;
+	
+	public ReglasAprovicionamiento() {
 	}
-
-	public List<Proceso> getProcesos() {
-		return procesos;
+	public ReglasAprovicionamiento(String nombre,String detalles,String logo,int estado) {
+		this.nombre=nombre;
+		this.detalle=detalles;
+		this.logo=logo;
+		this.estado=estado;
+		
 	}
-
-	public Rol() {
-	}
-
-	public Rol(String nombre, String descripcion, int estado) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.estado = estado;
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -68,15 +61,21 @@ public class Rol implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDetalle() {
+		return detalle;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDetalle(String detalles) {
+		this.detalle = detalles;
 	}
 
+	public String getLogo() {
+		return logo;
+	}
 
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 
 	public int getEstado() {
 		return estado;
@@ -86,21 +85,12 @@ public class Rol implements Serializable {
 		this.estado = estado;
 	}
 
-	public void addProceso(Proceso proceso) {
-		procesos.add(proceso);
 
-	}
-
-	public void removeProceso(Proceso proceso) {
-		procesos.remove(proceso);
-
-	}
 	@Override
 	public String toString() {
 		try {
-			return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter()
-					.writeValueAsString(this);
-
+			return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+			
 		} catch (com.fasterxml.jackson.core.JsonProcessingException e) {
 			e.printStackTrace();
 		}

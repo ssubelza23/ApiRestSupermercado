@@ -16,9 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "proveedores")
+@Audited
 public class Proveedor implements Serializable {
 
 	private static final long serialVersionUID = 1L;

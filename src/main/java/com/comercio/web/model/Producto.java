@@ -14,11 +14,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
 
 
 
 @Entity
 @Table(name = "productos")
+@Audited
 public class Producto implements Serializable{
 
 	
@@ -27,7 +29,7 @@ public class Producto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@Column(unique=true)
+	
 	private long codigoBarra;
 	private String nombre;
 	private int cantidad;
@@ -44,8 +46,8 @@ public class Producto implements Serializable{
 	//logistica
 	private ArrayList<Float> costos = new ArrayList<Float>();
 	private ArrayList<Float> porcentajeGanancia= new ArrayList<Float>();
-	private ArrayList<Float> precioVenta= new ArrayList<Float>();
-	private ArrayList<Integer> stock=new ArrayList<Integer>();
+	private float  precioVenta;
+	private int stock;
 	private ArrayList<Date> fechaVencimiento=new ArrayList<Date>();
 	
 	
@@ -56,33 +58,30 @@ public class Producto implements Serializable{
 		this.porcentajeGanancia.add(porcentajeGanancia);
 		
 	}
-	public void addPrecioVenta(float precioVenta) {
-		this.precioVenta.add(precioVenta);
-		
-	}
+
 	public void addFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento.add(fechaVencimiento);
 		
 	}
-	
-	public void addStock(int stock) {
-		this.stock.add(stock);
-		
+	public float getPrecioVenta() {
+		return precioVenta;
 	}
-	
-
+	public void setPrecioVenta(float precioVenta) {
+		this.precioVenta = precioVenta;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	public List<Float> getCostos() {
 		return costos;
 	}
 	public List<Float> getPorcentajeGanancia() {
 		return porcentajeGanancia;
 	}
-	public List<Float> getPrecioVenta() {
-		return precioVenta;
-	}
-	public List<Integer> getStock() {
-		return stock;
-	}
+
 	public List<Date> getFechaVencimiento() {
 		return fechaVencimiento;
 	}

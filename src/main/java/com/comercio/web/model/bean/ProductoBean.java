@@ -45,7 +45,7 @@ public class ProductoBean {
 	private String porcentajeGanancia;
 	@Size(min = 1, max = 50,message="defina el costo del producto")
 	private String costo;
-	@Size(min = 1, max = 50,message="Se requiere el precio de venta")
+	
 	private String precioVenta;
 	
 	private String fechaVencimiento;

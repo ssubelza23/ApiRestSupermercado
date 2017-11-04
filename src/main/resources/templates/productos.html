@@ -12,78 +12,83 @@
 					<ul class="tabs">
 						<li class="tab col s3"><a class="active" href="#test1"><span
 								id="opcion_productos">Productos</span></a></li>
-								
-								<li class="tab col s3"><a href="#test2"><span
-                                id="opcion_productos">Inventario</span></a></li>
-						
+
+						<li class="tab col s3"><a href="#test2"><span
+								id="opcion_productos">Inventario</span></a></li>
+
 					</ul>
 				</div>
 				<div id="test1" class="col s12">
 
 					<input type="hidden" name="id" id="id" />
-					<div class="input-field col s12 m6 l6 grey-text">
-						<input id="codigoBarras" type="text"
-							name="codigoBarras" /> <label>Codigo de Barras</label>
+					<div class="input-field col s12 m6 l6 ">
+						<input id="codigoBarras" type="text" name="codigoBarras" /> <label>Codigo
+							de Barras</label>
 					</div>
-					<div class="input-field col s12 m6 l6 grey-text">
+					<div class="input-field col s12 m6 l6 ">
 						<input id="nombre" type="text" class="validate" name="nombre" />
 						<label>Nombre</label>
 					</div>
 
-					<div class="input-field col s12 m6 l4 grey-text">
+					<div class="input-field col s12 m6 l4 ">
 						<input id="contenidoNeto" name="contenidoNeto" type="text"
 							class="validate" /> <label for="icon_telephone">Contenido
 							Neto</label>
 					</div>
-					<div class="input-field col s12 m6 l4 grey-text">
+					<div class="input-field col s12 m6 l4 ">
 						<input id="detalles" type="text" class="validate" name="detalles"
 							placeholder="sabor,color.." /> <label for="icon_telephone">Detalles</label>
 					</div>
-					<div class="input-field col s12 m6 l4 grey-text">
+					<div class="input-field col s12 m6 l4 ">
 						<input id="presentacion" type="text" class="validate"
 							name="presentacion" placeholder="botella,sachet,bolsa,caja....." />
 						<label for="icon_telephone">Presentacion</label>
 					</div>
-					<div class="input-field col s12 m6 l4 center-aling" id="imgProducto">
-						<img id="imagenEditarProducto" class='z-depth-2 responsive-img activator'
-							width='30%' height='20%'>
-						<a class="cambiarImagen btn-floating btn-large waves-effect waves-light black tiny"><i class="material-icons">camera_alt</i></a>
+					<div class="input-field col s12 m6 l4 center-aling"
+						id="imgProducto">
+						<img id="imagenEditarProducto"
+							class='z-depth-2 responsive-img activator' width='30%'
+							height='20%'> <a
+							class="cambiarImagen btn-floating btn-large waves-effect waves-light black tiny"><i
+							class="material-icons">camera_alt</i></a>
 					</div>
 
-					<div class="file-field input-field col s12 m6 l4 grey-text center" id="imgInputProductos">
+					<div class="file-field input-field col s12 m6 l4  center"
+						id="imgInputProductos">
 
 						<span>Imagen</span> <input type="file" id="imagen"
 							class="dropify center-aling" data-max-file-size="2M"
 							name="imagen" />
 
 					</div>
-					<div class="input-field col s12 m6 l3 grey-text">
+					<div class="input-field col s12 m6 l3 ">
 						<div class="col s12 m10">
-							<select class="browser-default" id="idCategoria" name="idCategoria">
+							<select class="browser-default" id="idCategoria"
+								name="idCategoria">
 								<option disabled selected>Selecione una categoria</option>
 								<option data-th-each="c:${categorias}" data-th-value="${c.id}"
 									data-th-text="${c.nombre}"></option>
 							</select>
 						</div>
 						<div class="col s12 m2">
-							<a href="categorias" class="grey-text "><i
+							<a href="categorias" class=" "><i
 								class="material-icons prefix right">create</i></a>
 						</div>
 					</div>
-					<div class="input-field col s12 m4 l3 grey-text">
+					<div class="input-field col s12 m4 l3 ">
 						<div class="col s12 m10">
-							 <select class="browser-default" id="idSector" name="idSector">
-                                <option disabled selected>Selecione un sector</option>
-                                <option data-th-each="c:${sectores}" data-th-value="${c.id}"
-                                    data-th-text="${c.nombre}"></option>
-                            </select>
+							<select class="browser-default" id="idSector" name="idSector">
+								<option disabled selected>Selecione un sector</option>
+								<option data-th-each="c:${sectores}" data-th-value="${c.id}"
+									data-th-text="${c.nombre}"></option>
+							</select>
 						</div>
 						<div class="col s12 m2">
-							<a href="sectores" class=" grey-text lighten-5"><i
+							<a href="sectores" class="  lighten-5"><i
 								class="material-icons prefix right tiny">create</i></a>
 						</div>
 					</div>
-					<div class="input-field col s12 m6 l3 grey-text">
+					<div class="input-field col s12 m6 l3 ">
 						<div class="col s12 m10">
 							<select id="idMarca" name="idMarca" class="browser-default">
 								<option disabled selected>Selecione una marca</option>
@@ -92,58 +97,57 @@
 							</select>
 						</div>
 						<div class="col s12 m2">
-							<a href="marcas" class="grey-text "><i
+							<a href="marcas" class=" "><i
 								class="material-icons prefix right">create</i></a>
 						</div>
 					</div>
-					<div class="input-field col s12 m4 l3 grey-text">
+					<div class="input-field col s12 m4 l3 ">
 						<div class="col s12 m10">
-							<select id="idProveedor" name="idProveedor" class="browser-default">
-								<option  disabled selected>Selecione proveedor</option>
+							<select id="idProveedor" name="idProveedor"
+								class="browser-default">
+								<option disabled selected>Selecione proveedor</option>
 								<option data-th-each="p:${proveedores}" data-th-value="${p.id}"
 									data-th-text="${p.contactos.nombre}+ '- '+${p.empresa.nombre} "></option>
 							</select>
 						</div>
 						<div class="col s12 m2">
-							<a href="proveedores" class="grey-text "><i
+							<a href="proveedores" class=" "><i
 								class="material-icons prefix right">create</i></a>
 						</div>
 					</div>
 				</div>
-	               <div id="test2" class="col s12">
+				<div id="test2" class="col s12">
 
-                    <div class="input-field col s12 m6 l6 grey-text">
-                        <input id="costo" type="text" class="validate"
-                            name="costo" /> <label>Costo</label>
-                    </div>
-                    <div class="input-field col s12 m6 l6 grey-text">
-                    <div class="col s12 m10">
-                        <input id="porcentajeGanancia" type="number" class="validate" name="porcentajeGanancia" />
-                        <label>porcentaje de ganancia</label>
-                    </div>
-                    
-                        <div class="col s12 m2">
-                            %
-                        </div>
-                    </div>
-                    <div class="input-field col s12 m6 l4 grey-text">
-                        <input id="PrecioVenta" name="precioVenta" type="text"
-                            class="validate" disabled placeholder="Precio de venta"/> 
-                            <label>Precio de venta</label>
-                    </div>
-                    <div class="input-field col s12 m6 l4 grey-text">
-                    
-                        <input id="fechaVencimieno" type="text" name="fechaVencimiento"
-                            placeholder="dd/mm/aaaa" /> <label for="icon_telephone">Fecha de vencimiento</label>
-                    </div>
-                    <div class="input-field col s12 m6 l4 grey-text">
-                        <input id="stock" type="text" class="validate"
-                            name="stock" />
-                        <label for="icon_telephone">Stock</label>
-                    </div>
-                      
-                </div>
-	
+					<div class="input-field col s12 m6 l6 ">
+						<input id="costo" type="text" class="validate" name="costo" /> <label>Costo</label>
+					</div>
+					<div class="input-field col s12 m6 l6 ">
+						<div class="col s12 m10">
+							<input id="porcentajeGanancia" type="number" class="validate"
+								name="porcentajeGanancia" /> <label>porcentaje de
+								ganancia</label>
+						</div>
+
+						<div class="col s12 m2">%</div>
+					</div>
+					<div class="input-field col s12 m6 l4 ">
+						<input id="PrecioVenta" name="precioVenta" type="text"
+							class="validate" disabled placeholder="Precio de venta" /> <label>Precio
+							de venta</label>
+					</div>
+					<div class="input-field col s12 m6 l4 ">
+
+						<input id="fechaVencimieno" type="text" name="fechaVencimiento"
+							placeholder="dd/mm/aaaa" /> <label for="icon_telephone">Fecha
+							de vencimiento</label>
+					</div>
+					<div class="input-field col s12 m6 l4 ">
+						<input id="stock" type="text" class="validate" name="stock" /> <label
+							for="icon_telephone">Stock</label>
+					</div>
+
+				</div>
+
 			</form>
 			<div
 				class="collapsible-header active col s12 m12 l12 card-action center">
@@ -161,26 +165,98 @@
 			<input type="text" name="id" id="id" />
 			<h4>¿ Seguro que desea eliminar ?</h4>
 		</div>
-    <div class="modal-footer">
-           <a class="modal-action modal-close waves-effect waves-green btn-flat " id="btnEliminarProducto" href="#" >Eliminar</a>
-            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
-           
-          </div>
+		<div class="modal-footer">
+			<a
+				class="modal-action modal-close waves-effect waves-green btn-flat "
+				id="btnEliminarProducto" href="#">Eliminar</a> <a href="#!"
+				class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+
+		</div>
+	</div>
+	<div id="modalProductosVentas" class="modal">
+	<input type="hidden" name="id" id="id" />
+<div class="modal-content white black-text">
+
+		<div class="row">
+			<div class="col s12 m4 l4 center">
+			<h4 id="nombre" class="center-align">Nombre Producto</h4>
+				<img id="imgVentasProducto" class="center-align" width="200" height="200">
+				<h5 id="detalle" class="center-align">Nombre</h5> 
+				<h6 id="contenidoNeto" class="center-align">contenido neto</h6>
+			</div>
+			<div class="col s12 m5 l5">
+				<div class="input-field col s12 m6 l6">
+                        <input id="stockActual" placeholder="stock"type="text" class="validate" name="stockActual" />
+                        <label>stock actual</label>
+              </div>
+            <div class="input-field col s12 m6 l6">
+                        <input id="addStock" type="number" class="validate" name="addStock" />
+                        <label>incrementar stock</label>
+              </div>
+            
+       
+            
+             <div class="input-field col s12 m6 l6 ">
+                        <input id="fechaVencimiento" placeholder="fecha vencimiento" type="text" class="validate" name="fechaVencimiento" />
+                        <label>Fecha de vencimiento actual</label>
+              </div>
+            <div class="input-field col s12 m6 l6 ">
+                        <input id="fechaVencimientoMod" type="text" class="validate" name="fechaVencimientoMod" />
+                        <label>modificar fecha de vencimiento</label>
+              </div>
+            
+             <div class="input-field col s12 m6 l6 ">
+                        <input id="costoActual" type="text" placeholder="costo actual" class="validate" name="costoActual" />
+                        <label>costo actual</label>
+              </div>
+             <div class="input-field col s12 m6 l6 ">
+                        <input id="costoMod" type="text" class="validate" name="costoMod" />
+                        <label>modificar costo</label>
+              </div>
+            
+            <div class="input-field col s12 m6 l6 ">
+                        <input id="gananciaActual" placeholder="Pocentage ganancia" type="text" class="validate" name="gananciaActual" />
+                        <label>ganacia actual</label>
+              </div>
+             <div class="input-field col s12 m6 l6 ">
+                        <input id="gananciaMod" type="text" class="validate" name="gananciaMod" />
+                        <label>modificar ganacia</label>
+              </div>
+
+			</div>
+			
+			 
+		</div>
+    </div>
+		<div class="modal-footer">
+			<a
+				class="btnActualizarDatosProducto modal-action modal-close waves-effect waves-green btn-flat "
+				id="btnActualizarDatosProducto" href="#">Actualizar Datos</a> <a
+				href="#!"
+				class="modal-action modal-close waves-effect waves-red btn-flat ">Cancelar</a>
+
+		</div>
 	</div>
 	<div class="tp row">
 		<div class="col s12 m12 l12 white mdc-elevation--z5 center ">
-		<a class="btn-flat center" href="logistica">Button</a>
+			<a class="btn-flat center" href="logistica">Lista de Productos</a>
 			<table id="tablaProductos" class="display highlight" cellspacing="0"
 				width="100%">
 				<thead>
 					<tr>
-						
+
 						<th>codigo de barras</th>
 						<th>nombre</th>
 						<th>contenido Neto</th>
 						<th>presentacion</th>
 						<th>Detalles</th>
+						<th>categoria</th>
+						<th>marca</th>
 						<th>sector</th>
+						<th>costo</th>
+						<th>% de ganancia</th>
+						<th>stock</th>
+						<th></th>
 						<th></th>
 						<th></th>
 					</tr>

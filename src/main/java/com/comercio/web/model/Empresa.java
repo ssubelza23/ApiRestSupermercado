@@ -14,10 +14,13 @@ import javax.persistence.Id;
 
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 
 
 @Entity
 @Table(name = "empresas")
+@Audited
 public class Empresa implements Serializable{
 
 	/**

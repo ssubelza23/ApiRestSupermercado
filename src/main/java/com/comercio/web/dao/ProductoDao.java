@@ -27,8 +27,9 @@ public class ProductoDao {
 		.executeUpdate();
 		
 	}
-	public void update(Producto p) {
+	public long update(Producto p) {
 		entityManager.merge(p);
+		return p.getId();
 		
 	}
 	public Producto getById(long id) {

@@ -71,7 +71,7 @@ var cargarTablaUsuarios = function() {
 								{
 									"mData" : "dni",
 									"render" : function(mData, type, row) {
-										return "<img class='circle' width='30%' height='30%' src='/assets/images/usuarios/"
+										return "<img class='circle' width='30' height='30' src='/assets/images/usuarios/"
 												+ mData + ".jpg'/>"
 									}
 								},

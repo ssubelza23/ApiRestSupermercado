@@ -10,13 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 @Entity
 @Table(name = "procesos")
-
+@Audited
 public class Proceso implements Serializable{
 	private static final long serialVersionUID = 1L;
 

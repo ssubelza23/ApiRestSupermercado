@@ -9,11 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.envers.Audited;
 
 
 
 @Entity
 @Table(name = "datos")
+@Audited
 public class Dato implements Serializable{
 	private static final long serialVersionUID = 1L;
 
